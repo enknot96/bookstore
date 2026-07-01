@@ -8,19 +8,19 @@ use Inertia\Inertia;
 
 class HomeController extends Controller
 {
-    public function index()
-    {
-        $newArrivals = Book::where('is_published', true)
-            ->with('categories')
-            ->latest()
-            ->take(4)
-            ->get();
+  public function index()
+  {
+    $newArrivals = Book::where('is_published', true)
+      ->with('categories')
+      ->latest()
+      ->take(4)
+      ->get();
 
-        $categories = Category::all();
+    $categories = Category::all();
 
-        return Inertia::render('Home', [
-            'newArrivals' => $newArrivals,
-            'categories' => $categories,
-        ]);
-    }
+    return Inertia::render('Home', [
+      'newArrivals' => $newArrivals,
+      'categories' => $categories,
+    ]);
+  }
 }
