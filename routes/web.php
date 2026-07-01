@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\BookController as AdminBookController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -21,7 +23,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-  Route::get('/', fn() => Inertia::render('Admin/Dashboard'))->name('dashboard');
+  Route::get('/', AdminDashboardController::class)->name('dashboard');
+  Route::delete('books/bulk-destroy', [AdminBookController::class, 'bulkDestroy'])->name('books.bulk-destroy');
+  Route::resource('books', AdminBookController::class)->except(['show']);
 });
 
 require __DIR__ . '/auth.php';

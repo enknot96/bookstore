@@ -33,7 +33,10 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        $user = $request->user();
+        $defaultRoute = $user->role === 'admin' ? route('admin.books.index', absolute: false) : '/';
+
+        return redirect()->intended($defaultRoute);
     }
 
     /**
