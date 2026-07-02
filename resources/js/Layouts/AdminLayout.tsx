@@ -1,11 +1,12 @@
 import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, LayoutDashboard, Menu, X } from 'lucide-react';
+import { BookOpen, LayoutDashboard, Menu, ShoppingBag, X } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 
 const navItems = [
     { href: '/admin', label: 'ダッシュボード', icon: LayoutDashboard },
     { href: '/admin/books', label: '書籍管理', icon: BookOpen },
+    { href: '/admin/orders', label: '注文管理', icon: ShoppingBag },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

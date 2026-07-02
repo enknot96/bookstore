@@ -1,5 +1,6 @@
-import { Head, Link } from "@inertiajs/react";
+import { Head, Link, router, usePage } from "@inertiajs/react";
 import MainLayout from "@/Layouts/MainLayout";
+import { PageProps } from "@/types";
 
 type Category = {
     id: number;
@@ -34,6 +35,12 @@ function ageLabel(min: number | null, max: number | null): string {
 }
 
 export default function BookShow({ book, related }: Props) {
+    const { auth } = usePage<PageProps>().props;
+
+    const addToCart = () => {
+        router.post(route('cart.store'), { book_id: book.id, quantity: 1 });
+    };
+
     return (
         <>
             <Head title={`${book.title} | BookStore`} />
@@ -113,12 +120,21 @@ export default function BookShow({ book, related }: Props) {
                             </p>
 
                             {book.stock > 0 ? (
-                                <Link
-                                    href={route("login")}
-                                    className="inline-block bg-indigo-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-indigo-700 transition"
-                                >
-                                    カートに入れる（要ログイン）
-                                </Link>
+                                auth.user ? (
+                                    <button
+                                        onClick={addToCart}
+                                        className="inline-block bg-indigo-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-indigo-700 transition"
+                                    >
+                                        カートに入れる
+                                    </button>
+                                ) : (
+                                    <Link
+                                        href={route("login")}
+                                        className="inline-block bg-indigo-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-indigo-700 transition"
+                                    >
+                                        カートに入れる（要ログイン）
+                                    </Link>
+                                )
                             ) : (
                                 <button
                                     disabled
