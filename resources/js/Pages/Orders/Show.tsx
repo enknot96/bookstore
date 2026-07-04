@@ -19,7 +19,7 @@ const STATUS_COLORS: Record<string, string> = {
     pending:    'bg-yellow-100 text-yellow-800',
     confirmed:  'bg-blue-100 text-blue-800',
     processing: 'bg-purple-100 text-purple-800',
-    shipped:    'bg-indigo-100 text-indigo-800',
+    shipped:    'bg-[#EBDACA] text-[#431608]',
     delivered:  'bg-green-100 text-green-800',
     cancelled:  'bg-gray-100 text-gray-800',
 };
@@ -30,7 +30,7 @@ export default function OrderShow({ order }: Props) {
             <Head title={`注文 #${order.id}`} />
             <div className="max-w-2xl mx-auto px-4 py-12">
                 <div className="flex items-center gap-3 mb-8">
-                    <Link href={route('orders.index')} className="text-sm text-gray-500 hover:text-indigo-600">
+                    <Link href={route('orders.index')} className="text-sm text-gray-500 hover:text-[#B27E6E]">
                         ← 注文履歴
                     </Link>
                 </div>
@@ -98,7 +98,7 @@ export default function OrderShow({ order }: Props) {
                     {/* 合計 */}
                     <div className="border-t pt-4 flex justify-between items-center">
                         <span className="font-semibold text-gray-900">合計</span>
-                        <span className="text-xl font-bold text-indigo-600">
+                        <span className="text-xl font-bold text-[#431608]">
                             ¥{order.total_amount.toLocaleString()}
                         </span>
                     </div>

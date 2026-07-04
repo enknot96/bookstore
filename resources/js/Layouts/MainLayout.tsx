@@ -16,46 +16,46 @@ export default function MainLayout({ children }: { children: ReactNode }) {
     }, [flash]);
 
     return (
-        <div className="min-h-screen bg-gray-50 flex flex-col">
-            <header className="bg-white shadow-sm">
+        <div className="min-h-screen bg-[#FDFAEB] flex flex-col">
+            <header className="bg-white border-b border-[#431608]/10 shadow-sm">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-                    <Link href={route('home')} className="text-xl font-bold text-indigo-600">
+                    <Link href={route('home')} className="text-xl font-bold text-[#431608]">
                         📚 BookStore
                     </Link>
                     <nav className="flex items-center gap-4 text-sm">
-                        <Link href={route('books.index')} className="text-gray-600 hover:text-indigo-600">
+                        <Link href={route('books.index')} className="text-[#431608]/70 hover:text-[#B27E6E] transition-colors">
                             本を探す
                         </Link>
                         {auth.user ? (
                             <>
-                                <Link href={route('cart.index')} className="relative text-gray-600 hover:text-indigo-600">
+                                <Link href={route('cart.index')} className="relative text-[#431608]/70 hover:text-[#B27E6E] transition-colors">
                                     <ShoppingCart className="w-5 h-5" />
                                     {cartCount > 0 && (
-                                        <span className="absolute -top-1.5 -right-1.5 bg-indigo-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                                        <span className="absolute -top-1.5 -right-1.5 bg-[#431608] text-[#FDFAEB] text-xs rounded-full w-4 h-4 flex items-center justify-center">
                                             {cartCount}
                                         </span>
                                     )}
                                 </Link>
-                                <Link href={route('orders.index')} className="text-gray-600 hover:text-indigo-600">
+                                <Link href={route('orders.index')} className="text-[#431608]/70 hover:text-[#B27E6E] transition-colors">
                                     注文履歴
                                 </Link>
-                                <span className="text-gray-400">|</span>
-                                <span className="text-gray-600">{auth.user.name}</span>
+                                <span className="text-[#431608]/30">|</span>
+                                <span className="text-[#431608]/70">{auth.user.name}</span>
                                 <button
                                     onClick={() => router.post(route('logout'))}
-                                    className="text-gray-500 hover:text-indigo-600 transition-colors"
+                                    className="text-[#431608]/60 hover:text-[#B27E6E] transition-colors"
                                 >
                                     ログアウト
                                 </button>
                             </>
                         ) : (
                             <>
-                                <Link href={route('login')} className="text-gray-600 hover:text-indigo-600">
+                                <Link href={route('login')} className="text-[#431608]/70 hover:text-[#B27E6E] transition-colors">
                                     ログイン
                                 </Link>
                                 <Link
                                     href={route('register')}
-                                    className="bg-indigo-600 text-white px-3 py-1.5 rounded-md hover:bg-indigo-700"
+                                    className="bg-[#FFF17C] text-[#431608] px-3 py-1.5 rounded-full font-medium hover:bg-[#ED946D] transition-colors"
                                 >
                                     新規登録
                                 </Link>

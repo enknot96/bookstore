@@ -34,7 +34,7 @@ function BookCard({ book }: { book: Book }) {
                     className="w-full h-48 object-cover"
                 />
             ) : (
-                <div className="bg-indigo-50 h-48 flex items-center justify-center text-6xl">
+                <div className="bg-[#EBDACA] h-48 flex items-center justify-center text-6xl">
                     📖
                 </div>
             )}
@@ -46,7 +46,7 @@ function BookCard({ book }: { book: Book }) {
                     {book.title}
                 </h3>
                 <p className="text-sm text-gray-500 mt-1">{book.author}</p>
-                <p className="text-indigo-600 font-bold mt-2">
+                <p className="text-[#431608] font-bold mt-2">
                     ¥{book.price.toLocaleString()}
                 </p>
             </div>
@@ -60,16 +60,16 @@ export default function Home({ newArrivals, categories }: Props) {
             <Head title="トップ | BookStore" />
             <MainLayout>
                 {/* Hero */}
-                <section className="bg-indigo-600 text-white py-20 px-4 text-center">
+                <section className="bg-[#431608] text-[#FDFAEB] py-20 px-4 text-center">
                     <h1 className="text-4xl font-bold mb-4">
                         子供の本の世界へ
                     </h1>
-                    <p className="text-indigo-200 mb-8 text-lg">
+                    <p className="text-[#EBDACA] mb-8 text-lg">
                         年齢・ジャンルから、ぴったりの一冊を見つけよう
                     </p>
                     <Link
                         href={route("books.index")}
-                        className="bg-white text-indigo-600 font-semibold px-6 py-3 rounded-full hover:bg-indigo-50 transition"
+                        className="bg-[#FFF17C] text-[#431608] font-semibold px-6 py-3 rounded-full hover:bg-[#ED946D] transition"
                     >
                         本を探す
                     </Link>
@@ -80,12 +80,12 @@ export default function Home({ newArrivals, categories }: Props) {
                     {newArrivals.length > 0 && (
                         <section className="mt-16">
                             <div className="flex items-center justify-between mb-6">
-                                <h2 className="text-2xl font-bold text-gray-800">
+                                <h2 className="text-2xl font-bold text-[#431608]">
                                     新着本
                                 </h2>
                                 <Link
                                     href={route("books.index")}
-                                    className="text-indigo-600 text-sm hover:underline"
+                                    className="text-[#B27E6E] text-sm hover:underline"
                                 >
                                     すべて見る →
                                 </Link>
@@ -111,7 +111,7 @@ export default function Home({ newArrivals, categories }: Props) {
                                         href={route("books.index", {
                                             category: cat.slug,
                                         })}
-                                        className="bg-white border border-gray-200 rounded-lg p-4 text-center font-medium text-gray-700 hover:border-indigo-400 hover:text-indigo-600 transition"
+                                        className="bg-white border border-[#431608]/20 rounded-lg p-4 text-center font-medium text-[#431608]/80 hover:border-[#B27E6E] hover:text-[#B27E6E] transition"
                                     >
                                         {cat.name}
                                     </Link>
