@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, LayoutDashboard, Menu, Settings, ShoppingBag, X } from 'lucide-react';
+import { BookOpen, LayoutDashboard, Menu, Settings, ShieldCheck, ShoppingBag, Users, X } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 
@@ -7,6 +7,8 @@ const navItems = [
     { href: '/admin', label: 'ダッシュボード', icon: LayoutDashboard },
     { href: '/admin/books', label: '書籍管理', icon: BookOpen },
     { href: '/admin/orders', label: '注文管理', icon: ShoppingBag },
+    { href: '/admin/admins', label: '管理者管理', icon: ShieldCheck },
+    { href: '/admin/customers', label: '顧客管理', icon: Users },
     { href: '/admin/settings', label: '設定', icon: Settings },
 ];
 
