@@ -36,6 +36,10 @@ class CartController extends Controller
 
         $book = Book::findOrFail($request->book_id);
 
+        if ($book->stock <= 0) {
+            return back()->with('error', '「' . $book->title . '」は在庫切れです。');
+        }
+
         $cartItem = CartItem::firstOrNew([
             'user_id' => $request->user()->id,
             'book_id' => $book->id,

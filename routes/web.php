@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\BookController as AdminBookController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+use App\Http\Controllers\Admin\SettingController as AdminSettingController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
@@ -50,6 +51,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
   Route::delete('books/bulk-destroy', [AdminBookController::class, 'bulkDestroy'])->name('books.bulk-destroy');
   Route::resource('books', AdminBookController::class)->except(['show']);
   Route::resource('orders', AdminOrderController::class)->only(['index', 'show', 'update']);
+  Route::get('settings', [AdminSettingController::class, 'edit'])->name('settings.edit');
+  Route::patch('settings', [AdminSettingController::class, 'update'])->name('settings.update');
 });
 
 require __DIR__ . '/auth.php';
