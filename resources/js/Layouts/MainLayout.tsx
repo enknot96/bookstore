@@ -1,4 +1,4 @@
-import { Link, usePage } from '@inertiajs/react';
+import { Link, router, usePage } from '@inertiajs/react';
 import { ShoppingCart } from 'lucide-react';
 import { ReactNode, useEffect } from 'react';
 import { toast, Toaster } from 'sonner';
@@ -39,6 +39,14 @@ export default function MainLayout({ children }: { children: ReactNode }) {
                                 <Link href={route('orders.index')} className="text-gray-600 hover:text-indigo-600">
                                     注文履歴
                                 </Link>
+                                <span className="text-gray-400">|</span>
+                                <span className="text-gray-600">{auth.user.name}</span>
+                                <button
+                                    onClick={() => router.post(route('logout'))}
+                                    className="text-gray-500 hover:text-indigo-600 transition-colors"
+                                >
+                                    ログアウト
+                                </button>
                             </>
                         ) : (
                             <>

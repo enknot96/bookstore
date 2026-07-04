@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\BookController as AdminBookController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\SettingController as AdminSettingController;
+use App\Http\Controllers\Admin\AdminAccountController;
+use App\Http\Controllers\Admin\CustomerController as AdminCustomerController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
@@ -53,6 +55,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
   Route::resource('orders', AdminOrderController::class)->only(['index', 'show', 'update']);
   Route::get('settings', [AdminSettingController::class, 'edit'])->name('settings.edit');
   Route::patch('settings', [AdminSettingController::class, 'update'])->name('settings.update');
+  Route::get('customers', [AdminCustomerController::class, 'index'])->name('customers.index');
+  Route::get('admins', [AdminAccountController::class, 'index'])->name('admins.index');
+  Route::post('admins', [AdminAccountController::class, 'store'])->name('admins.store');
+  Route::delete('admins/{user}', [AdminAccountController::class, 'destroy'])->name('admins.destroy');
 });
 
 require __DIR__ . '/auth.php';
