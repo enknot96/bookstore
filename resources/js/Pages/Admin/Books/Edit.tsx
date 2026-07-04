@@ -32,6 +32,7 @@ export default function Edit({ book, categories }: Props) {
         stock: String(book.stock),
         is_published: book.is_published,
         cover_image_path: book.cover_image_path ?? '',
+        cover_image: null as File | null,
         categories: book.categories.map((c) => c.id),
     });
 

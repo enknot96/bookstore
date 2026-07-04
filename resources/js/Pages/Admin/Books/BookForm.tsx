@@ -4,6 +4,8 @@ import { Input } from '@/Components/ui/input';
 import { Label } from '@/Components/ui/label';
 import { Textarea } from '@/Components/ui/textarea';
 import { Category } from '@/types';
+import { ImagePlus, X } from 'lucide-react';
+import { useRef, useState } from 'react';
 
 interface BookFormData {
     title: string;
@@ -16,15 +18,17 @@ interface BookFormData {
     stock: string;
     is_published: boolean;
     cover_image_path: string;
+    cover_image: File | null;
     categories: number[];
+    [key: string]: string | boolean | number[] | File | null;
 }
 
 interface Props {
     data: BookFormData;
-    errors: Partial<Record<keyof BookFormData, string>>;
+    errors: Partial<Record<string, string>>;
     categories: Category[];
     processing: boolean;
-    setData: (key: keyof BookFormData, value: string | boolean | number[]) => void;
+    setData: (key: string, value: string | boolean | number[] | File | null) => void;
     onSubmit: (e: React.FormEvent) => void;
     submitLabel: string;
 }
@@ -38,12 +42,34 @@ export default function BookForm({
     onSubmit,
     submitLabel,
 }: Props) {
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+
     const toggleCategory = (id: number) => {
         const next = data.categories.includes(id)
             ? data.categories.filter((c) => c !== id)
             : [...data.categories, id];
         setData('categories', next);
     };
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0] ?? null;
+        setData('cover_image', file);
+        if (file) {
+            const url = URL.createObjectURL(file);
+            setPreviewUrl(url);
+        } else {
+            setPreviewUrl(null);
+        }
+    };
+
+    const handleRemoveNew = () => {
+        setData('cover_image', null);
+        setPreviewUrl(null);
+        if (fileInputRef.current) fileInputRef.current.value = '';
+    };
+
+    const displayUrl = previewUrl ?? (data.cover_image_path || null);
 
     return (
         <form onSubmit={onSubmit} className="space-y-6">
@@ -150,18 +176,61 @@ export default function BookForm({
                 </div>
             </div>
 
-            {/* カバー画像 URL */}
-            <div className="space-y-1">
-                <Label htmlFor="cover_image_path">カバー画像 URL</Label>
-                <Input
-                    id="cover_image_path"
-                    type="url"
-                    placeholder="https://..."
-                    value={data.cover_image_path}
-                    onChange={(e) => setData('cover_image_path', e.target.value)}
-                />
-                {errors.cover_image_path && (
-                    <p className="text-sm text-destructive">{errors.cover_image_path}</p>
+            {/* カバー画像アップロード */}
+            <div className="space-y-2">
+                <Label>カバー画像</Label>
+                <div className="flex gap-4 items-start">
+                    {/* プレビュー */}
+                    {displayUrl ? (
+                        <div className="relative w-28 h-36 flex-shrink-0">
+                            <img
+                                src={displayUrl}
+                                alt="カバープレビュー"
+                                className="w-full h-full object-cover rounded-md border"
+                            />
+                            {previewUrl && (
+                                <button
+                                    type="button"
+                                    onClick={handleRemoveNew}
+                                    className="absolute -top-2 -right-2 bg-white border rounded-full p-0.5 shadow hover:bg-gray-100"
+                                >
+                                    <X size={14} />
+                                </button>
+                            )}
+                        </div>
+                    ) : (
+                        <div className="w-28 h-36 flex-shrink-0 bg-gray-100 rounded-md border border-dashed flex items-center justify-center text-gray-400">
+                            <ImagePlus size={24} />
+                        </div>
+                    )}
+
+                    {/* アップロードボタン */}
+                    <div className="flex flex-col gap-2 justify-center pt-1">
+                        <input
+                            ref={fileInputRef}
+                            type="file"
+                            accept="image/*"
+                            className="hidden"
+                            onChange={handleFileChange}
+                        />
+                        <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            onClick={() => fileInputRef.current?.click()}
+                        >
+                            {displayUrl ? '画像を変更' : '画像を選択'}
+                        </Button>
+                        <p className="text-xs text-gray-400">JPEG / PNG / WebP（5MB以内）</p>
+                        {data.cover_image && (
+                            <p className="text-xs text-green-600 font-medium">
+                                {data.cover_image.name}
+                            </p>
+                        )}
+                    </div>
+                </div>
+                {errors.cover_image && (
+                    <p className="text-sm text-destructive">{errors.cover_image}</p>
                 )}
             </div>
 

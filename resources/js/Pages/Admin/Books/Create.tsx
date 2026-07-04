@@ -19,6 +19,7 @@ export default function Create({ categories }: Props) {
         stock: '',
         is_published: false,
         cover_image_path: '',
+        cover_image: null as File | null,
         categories: [] as number[],
     });
 

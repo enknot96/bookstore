@@ -50,7 +50,13 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
   Route::get('/', AdminDashboardController::class)->name('dashboard');
+  Route::get('books/trash', [AdminBookController::class, 'trash'])->name('books.trash');
+  Route::delete('books/trash/empty', [AdminBookController::class, 'emptyTrash'])->name('books.trash.empty');
+  Route::patch('books/bulk-restore', [AdminBookController::class, 'bulkRestore'])->name('books.bulk-restore');
+  Route::delete('books/bulk-force-delete', [AdminBookController::class, 'bulkForceDelete'])->name('books.bulk-force-delete');
   Route::delete('books/bulk-destroy', [AdminBookController::class, 'bulkDestroy'])->name('books.bulk-destroy');
+  Route::patch('books/{book}/restore', [AdminBookController::class, 'restore'])->withTrashed()->name('books.restore');
+  Route::delete('books/{book}/force-delete', [AdminBookController::class, 'forceDelete'])->withTrashed()->name('books.force-delete');
   Route::resource('books', AdminBookController::class)->except(['show']);
   Route::resource('orders', AdminOrderController::class)->only(['index', 'show', 'update']);
   Route::get('settings', [AdminSettingController::class, 'edit'])->name('settings.edit');
