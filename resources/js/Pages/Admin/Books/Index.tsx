@@ -20,6 +20,7 @@ import AdminLayout from '@/Layouts/AdminLayout';
 import { Category, PageProps, PaginatedBooks } from '@/types';
 import { Link, router, usePage } from '@inertiajs/react';
 import { Pencil, Plus, Trash2 } from 'lucide-react';
+import { Head } from '@inertiajs/react';
 import { useState } from 'react';
 
 interface Filters {
@@ -32,9 +33,10 @@ interface Props extends PageProps {
     books: PaginatedBooks;
     categories: Category[];
     filters: Filters;
+    trashedCount: number;
 }
 
-export default function Index({ books, categories, filters }: Props) {
+export default function Index({ books, categories, filters, trashedCount }: Props) {
     const { props } = usePage<PageProps & { flash?: { success?: string } }>();
     const [search, setSearch] = useState(filters.search ?? '');
     const [selectedIds, setSelectedIds] = useState<number[]>([]);
@@ -75,12 +77,26 @@ export default function Index({ books, categories, filters }: Props) {
             <div className="space-y-4">
                 <div className="flex items-center justify-between">
                     <h1 className="text-xl font-semibold">書籍管理</h1>
-                    <Link href={route('admin.books.create')}>
-                        <Button size="sm">
-                            <Plus size={16} className="mr-1" />
-                            新規登録
-                        </Button>
-                    </Link>
+                    <div className="flex items-center gap-2">
+                        <Link
+                            href={route('admin.books.trash')}
+                            className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-700 border border-gray-200 rounded-md px-3 py-1.5 hover:bg-gray-50 transition-colors"
+                        >
+                            <Trash2 size={14} />
+                            ゴミ箱
+                            {trashedCount > 0 && (
+                                <span className="bg-red-100 text-red-700 text-xs rounded-full px-1.5 py-0.5 font-medium">
+                                    {trashedCount}
+                                </span>
+                            )}
+                        </Link>
+                        <Link href={route('admin.books.create')}>
+                            <Button size="sm">
+                                <Plus size={16} className="mr-1" />
+                                新規登録
+                            </Button>
+                        </Link>
+                    </div>
                 </div>
 
                 {props.flash?.success && (

@@ -26,6 +26,7 @@ export interface Book {
     categories: Category[];
     created_at: string;
     updated_at: string;
+    deleted_at: string | null;
 }
 
 export interface PaginatedBooks {
