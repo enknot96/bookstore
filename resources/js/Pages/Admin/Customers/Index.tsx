@@ -38,7 +38,7 @@ export default function CustomersIndex({ customers, filters }: Props) {
     return (
         <AdminLayout>
             <Head title="顧客管理" />
-            <div className="p-6">
+            <div>
                 <h1 className="text-2xl font-bold text-gray-900 mb-6">顧客管理</h1>
 
                 {/* 検索 */}

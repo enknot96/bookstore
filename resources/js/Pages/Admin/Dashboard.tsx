@@ -41,7 +41,7 @@ export default function Dashboard({ stats }: Props) {
     return (
         <AdminLayout>
             <div className="space-y-6">
-                <h1 className="text-xl font-semibold">ダッシュボード</h1>
+                <h1 className="text-2xl font-bold text-gray-900">ダッシュボード</h1>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     {statCards(stats).map(

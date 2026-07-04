@@ -26,7 +26,7 @@ export default function AdminOrdersIndex({ orders, statuses, filters, flash }: P
     return (
         <AdminLayout>
             <Head title="注文管理" />
-            <div className="p-6">
+            <div>
                 <h1 className="text-2xl font-bold text-gray-900 mb-6">注文管理</h1>
 
                 {flash.success && (

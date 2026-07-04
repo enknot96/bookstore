@@ -69,10 +69,18 @@ export default function BookShow({ book, related }: Props) {
 
                     {/* 書籍詳細 */}
                     <div className="bg-white rounded-lg shadow p-6 flex flex-col sm:flex-row gap-8">
-                        {/* 表紙（プレースホルダー） */}
-                        <div className="bg-indigo-50 rounded-lg flex items-center justify-center text-8xl shrink-0 w-full sm:w-48 h-64">
-                            📖
-                        </div>
+                        {/* 表紙 */}
+                        {book.cover_image_path ? (
+                            <img
+                                src={book.cover_image_path}
+                                alt={book.title}
+                                className="rounded-lg object-cover shrink-0 w-full sm:w-48 h-64"
+                            />
+                        ) : (
+                            <div className="bg-indigo-50 rounded-lg flex items-center justify-center text-8xl shrink-0 w-full sm:w-48 h-64">
+                                📖
+                            </div>
+                        )}
 
                         {/* 情報 */}
                         <div className="flex-1">
@@ -170,9 +178,17 @@ export default function BookShow({ book, related }: Props) {
                                         href={route("books.show", b.id)}
                                         className="bg-white rounded-lg shadow hover:shadow-md transition overflow-hidden flex flex-col"
                                     >
-                                        <div className="bg-indigo-50 h-32 flex items-center justify-center text-4xl">
-                                            📖
-                                        </div>
+                                        {b.cover_image_path ? (
+                                            <img
+                                                src={b.cover_image_path}
+                                                alt={b.title}
+                                                className="w-full h-32 object-cover"
+                                            />
+                                        ) : (
+                                            <div className="bg-indigo-50 h-32 flex items-center justify-center text-4xl">
+                                                📖
+                                            </div>
+                                        )}
                                         <div className="p-3">
                                             <p className="text-sm font-semibold text-gray-800 line-clamp-2">
                                                 {b.title}
