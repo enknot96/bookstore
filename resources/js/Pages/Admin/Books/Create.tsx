@@ -32,7 +32,7 @@ export default function Create({ categories }: Props) {
         <AdminLayout>
             <div className="max-w-2xl">
                 <div className="flex items-center justify-between mb-6">
-                    <h1 className="text-xl font-semibold">書籍登録</h1>
+                    <h1 className="text-2xl font-bold text-gray-900">書籍登録</h1>
                     <button
                         type="button"
                         onClick={() => router.visit(route('admin.books.index'))}

@@ -133,7 +133,7 @@ export default function AdminsIndex({ admins, filters, flash, auth }: Props) {
     return (
         <AdminLayout>
             <Head title="管理者管理" />
-            <div className="p-6">
+            <div>
                 <div className="flex items-center justify-between mb-6">
                     <h1 className="text-2xl font-bold text-gray-900">管理者管理</h1>
                     {!showForm && (

@@ -19,7 +19,7 @@ export default function AdminSettingsEdit({ adminNotificationEmail, flash }: Pro
     return (
         <AdminLayout>
             <Head title="設定" />
-            <div className="p-6 max-w-xl">
+            <div className="max-w-xl">
                 <h1 className="text-2xl font-bold text-gray-900 mb-6">設定</h1>
 
                 {flash.success && (

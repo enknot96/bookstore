@@ -74,9 +74,9 @@ export default function Index({ books, categories, filters, trashedCount }: Prop
 
     return (
         <AdminLayout>
-            <div className="space-y-4">
+            <div className="space-y-6">
                 <div className="flex items-center justify-between">
-                    <h1 className="text-xl font-semibold">書籍管理</h1>
+                    <h1 className="text-2xl font-bold text-gray-900">書籍管理</h1>
                     <div className="flex items-center gap-2">
                         <Link
                             href={route('admin.books.trash')}
@@ -191,6 +191,7 @@ export default function Index({ books, categories, filters, trashedCount }: Prop
                                     <th className="px-4 py-3 text-left font-medium text-gray-600">
                                         タイトル
                                     </th>
+                                    <th className="px-4 py-3 w-36"></th>
                                     <th className="px-4 py-3 text-left font-medium text-gray-600 hidden md:table-cell">
                                         著者
                                     </th>
@@ -210,7 +211,7 @@ export default function Index({ books, categories, filters, trashedCount }: Prop
                                 {books.data.length === 0 ? (
                                     <tr>
                                         <td
-                                            colSpan={7}
+                                            colSpan={8}
                                             className="px-4 py-10 text-center text-gray-400"
                                         >
                                             書籍が見つかりません
@@ -237,6 +238,19 @@ export default function Index({ books, categories, filters, trashedCount }: Prop
                                                 <div className="text-xs text-gray-400 md:hidden">
                                                     {book.author}
                                                 </div>
+                                            </td>
+                                            <td className="px-4 py-2">
+                                                {book.cover_image_path ? (
+                                                    <img
+                                                        src={book.cover_image_path}
+                                                        alt={book.title}
+                                                        className="w-full h-28 object-cover rounded shadow-sm"
+                                                    />
+                                                ) : (
+                                                    <div className="w-full h-28 bg-gray-100 rounded flex items-center justify-center text-2xl">
+                                                        📖
+                                                    </div>
+                                                )}
                                             </td>
                                             <td className="px-4 py-3 text-gray-600 hidden md:table-cell">
                                                 {book.author}

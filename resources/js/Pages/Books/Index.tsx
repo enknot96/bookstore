@@ -48,9 +48,17 @@ function BookCard({ book }: { book: Book }) {
             href={route("books.show", book.id)}
             className="bg-white rounded-lg shadow hover:shadow-md transition-shadow overflow-hidden flex flex-col"
         >
-            <div className="bg-indigo-50 h-40 flex items-center justify-center text-5xl">
-                📖
-            </div>
+            {book.cover_image_path ? (
+                <img
+                    src={book.cover_image_path}
+                    alt={book.title}
+                    className="w-full h-40 object-cover"
+                />
+            ) : (
+                <div className="bg-indigo-50 h-40 flex items-center justify-center text-5xl">
+                    📖
+                </div>
+            )}
             <div className="p-3 flex flex-col flex-1">
                 <p className="text-xs text-gray-500 mb-1 truncate">
                     {book.categories.map((c) => c.name).join(" / ")}

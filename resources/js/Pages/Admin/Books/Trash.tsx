@@ -86,7 +86,7 @@ export default function Trash({ books, filters }: Props) {
     return (
         <AdminLayout>
             <Head title="ゴミ箱" />
-            <div className="space-y-4">
+            <div className="space-y-6">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                         <Link
@@ -96,7 +96,7 @@ export default function Trash({ books, filters }: Props) {
                             <ArrowLeft size={14} />
                             書籍管理に戻る
                         </Link>
-                        <h1 className="text-xl font-semibold">ゴミ箱</h1>
+                        <h1 className="text-2xl font-bold text-gray-900">ゴミ箱</h1>
                         {books.total > 0 && (
                             <span className="text-sm text-gray-500">{books.total}件</span>
                         )}
