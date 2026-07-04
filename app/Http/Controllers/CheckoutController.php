@@ -47,6 +47,14 @@ class CheckoutController extends Controller
             return response()->json(['error' => 'カートが空です。'], 422);
         }
 
+        // 在庫再チェック（多重注文対策）
+        $outOfStock = $cartItems->first(fn($item) => $item->book->stock < $item->quantity);
+        if ($outOfStock) {
+            return response()->json([
+                'error' => '「' . $outOfStock->book->title . '」の在庫が不足しています。カートを確認してください。',
+            ], 422);
+        }
+
         $total = $cartItems->sum(fn($item) => $item->book->price * $item->quantity);
 
         $stripe = new StripeClient(config('services.stripe.secret'));
