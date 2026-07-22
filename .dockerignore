@@ -1,0 +1,9 @@
+.git
+.env
+.env.*
+node_modules
+vendor
+.DS_Store
+public/build
+storage/logs/*.log
+laravel
