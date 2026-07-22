@@ -48,10 +48,9 @@ class StripeWebhookController extends Controller
                 // 注文者へサンクスメール
                 Mail::to($order->user->email)->send(new OrderConfirmed($order));
 
-                // 管理者へ通知メール（Mailtrapのレートリミット対策で1秒待機）
+                // 管理者へ通知メール
                 $adminEmail = Setting::get('admin_notification_email');
                 if ($adminEmail) {
-                    sleep(2);
                     Mail::to($adminEmail)->send(new NewOrderAlert($order));
                 }
             }
