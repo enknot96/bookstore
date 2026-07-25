@@ -30,7 +30,7 @@ export default function AdminOrdersIndex({ orders, statuses, filters, flash }: P
                 <h1 className="text-2xl font-bold text-gray-900 mb-6">注文管理</h1>
 
                 {flash.success && (
-                    <p className="mb-4 text-sm text-green-700 bg-green-50 border border-green-200 rounded px-4 py-2">
+                    <p className="mb-4 text-base text-green-700 bg-green-50 border border-green-200 rounded px-4 py-2">
                         {flash.success}
                     </p>
                 )}
@@ -39,7 +39,7 @@ export default function AdminOrdersIndex({ orders, statuses, filters, flash }: P
                 <div className="flex flex-wrap gap-2 mb-6">
                     <button
                         onClick={() => handleStatusFilter('')}
-                        className={`px-3 py-1.5 rounded-full text-sm border transition-colors ${
+                        className={`px-3 py-1.5 rounded-full text-base border transition-colors ${
                             !filters.status ? 'bg-gray-900 text-white border-gray-900' : 'bg-white text-gray-600 border-gray-300 hover:bg-gray-50'
                         }`}
                     >
@@ -49,7 +49,7 @@ export default function AdminOrdersIndex({ orders, statuses, filters, flash }: P
                         <button
                             key={key}
                             onClick={() => handleStatusFilter(key)}
-                            className={`px-3 py-1.5 rounded-full text-sm border transition-colors ${
+                            className={`px-3 py-1.5 rounded-full text-base border transition-colors ${
                                 filters.status === key ? 'bg-gray-900 text-white border-gray-900' : 'bg-white text-gray-600 border-gray-300 hover:bg-gray-50'
                             }`}
                         >
@@ -63,44 +63,44 @@ export default function AdminOrdersIndex({ orders, statuses, filters, flash }: P
                     <table className="min-w-full divide-y divide-gray-200">
                         <thead className="bg-gray-50">
                             <tr>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">注文番号</th>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">顧客</th>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">金額</th>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">ステータス</th>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">注文日</th>
+                                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500 uppercase">注文番号</th>
+                                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500 uppercase">顧客</th>
+                                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500 uppercase">金額</th>
+                                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500 uppercase">ステータス</th>
+                                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500 uppercase">注文日</th>
                                 <th className="px-4 py-3" />
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200">
                             {orders.data.length === 0 ? (
                                 <tr>
-                                    <td colSpan={6} className="px-4 py-8 text-center text-sm text-gray-500">
+                                    <td colSpan={6} className="px-4 py-8 text-center text-base text-gray-500">
                                         注文がありません
                                     </td>
                                 </tr>
                             ) : (
                                 orders.data.map((order) => (
                                     <tr key={order.id} className="hover:bg-gray-50">
-                                        <td className="px-4 py-3 text-sm font-medium text-gray-900">#{order.id}</td>
+                                        <td className="px-4 py-3 text-base font-medium text-gray-900">#{order.id}</td>
                                         <td className="px-4 py-3">
-                                            <p className="text-sm text-gray-900">{order.user.name}</p>
-                                            <p className="text-xs text-gray-500">{order.user.email}</p>
+                                            <p className="text-base text-gray-900">{order.user.name}</p>
+                                            <p className="text-sm text-gray-500">{order.user.email}</p>
                                         </td>
-                                        <td className="px-4 py-3 text-sm text-gray-900">
+                                        <td className="px-4 py-3 text-base text-gray-900">
                                             ¥{order.total_amount.toLocaleString()}
                                         </td>
                                         <td className="px-4 py-3">
-                                            <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${STATUS_COLORS[order.status] ?? 'bg-gray-100 text-gray-800'}`}>
+                                            <span className={`text-sm font-medium px-2.5 py-1 rounded-full ${STATUS_COLORS[order.status] ?? 'bg-gray-100 text-gray-800'}`}>
                                                 {statuses[order.status] ?? order.status}
                                             </span>
                                         </td>
-                                        <td className="px-4 py-3 text-sm text-gray-500">
+                                        <td className="px-4 py-3 text-base text-gray-500">
                                             {new Date(order.created_at).toLocaleDateString('ja-JP')}
                                         </td>
                                         <td className="px-4 py-3 text-right">
                                             <Link
                                                 href={route('admin.orders.show', order.id)}
-                                                className="text-sm text-indigo-600 hover:underline"
+                                                className="text-base text-indigo-600 hover:underline"
                                             >
                                                 詳細
                                             </Link>
@@ -119,7 +119,7 @@ export default function AdminOrdersIndex({ orders, statuses, filters, flash }: P
                             <Link
                                 key={i}
                                 href={link.url ?? '#'}
-                                className={`px-3 py-1.5 rounded text-sm border ${
+                                className={`px-3 py-1.5 rounded text-base border ${
                                     link.active
                                         ? 'bg-indigo-600 text-white border-indigo-600'
                                         : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'

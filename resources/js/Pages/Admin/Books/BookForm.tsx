@@ -81,7 +81,7 @@ export default function BookForm({
                     value={data.title}
                     onChange={(e) => setData('title', e.target.value)}
                 />
-                {errors.title && <p className="text-sm text-destructive">{errors.title}</p>}
+                {errors.title && <p className="text-base text-destructive">{errors.title}</p>}
             </div>
 
             {/* 著者 / 出版社 */}
@@ -93,7 +93,7 @@ export default function BookForm({
                         value={data.author}
                         onChange={(e) => setData('author', e.target.value)}
                     />
-                    {errors.author && <p className="text-sm text-destructive">{errors.author}</p>}
+                    {errors.author && <p className="text-base text-destructive">{errors.author}</p>}
                 </div>
                 <div className="space-y-1">
                     <Label htmlFor="publisher">出版社 *</Label>
@@ -103,7 +103,7 @@ export default function BookForm({
                         onChange={(e) => setData('publisher', e.target.value)}
                     />
                     {errors.publisher && (
-                        <p className="text-sm text-destructive">{errors.publisher}</p>
+                        <p className="text-base text-destructive">{errors.publisher}</p>
                     )}
                 </div>
             </div>
@@ -118,7 +118,7 @@ export default function BookForm({
                     onChange={(e) => setData('description', e.target.value)}
                 />
                 {errors.description && (
-                    <p className="text-sm text-destructive">{errors.description}</p>
+                    <p className="text-base text-destructive">{errors.description}</p>
                 )}
             </div>
 
@@ -133,7 +133,7 @@ export default function BookForm({
                         value={data.price}
                         onChange={(e) => setData('price', e.target.value)}
                     />
-                    {errors.price && <p className="text-sm text-destructive">{errors.price}</p>}
+                    {errors.price && <p className="text-base text-destructive">{errors.price}</p>}
                 </div>
                 <div className="space-y-1">
                     <Label htmlFor="stock">在庫数 *</Label>
@@ -144,7 +144,7 @@ export default function BookForm({
                         value={data.stock}
                         onChange={(e) => setData('stock', e.target.value)}
                     />
-                    {errors.stock && <p className="text-sm text-destructive">{errors.stock}</p>}
+                    {errors.stock && <p className="text-base text-destructive">{errors.stock}</p>}
                 </div>
             </div>
 
@@ -160,7 +160,7 @@ export default function BookForm({
                         value={data.age_min}
                         onChange={(e) => setData('age_min', e.target.value)}
                     />
-                    {errors.age_min && <p className="text-sm text-destructive">{errors.age_min}</p>}
+                    {errors.age_min && <p className="text-base text-destructive">{errors.age_min}</p>}
                 </div>
                 <div className="space-y-1">
                     <Label htmlFor="age_max">対象年齢（上限）</Label>
@@ -172,7 +172,7 @@ export default function BookForm({
                         value={data.age_max}
                         onChange={(e) => setData('age_max', e.target.value)}
                     />
-                    {errors.age_max && <p className="text-sm text-destructive">{errors.age_max}</p>}
+                    {errors.age_max && <p className="text-base text-destructive">{errors.age_max}</p>}
                 </div>
             </div>
 
@@ -221,16 +221,16 @@ export default function BookForm({
                         >
                             {displayUrl ? '画像を変更' : '画像を選択'}
                         </Button>
-                        <p className="text-xs text-gray-400">JPEG / PNG / WebP（5MB以内）</p>
+                        <p className="text-sm text-gray-400">JPEG / PNG / WebP（5MB以内）</p>
                         {data.cover_image && (
-                            <p className="text-xs text-green-600 font-medium">
+                            <p className="text-sm text-green-600 font-medium">
                                 {data.cover_image.name}
                             </p>
                         )}
                     </div>
                 </div>
                 {errors.cover_image && (
-                    <p className="text-sm text-destructive">{errors.cover_image}</p>
+                    <p className="text-base text-destructive">{errors.cover_image}</p>
                 )}
             </div>
 
@@ -244,12 +244,12 @@ export default function BookForm({
                                 checked={data.categories.includes(cat.id)}
                                 onCheckedChange={() => toggleCategory(cat.id)}
                             />
-                            <span className="text-sm">{cat.name}</span>
+                            <span className="text-base">{cat.name}</span>
                         </label>
                     ))}
                 </div>
                 {errors.categories && (
-                    <p className="text-sm text-destructive">{errors.categories}</p>
+                    <p className="text-base text-destructive">{errors.categories}</p>
                 )}
             </div>
 

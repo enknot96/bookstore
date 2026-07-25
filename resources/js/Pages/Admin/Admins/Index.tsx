@@ -53,45 +53,45 @@ function CreateAdminForm({ onClose }: { onClose: () => void }) {
             </div>
             <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                    <label className="block text-xs font-medium text-gray-700 mb-1">名前</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">名前</label>
                     <input
                         type="text"
                         value={data.name}
                         onChange={(e) => setData('name', e.target.value)}
-                        className="w-full border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="w-full border border-gray-300 rounded-md px-3 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-indigo-500"
                         placeholder="山田 太郎"
                     />
-                    {errors.name && <p className="text-xs text-red-600 mt-1">{errors.name}</p>}
+                    {errors.name && <p className="text-sm text-red-600 mt-1">{errors.name}</p>}
                 </div>
                 <div>
-                    <label className="block text-xs font-medium text-gray-700 mb-1">メールアドレス</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">メールアドレス</label>
                     <input
                         type="email"
                         value={data.email}
                         onChange={(e) => setData('email', e.target.value)}
-                        className="w-full border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="w-full border border-gray-300 rounded-md px-3 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-indigo-500"
                         placeholder="admin@example.com"
                     />
-                    {errors.email && <p className="text-xs text-red-600 mt-1">{errors.email}</p>}
+                    {errors.email && <p className="text-sm text-red-600 mt-1">{errors.email}</p>}
                 </div>
                 <div>
-                    <label className="block text-xs font-medium text-gray-700 mb-1">パスワード</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">パスワード</label>
                     <input
                         type="password"
                         value={data.password}
                         onChange={(e) => setData('password', e.target.value)}
-                        className="w-full border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="w-full border border-gray-300 rounded-md px-3 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-indigo-500"
                         placeholder="8文字以上"
                     />
-                    {errors.password && <p className="text-xs text-red-600 mt-1">{errors.password}</p>}
+                    {errors.password && <p className="text-sm text-red-600 mt-1">{errors.password}</p>}
                 </div>
                 <div>
-                    <label className="block text-xs font-medium text-gray-700 mb-1">パスワード（確認）</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">パスワード（確認）</label>
                     <input
                         type="password"
                         value={data.password_confirmation}
                         onChange={(e) => setData('password_confirmation', e.target.value)}
-                        className="w-full border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="w-full border border-gray-300 rounded-md px-3 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-indigo-500"
                         placeholder="もう一度入力"
                     />
                 </div>
@@ -99,14 +99,14 @@ function CreateAdminForm({ onClose }: { onClose: () => void }) {
                     <button
                         type="button"
                         onClick={onClose}
-                        className="text-sm text-gray-600 hover:text-gray-800 px-3 py-1.5"
+                        className="text-base text-gray-600 hover:text-gray-800 px-3 py-1.5"
                     >
                         キャンセル
                     </button>
                     <button
                         type="submit"
                         disabled={processing}
-                        className="bg-indigo-600 text-white text-sm px-4 py-1.5 rounded-md hover:bg-indigo-700 disabled:opacity-60"
+                        className="bg-indigo-600 text-white text-base px-4 py-1.5 rounded-md hover:bg-indigo-700 disabled:opacity-60"
                     >
                         {processing ? '作成中...' : '管理者を追加'}
                     </button>
@@ -139,7 +139,7 @@ export default function AdminsIndex({ admins, filters, flash, auth }: Props) {
                     {!showForm && (
                         <button
                             onClick={() => setShowForm(true)}
-                            className="flex items-center gap-2 bg-indigo-600 text-white text-sm px-4 py-2 rounded-md hover:bg-indigo-700"
+                            className="flex items-center gap-2 bg-indigo-600 text-white text-base px-4 py-2 rounded-md hover:bg-indigo-700"
                         >
                             <Plus size={16} />
                             管理者を追加
@@ -148,12 +148,12 @@ export default function AdminsIndex({ admins, filters, flash, auth }: Props) {
                 </div>
 
                 {flash.success && (
-                    <p className="mb-4 text-sm text-green-700 bg-green-50 border border-green-200 rounded px-4 py-2">
+                    <p className="mb-4 text-base text-green-700 bg-green-50 border border-green-200 rounded px-4 py-2">
                         {flash.success}
                     </p>
                 )}
                 {flash.error && (
-                    <p className="mb-4 text-sm text-red-700 bg-red-50 border border-red-200 rounded px-4 py-2">
+                    <p className="mb-4 text-base text-red-700 bg-red-50 border border-red-200 rounded px-4 py-2">
                         {flash.error}
                     </p>
                 )}
@@ -167,16 +167,16 @@ export default function AdminsIndex({ admins, filters, flash, auth }: Props) {
                             name="search"
                             defaultValue={filters.search ?? ''}
                             placeholder="名前・メールで検索"
-                            className="border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 w-56"
+                            className="border border-gray-300 rounded-md px-3 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-indigo-500 w-56"
                         />
                         <button
                             type="submit"
-                            className="bg-gray-800 text-white text-sm px-3 py-1.5 rounded-md hover:bg-gray-700"
+                            className="bg-gray-800 text-white text-base px-3 py-1.5 rounded-md hover:bg-gray-700"
                         >
                             検索
                         </button>
                     </form>
-                    <span className="text-sm text-gray-500 self-center">全 {admins.total} 名</span>
+                    <span className="text-base text-gray-500 self-center">全 {admins.total} 名</span>
                 </div>
 
                 {/* テーブル */}
@@ -184,15 +184,15 @@ export default function AdminsIndex({ admins, filters, flash, auth }: Props) {
                     <table className="min-w-full divide-y divide-gray-200">
                         <thead className="bg-gray-50">
                             <tr>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">管理者</th>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">登録日</th>
-                                <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase">操作</th>
+                                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500 uppercase">管理者</th>
+                                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500 uppercase">登録日</th>
+                                <th className="px-4 py-3 text-right text-sm font-medium text-gray-500 uppercase">操作</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200">
                             {admins.data.length === 0 ? (
                                 <tr>
-                                    <td colSpan={3} className="px-4 py-8 text-center text-sm text-gray-500">
+                                    <td colSpan={3} className="px-4 py-8 text-center text-base text-gray-500">
                                         管理者が見つかりません
                                     </td>
                                 </tr>
@@ -200,17 +200,17 @@ export default function AdminsIndex({ admins, filters, flash, auth }: Props) {
                                 admins.data.map((admin) => (
                                     <tr key={admin.id} className="hover:bg-gray-50">
                                         <td className="px-4 py-3">
-                                            <p className="text-sm font-medium text-gray-900">
+                                            <p className="text-base font-medium text-gray-900">
                                                 {admin.name}
                                                 {admin.id === auth.user.id && (
-                                                    <span className="ml-2 text-xs text-indigo-600 bg-indigo-50 border border-indigo-200 rounded px-1.5 py-0.5">
+                                                    <span className="ml-2 text-sm text-indigo-600 bg-indigo-50 border border-indigo-200 rounded px-1.5 py-0.5">
                                                         あなた
                                                     </span>
                                                 )}
                                             </p>
-                                            <p className="text-xs text-gray-500">{admin.email}</p>
+                                            <p className="text-sm text-gray-500">{admin.email}</p>
                                         </td>
-                                        <td className="px-4 py-3 text-sm text-gray-500">
+                                        <td className="px-4 py-3 text-base text-gray-500">
                                             {new Date(admin.created_at).toLocaleDateString('ja-JP')}
                                         </td>
                                         <td className="px-4 py-3 text-right">
@@ -238,7 +238,7 @@ export default function AdminsIndex({ admins, filters, flash, auth }: Props) {
                             <Link
                                 key={i}
                                 href={link.url ?? '#'}
-                                className={`px-3 py-1.5 rounded text-sm border ${
+                                className={`px-3 py-1.5 rounded text-base border ${
                                     link.active
                                         ? 'bg-indigo-600 text-white border-indigo-600'
                                         : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'

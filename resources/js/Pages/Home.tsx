@@ -73,7 +73,7 @@ export default function Home({ newArrivals, categories }: Props) {
 
     return (
         <>
-            <Head title="トップ | こもれび書房" />
+            <Head title="トップ" />
             <MainLayout>
                 {/* Hero */}
                 <section className="relative h-[420px] sm:h-[480px] overflow-hidden text-[#FDFAEB]">
@@ -92,10 +92,10 @@ export default function Home({ newArrivals, categories }: Props) {
 
                     <div className="relative h-full flex flex-col items-center justify-center text-center px-4">
                         <h1 className="text-4xl font-bold mb-4 drop-shadow">
-                            子供の本の世界へ
+                            木もれびの下で、お気に入りの一冊を
                         </h1>
                         <p className="text-[#EBDACA] mb-8 text-lg drop-shadow">
-                            年齢・ジャンルから、ぴったりの一冊を見つけよう
+                            年齢やジャンルから、お子さまにぴったりの絵本をさがせます
                         </p>
                         <Link
                             href={route("books.index")}

@@ -48,11 +48,11 @@ export default function CustomersIndex({ customers, filters }: Props) {
                             name="search"
                             defaultValue={filters.search ?? ''}
                             placeholder="名前・メールで検索"
-                            className="border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 w-56"
+                            className="border border-gray-300 rounded-md px-3 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-indigo-500 w-56"
                         />
                         <button
                             type="submit"
-                            className="bg-gray-800 text-white text-sm px-3 py-1.5 rounded-md hover:bg-gray-700"
+                            className="bg-gray-800 text-white text-base px-3 py-1.5 rounded-md hover:bg-gray-700"
                         >
                             検索
                         </button>
@@ -60,13 +60,13 @@ export default function CustomersIndex({ customers, filters }: Props) {
                             <button
                                 type="button"
                                 onClick={() => router.get(route('admin.customers.index'), {}, { preserveState: true })}
-                                className="text-sm text-gray-500 hover:text-gray-700 px-2"
+                                className="text-base text-gray-500 hover:text-gray-700 px-2"
                             >
                                 クリア
                             </button>
                         )}
                     </form>
-                    <span className="text-sm text-gray-500 self-center">全 {customers.total} 名</span>
+                    <span className="text-base text-gray-500 self-center">全 {customers.total} 名</span>
                 </div>
 
                 {/* テーブル */}
@@ -74,16 +74,16 @@ export default function CustomersIndex({ customers, filters }: Props) {
                     <table className="min-w-full divide-y divide-gray-200">
                         <thead className="bg-gray-50">
                             <tr>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">顧客</th>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">注文数</th>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">合計購入金額</th>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">登録日</th>
+                                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500 uppercase">顧客</th>
+                                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500 uppercase">注文数</th>
+                                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500 uppercase">合計購入金額</th>
+                                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500 uppercase">登録日</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200">
                             {customers.data.length === 0 ? (
                                 <tr>
-                                    <td colSpan={4} className="px-4 py-8 text-center text-sm text-gray-500">
+                                    <td colSpan={4} className="px-4 py-8 text-center text-base text-gray-500">
                                         顧客が見つかりません
                                     </td>
                                 </tr>
@@ -91,16 +91,16 @@ export default function CustomersIndex({ customers, filters }: Props) {
                                 customers.data.map((customer) => (
                                     <tr key={customer.id} className="hover:bg-gray-50">
                                         <td className="px-4 py-3">
-                                            <p className="text-sm font-medium text-gray-900">{customer.name}</p>
-                                            <p className="text-xs text-gray-500">{customer.email}</p>
+                                            <p className="text-base font-medium text-gray-900">{customer.name}</p>
+                                            <p className="text-sm text-gray-500">{customer.email}</p>
                                         </td>
-                                        <td className="px-4 py-3 text-sm text-gray-600">
+                                        <td className="px-4 py-3 text-base text-gray-600">
                                             {customer.orders_count}件
                                         </td>
-                                        <td className="px-4 py-3 text-sm font-medium text-gray-900">
+                                        <td className="px-4 py-3 text-base font-medium text-gray-900">
                                             {formatAmount(customer.orders_sum_total_amount)}
                                         </td>
-                                        <td className="px-4 py-3 text-sm text-gray-500">
+                                        <td className="px-4 py-3 text-base text-gray-500">
                                             {new Date(customer.created_at).toLocaleDateString('ja-JP')}
                                         </td>
                                     </tr>
@@ -117,7 +117,7 @@ export default function CustomersIndex({ customers, filters }: Props) {
                             <Link
                                 key={i}
                                 href={link.url ?? '#'}
-                                className={`px-3 py-1.5 rounded text-sm border ${
+                                className={`px-3 py-1.5 rounded text-base border ${
                                     link.active
                                         ? 'bg-indigo-600 text-white border-indigo-600'
                                         : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'

@@ -74,18 +74,19 @@ export default function Index({ books, categories, filters, trashedCount }: Prop
 
     return (
         <AdminLayout>
+            <Head title="書籍管理" />
             <div className="space-y-6">
                 <div className="flex items-center justify-between">
                     <h1 className="text-2xl font-bold text-gray-900">書籍管理</h1>
                     <div className="flex items-center gap-2">
                         <Link
                             href={route('admin.books.trash')}
-                            className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-700 border border-gray-200 rounded-md px-3 py-1.5 hover:bg-gray-50 transition-colors"
+                            className="flex items-center gap-1.5 text-base text-gray-500 hover:text-gray-700 border border-gray-200 rounded-md px-3 py-1.5 hover:bg-gray-50 transition-colors"
                         >
                             <Trash2 size={14} />
                             ゴミ箱
                             {trashedCount > 0 && (
-                                <span className="bg-red-100 text-red-700 text-xs rounded-full px-1.5 py-0.5 font-medium">
+                                <span className="bg-red-100 text-red-700 text-sm rounded-full px-1.5 py-0.5 font-medium">
                                     {trashedCount}
                                 </span>
                             )}
@@ -100,7 +101,7 @@ export default function Index({ books, categories, filters, trashedCount }: Prop
                 </div>
 
                 {props.flash?.success && (
-                    <div className="rounded-md bg-green-50 border border-green-200 px-4 py-2 text-sm text-green-700">
+                    <div className="rounded-md bg-green-50 border border-green-200 px-4 py-2 text-base text-green-700">
                         {props.flash.success}
                     </div>
                 )}
@@ -151,7 +152,7 @@ export default function Index({ books, categories, filters, trashedCount }: Prop
                 {/* 一括削除バー */}
                 {selectedIds.length > 0 && (
                     <div className="flex items-center gap-3 bg-red-50 border border-red-200 rounded-lg px-4 py-2">
-                        <span className="text-sm text-red-700">
+                        <span className="text-base text-red-700">
                             {selectedIds.length}件を選択中
                         </span>
                         <Button
@@ -163,7 +164,7 @@ export default function Index({ books, categories, filters, trashedCount }: Prop
                             まとめて削除
                         </Button>
                         <button
-                            className="text-xs text-gray-500 hover:text-gray-700 ml-auto"
+                            className="text-sm text-gray-500 hover:text-gray-700 ml-auto"
                             onClick={() => setSelectedIds([])}
                         >
                             選択解除
@@ -174,7 +175,7 @@ export default function Index({ books, categories, filters, trashedCount }: Prop
                 {/* テーブル */}
                 <div className="bg-white border rounded-lg overflow-hidden">
                     <div className="overflow-x-auto">
-                        <table className="w-full text-sm">
+                        <table className="w-full text-base">
                             <thead className="bg-gray-50 border-b">
                                 <tr>
                                     <th className="px-4 py-3 text-left w-10">
@@ -235,7 +236,7 @@ export default function Index({ books, categories, filters, trashedCount }: Prop
                                                 <div className="font-medium text-gray-900 line-clamp-1">
                                                     {book.title}
                                                 </div>
-                                                <div className="text-xs text-gray-400 md:hidden">
+                                                <div className="text-sm text-gray-400 md:hidden">
                                                     {book.author}
                                                 </div>
                                             </td>
@@ -294,7 +295,7 @@ export default function Index({ books, categories, filters, trashedCount }: Prop
 
                     {/* ページネーション */}
                     {books.last_page > 1 && (
-                        <div className="flex items-center justify-between px-4 py-3 border-t text-sm text-gray-600">
+                        <div className="flex items-center justify-between px-4 py-3 border-t text-base text-gray-600">
                             <span>
                                 {books.total}件中 {(books.current_page - 1) * books.per_page + 1}〜
                                 {Math.min(books.current_page * books.per_page, books.total)}件
@@ -304,7 +305,7 @@ export default function Index({ books, categories, filters, trashedCount }: Prop
                                     <Link
                                         key={i}
                                         href={link.url ?? '#'}
-                                        className={`px-3 py-1 rounded border text-xs transition-colors ${
+                                        className={`px-3 py-1 rounded border text-sm transition-colors ${
                                             link.active
                                                 ? 'bg-primary text-primary-foreground border-primary'
                                                 : link.url
