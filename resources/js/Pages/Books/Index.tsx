@@ -93,7 +93,7 @@ export default function BooksIndex({ books, categories, filters }: Props) {
 
     return (
         <>
-            <Head title="本を探す | BookStore" />
+            <Head title="本を探す | こもれび書房" />
             <MainLayout>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
                     <h1 className="text-2xl font-bold text-gray-800 mb-6">

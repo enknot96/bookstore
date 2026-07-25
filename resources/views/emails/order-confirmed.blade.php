@@ -3,7 +3,7 @@
 
 {{ $order->shipping_name }} 様
 
-BookStore にてご注文が確定しました。
+こもれび書房 にてご注文が確定しました。
 
 ---
 
@@ -35,7 +35,7 @@ BookStore にてご注文が確定しました。
 ご不明な点はお気軽にお問い合わせください。
 
 <x-mail::button :url="config('app.url')">
-BookStore トップへ
+こもれび書房 トップへ
 </x-mail::button>
 
 {{ config('app.name') }}

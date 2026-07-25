@@ -20,7 +20,7 @@ class OrderConfirmed extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: '【BookStore】ご注文ありがとうございます（注文番号 #' . $this->order->id . '）',
+            subject: '【こもれび書房】ご注文ありがとうございます（注文番号 #' . $this->order->id . '）',
         );
     }
 
