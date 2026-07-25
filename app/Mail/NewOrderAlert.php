@@ -20,7 +20,7 @@ class NewOrderAlert extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: '【BookStore管理】新規注文が入りました（注文番号 #' . $this->order->id . '）',
+            subject: '【こもれび書房管理】新規注文が入りました（注文番号 #' . $this->order->id . '）',
         );
     }
 

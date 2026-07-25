@@ -2,6 +2,7 @@ import { Link, router, usePage } from '@inertiajs/react';
 import { ShoppingCart } from 'lucide-react';
 import { ReactNode, useEffect } from 'react';
 import { toast, Toaster } from 'sonner';
+import logo from '@/assets/logo/logo.jpeg';
 
 export default function MainLayout({ children }: { children: ReactNode }) {
     const { auth, cartCount, flash } = usePage<{
@@ -19,8 +20,9 @@ export default function MainLayout({ children }: { children: ReactNode }) {
         <div className="min-h-screen bg-[#FDFAEB] flex flex-col">
             <header className="bg-white border-b border-[#431608]/10 shadow-sm">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-                    <Link href={route('home')} className="text-xl font-bold text-[#431608]">
-                        📚 BookStore
+                    <Link href={route('home')} className="flex items-center gap-2 text-xl font-bold text-[#431608]">
+                        <img src={logo} alt="" className="h-10 w-10 object-contain" />
+                        こもれび書房
                     </Link>
                     <nav className="flex items-center gap-4 text-sm">
                         <Link href={route('books.index')} className="text-[#431608]/70 hover:text-[#B27E6E] transition-colors">
@@ -70,7 +72,7 @@ export default function MainLayout({ children }: { children: ReactNode }) {
 
             <footer className="bg-white border-t mt-16">
                 <div className="max-w-7xl mx-auto px-4 py-8 text-center text-sm text-gray-500">
-                    &copy; 2025 BookStore. All rights reserved.
+                    &copy; {new Date().getFullYear()} こもれび書房. All rights reserved.
                 </div>
             </footer>
         </div>

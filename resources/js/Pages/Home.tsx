@@ -1,5 +1,12 @@
 import { Head, Link } from "@inertiajs/react";
+import { useEffect, useState } from "react";
 import MainLayout from "@/Layouts/MainLayout";
+import hero01 from "@/assets/hero/hero01.jpg";
+import hero02 from "@/assets/hero/hero02.jpg";
+import hero03 from "@/assets/hero/hero03.jpg";
+
+const HERO_IMAGES = [hero01, hero02, hero03];
+const HERO_INTERVAL_MS = 5000;
 
 type Book = {
     id: number;
@@ -55,24 +62,60 @@ function BookCard({ book }: { book: Book }) {
 }
 
 export default function Home({ newArrivals, categories }: Props) {
+    const [heroIndex, setHeroIndex] = useState(0);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setHeroIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+        }, HERO_INTERVAL_MS);
+        return () => clearInterval(timer);
+    }, []);
+
     return (
         <>
-            <Head title="トップ | BookStore" />
+            <Head title="トップ | こもれび書房" />
             <MainLayout>
                 {/* Hero */}
-                <section className="bg-[#431608] text-[#FDFAEB] py-20 px-4 text-center">
-                    <h1 className="text-4xl font-bold mb-4">
-                        子供の本の世界へ
-                    </h1>
-                    <p className="text-[#EBDACA] mb-8 text-lg">
-                        年齢・ジャンルから、ぴったりの一冊を見つけよう
-                    </p>
-                    <Link
-                        href={route("books.index")}
-                        className="bg-[#FFF17C] text-[#431608] font-semibold px-6 py-3 rounded-full hover:bg-[#ED946D] transition"
+                <section className="relative h-[420px] sm:h-[480px] overflow-hidden text-[#FDFAEB]">
+                    {HERO_IMAGES.map((src, i) => (
+                        <img
+                            key={src}
+                            src={src}
+                            alt=""
+                            aria-hidden="true"
+                            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+                                i === heroIndex ? "opacity-100" : "opacity-0"
+                            }`}
+                        />
+                    ))}
+                    <div className="absolute inset-0 bg-[#431608]/40" />
+
+                    <div className="relative h-full flex flex-col items-center justify-center text-center px-4">
+                        <h1 className="text-4xl font-bold mb-4 drop-shadow">
+                            子供の本の世界へ
+                        </h1>
+                        <p className="text-[#EBDACA] mb-8 text-lg drop-shadow">
+                            年齢・ジャンルから、ぴったりの一冊を見つけよう
+                        </p>
+                        <Link
+                            href={route("books.index")}
+                            className="bg-[#FFF17C] text-[#431608] font-semibold px-6 py-3 rounded-full hover:bg-[#ED946D] transition"
+                        >
+                            本を探す
+                        </Link>
+                    </div>
+
+                    <svg
+                        className="absolute -bottom-1 left-0 w-full h-16 sm:h-20"
+                        viewBox="0 0 1440 100"
+                        preserveAspectRatio="none"
+                        aria-hidden="true"
                     >
-                        本を探す
-                    </Link>
+                        <path
+                            d="M0,100 L0,80 C 360,-20 1080,-20 1440,80 L1440,100 Z"
+                            fill="#FDFAEB"
+                        />
+                    </svg>
                 </section>
 
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
