@@ -11,27 +11,17 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StripeWebhookController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/books', [BookController::class, 'index'])->name('books.index');
 Route::get('/books/{book}', [BookController::class, 'show'])->name('books.show');
 
-Route::get('/dashboard', function () {
-  return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 // Stripe Webhook（CSRF除外のため auth ミドルウェア外）
 Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle'])->name('stripe.webhook');
 
 Route::middleware('auth')->group(function () {
-  Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-  Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-  Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
   // カート
   Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
   Route::post('/cart', [CartController::class, 'store'])->name('cart.store');

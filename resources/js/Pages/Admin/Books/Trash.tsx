@@ -91,14 +91,14 @@ export default function Trash({ books, filters }: Props) {
                     <div className="flex items-center gap-3">
                         <Link
                             href={route('admin.books.index')}
-                            className="text-sm text-gray-500 hover:text-gray-700 flex items-center gap-1"
+                            className="text-base text-gray-500 hover:text-gray-700 flex items-center gap-1"
                         >
                             <ArrowLeft size={14} />
                             書籍管理に戻る
                         </Link>
                         <h1 className="text-2xl font-bold text-gray-900">ゴミ箱</h1>
                         {books.total > 0 && (
-                            <span className="text-sm text-gray-500">{books.total}件</span>
+                            <span className="text-base text-gray-500">{books.total}件</span>
                         )}
                     </div>
                     {books.total > 0 && (
@@ -115,7 +115,7 @@ export default function Trash({ books, filters }: Props) {
                 </div>
 
                 {props.flash?.success && (
-                    <div className="rounded-md bg-green-50 border border-green-200 px-4 py-2 text-sm text-green-700">
+                    <div className="rounded-md bg-green-50 border border-green-200 px-4 py-2 text-base text-green-700">
                         {props.flash.success}
                     </div>
                 )}
@@ -127,7 +127,7 @@ export default function Trash({ books, filters }: Props) {
                         onChange={(e) => setSearch(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && applySearch()}
                         placeholder="タイトル・著者で検索"
-                        className="border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 w-56"
+                        className="border border-gray-300 rounded-md px-3 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-indigo-500 w-56"
                     />
                     <Button variant="outline" size="sm" onClick={applySearch}>
                         検索
@@ -137,7 +137,7 @@ export default function Trash({ books, filters }: Props) {
                 {/* 一括操作バー */}
                 {selectedIds.length > 0 && (
                     <div className="flex items-center gap-3 bg-blue-50 border border-blue-200 rounded-lg px-4 py-2">
-                        <span className="text-sm text-blue-700">{selectedIds.length}件を選択中</span>
+                        <span className="text-base text-blue-700">{selectedIds.length}件を選択中</span>
                         <Button
                             variant="outline"
                             size="sm"
@@ -156,7 +156,7 @@ export default function Trash({ books, filters }: Props) {
                             まとめて完全削除
                         </Button>
                         <button
-                            className="text-xs text-gray-500 hover:text-gray-700 ml-auto"
+                            className="text-sm text-gray-500 hover:text-gray-700 ml-auto"
                             onClick={() => setSelectedIds([])}
                         >
                             選択解除
@@ -167,7 +167,7 @@ export default function Trash({ books, filters }: Props) {
                 {/* テーブル */}
                 <div className="bg-white border rounded-lg overflow-hidden">
                     <div className="overflow-x-auto">
-                        <table className="w-full text-sm">
+                        <table className="w-full text-base">
                             <thead className="bg-gray-50 border-b">
                                 <tr>
                                     <th className="px-4 py-3 text-left w-10">
@@ -185,7 +185,7 @@ export default function Trash({ books, filters }: Props) {
                                     <th className="px-4 py-3 text-left font-medium text-gray-600 hidden md:table-cell">著者</th>
                                     <th className="px-4 py-3 text-center font-medium text-gray-600 hidden sm:table-cell">状態</th>
                                     <th className="px-4 py-3 text-left font-medium text-gray-600 hidden sm:table-cell">削除日時</th>
-                                    <th className="px-4 py-3 w-32"></th>
+                                    <th className="px-4 py-3 w-44"></th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y">
@@ -208,7 +208,7 @@ export default function Trash({ books, filters }: Props) {
                                             </td>
                                             <td className="px-4 py-3">
                                                 <div className="font-medium text-gray-700 line-clamp-1">{book.title}</div>
-                                                <div className="text-xs text-gray-400 md:hidden">{book.author}</div>
+                                                <div className="text-sm text-gray-400 md:hidden">{book.author}</div>
                                             </td>
                                             <td className="px-4 py-3 text-gray-500 hidden md:table-cell">{book.author}</td>
                                             <td className="px-4 py-3 text-center hidden sm:table-cell">
@@ -216,20 +216,20 @@ export default function Trash({ books, filters }: Props) {
                                                     {book.is_published ? '公開' : '非公開'}
                                                 </Badge>
                                             </td>
-                                            <td className="px-4 py-3 text-gray-400 text-xs hidden sm:table-cell">
+                                            <td className="px-4 py-3 text-gray-600 text-base hidden sm:table-cell whitespace-nowrap">
                                                 {new Date(book.deleted_at).toLocaleString('ja-JP')}
                                             </td>
                                             <td className="px-4 py-3 text-right">
-                                                <div className="flex items-center justify-end gap-1">
+                                                <div className="flex items-center justify-end gap-2">
                                                     <button
                                                         onClick={() => handleRestore(book)}
-                                                        className="text-xs text-green-700 hover:text-green-900 border border-green-200 hover:bg-green-50 rounded px-2 py-1 transition-colors"
+                                                        className="text-sm text-green-700 hover:text-green-900 border border-green-200 hover:bg-green-50 rounded px-3 py-1.5 whitespace-nowrap transition-colors"
                                                     >
                                                         復元
                                                     </button>
                                                     <button
                                                         onClick={() => handleForceDelete(book)}
-                                                        className="text-xs text-red-600 hover:text-red-800 border border-red-200 hover:bg-red-50 rounded px-2 py-1 transition-colors"
+                                                        className="text-sm text-red-600 hover:text-red-800 border border-red-200 hover:bg-red-50 rounded px-3 py-1.5 whitespace-nowrap transition-colors"
                                                     >
                                                         完全削除
                                                     </button>
@@ -243,7 +243,7 @@ export default function Trash({ books, filters }: Props) {
                     </div>
 
                     {books.last_page > 1 && (
-                        <div className="flex items-center justify-between px-4 py-3 border-t text-sm text-gray-600">
+                        <div className="flex items-center justify-between px-4 py-3 border-t text-base text-gray-600">
                             <span>
                                 {books.total}件中 {(books.current_page - 1) * books.per_page + 1}〜
                                 {Math.min(books.current_page * books.per_page, books.total)}件
@@ -253,7 +253,7 @@ export default function Trash({ books, filters }: Props) {
                                     <Link
                                         key={i}
                                         href={link.url ?? '#'}
-                                        className={`px-3 py-1 rounded border text-xs transition-colors ${
+                                        className={`px-3 py-1 rounded border text-sm transition-colors ${
                                             link.active
                                                 ? 'bg-primary text-primary-foreground border-primary'
                                                 : link.url

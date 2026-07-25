@@ -1,6 +1,6 @@
 import { Link, router, usePage } from '@inertiajs/react';
-import { ShoppingCart } from 'lucide-react';
-import { ReactNode, useEffect } from 'react';
+import { Menu, ShoppingCart, X } from 'lucide-react';
+import { ReactNode, useEffect, useState } from 'react';
 import { toast, Toaster } from 'sonner';
 import logo from '@/assets/logo/logo.jpeg';
 
@@ -10,6 +10,9 @@ export default function MainLayout({ children }: { children: ReactNode }) {
         cartCount: number;
         flash: { success?: string; error?: string };
     }>().props;
+
+    const [menuOpen, setMenuOpen] = useState(false);
+    const closeMenu = () => setMenuOpen(false);
 
     useEffect(() => {
         if (flash.success) toast.success(flash.success);
@@ -24,13 +27,15 @@ export default function MainLayout({ children }: { children: ReactNode }) {
                         <img src={logo} alt="" className="h-10 w-10 object-contain" />
                         こもれび書房
                     </Link>
-                    <nav className="flex items-center gap-4 text-sm">
-                        <Link href={route('books.index')} className="text-[#431608]/70 hover:text-[#B27E6E] transition-colors">
+
+                    {/* デスクトップ用ナビ */}
+                    <nav className="hidden sm:flex items-center gap-4 text-sm">
+                        <Link href={route('books.index')} className="font-medium text-[#431608]/90 hover:text-[#B27E6E] transition-colors">
                             本を探す
                         </Link>
                         {auth.user ? (
                             <>
-                                <Link href={route('cart.index')} className="relative text-[#431608]/70 hover:text-[#B27E6E] transition-colors">
+                                <Link href={route('cart.index')} className="relative font-medium text-[#431608]/90 hover:text-[#B27E6E] transition-colors">
                                     <ShoppingCart className="w-5 h-5" />
                                     {cartCount > 0 && (
                                         <span className="absolute -top-1.5 -right-1.5 bg-[#431608] text-[#FDFAEB] text-xs rounded-full w-4 h-4 flex items-center justify-center">
@@ -38,21 +43,21 @@ export default function MainLayout({ children }: { children: ReactNode }) {
                                         </span>
                                     )}
                                 </Link>
-                                <Link href={route('orders.index')} className="text-[#431608]/70 hover:text-[#B27E6E] transition-colors">
+                                <Link href={route('orders.index')} className="font-medium text-[#431608]/90 hover:text-[#B27E6E] transition-colors">
                                     注文履歴
                                 </Link>
                                 <span className="text-[#431608]/30">|</span>
                                 <span className="text-[#431608]/70">{auth.user.name}</span>
                                 <button
                                     onClick={() => router.post(route('logout'))}
-                                    className="text-[#431608]/60 hover:text-[#B27E6E] transition-colors"
+                                    className="font-medium text-[#431608]/80 hover:text-[#B27E6E] transition-colors"
                                 >
                                     ログアウト
                                 </button>
                             </>
                         ) : (
                             <>
-                                <Link href={route('login')} className="text-[#431608]/70 hover:text-[#B27E6E] transition-colors">
+                                <Link href={route('login')} className="font-medium text-[#431608]/90 hover:text-[#B27E6E] transition-colors">
                                     ログイン
                                 </Link>
                                 <Link
@@ -64,7 +69,67 @@ export default function MainLayout({ children }: { children: ReactNode }) {
                             </>
                         )}
                     </nav>
+
+                    {/* モバイル用: カート常時表示 + ハンバーガー */}
+                    <div className="flex items-center gap-3 sm:hidden">
+                        {auth.user && (
+                            <Link href={route('cart.index')} className="relative text-[#431608]/90">
+                                <ShoppingCart className="w-5 h-5" />
+                                {cartCount > 0 && (
+                                    <span className="absolute -top-1.5 -right-1.5 bg-[#431608] text-[#FDFAEB] text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                                        {cartCount}
+                                    </span>
+                                )}
+                            </Link>
+                        )}
+                        <button
+                            onClick={() => setMenuOpen((v) => !v)}
+                            aria-label="メニューを開く"
+                            className="text-[#431608]"
+                        >
+                            {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                        </button>
+                    </div>
                 </div>
+
+                {/* モバイル用メニューパネル */}
+                {menuOpen && (
+                    <nav className="sm:hidden border-t border-[#431608]/10 px-4 py-3 flex flex-col gap-3 text-sm">
+                        <Link href={route('books.index')} onClick={closeMenu} className="font-medium text-[#431608]/90">
+                            本を探す
+                        </Link>
+                        {auth.user ? (
+                            <>
+                                <Link href={route('orders.index')} onClick={closeMenu} className="font-medium text-[#431608]/90">
+                                    注文履歴
+                                </Link>
+                                <span className="text-[#431608]/70">{auth.user.name}</span>
+                                <button
+                                    onClick={() => {
+                                        closeMenu();
+                                        router.post(route('logout'));
+                                    }}
+                                    className="text-left font-medium text-[#431608]/80"
+                                >
+                                    ログアウト
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                <Link href={route('login')} onClick={closeMenu} className="font-medium text-[#431608]/90">
+                                    ログイン
+                                </Link>
+                                <Link
+                                    href={route('register')}
+                                    onClick={closeMenu}
+                                    className="bg-[#FFF17C] text-[#431608] px-3 py-1.5 rounded-full font-medium text-center"
+                                >
+                                    新規登録
+                                </Link>
+                            </>
+                        )}
+                    </nav>
+                )}
             </header>
 
             <Toaster position="top-right" richColors />

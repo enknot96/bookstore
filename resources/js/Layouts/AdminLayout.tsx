@@ -44,7 +44,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                             key={href}
                             href={href}
                             className={cn(
-                                'flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors',
+                                'flex items-center gap-3 px-3 py-2 rounded-md text-base font-medium transition-colors',
                                 url.startsWith(href) && href !== '/admin'
                                     ? 'bg-primary text-primary-foreground'
                                     : url === href
@@ -60,7 +60,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 <div className="p-4 border-t">
                     <Link
                         href="/"
-                        className="text-xs text-gray-500 hover:text-gray-700 transition-colors"
+                        className="text-sm text-gray-500 hover:text-gray-700 transition-colors"
                     >
                         ← 公開サイトへ
                     </Link>
@@ -76,7 +76,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                     >
                         {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
                     </button>
-                    <span className="text-sm text-gray-500">児童書EC 管理</span>
+                    <span className="text-base text-gray-500">児童書EC 管理</span>
                 </header>
                 <main className="flex-1 p-6">{children}</main>
             </div>

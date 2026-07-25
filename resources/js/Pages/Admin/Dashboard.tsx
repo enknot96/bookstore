@@ -1,6 +1,6 @@
 import AdminLayout from "@/Layouts/AdminLayout";
 import { PageProps } from "@/types";
-import { Link } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import { BookOpen, FolderOpen, ShoppingCart } from "lucide-react";
 
 interface Stats {
@@ -40,6 +40,7 @@ const statCards = (stats: Stats) => [
 export default function Dashboard({ stats }: Props) {
     return (
         <AdminLayout>
+            <Head title="ダッシュボード" />
             <div className="space-y-6">
                 <h1 className="text-2xl font-bold text-gray-900">ダッシュボード</h1>
 
@@ -55,7 +56,7 @@ export default function Dashboard({ stats }: Props) {
                                         <p className="text-2xl font-bold text-gray-900">
                                             {value}
                                         </p>
-                                        <p className="text-sm text-gray-500">
+                                        <p className="text-base text-gray-500">
                                             {label}
                                         </p>
                                     </div>
@@ -73,19 +74,19 @@ export default function Dashboard({ stats }: Props) {
                 </div>
 
                 <div className="bg-white border rounded-lg p-5">
-                    <h2 className="text-sm font-medium text-gray-700 mb-3">
+                    <h2 className="text-base font-medium text-gray-700 mb-3">
                         クイックリンク
                     </h2>
                     <div className="flex flex-wrap gap-3">
                         <Link
                             href="/admin/books/create"
-                            className="text-sm text-blue-600 hover:underline"
+                            className="text-base text-blue-600 hover:underline"
                         >
                             + 書籍を登録する
                         </Link>
                         <Link
                             href="/admin/books"
-                            className="text-sm text-blue-600 hover:underline"
+                            className="text-base text-blue-600 hover:underline"
                         >
                             書籍一覧を見る
                         </Link>

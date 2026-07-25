@@ -41,7 +41,7 @@ function RoleSelect({ user }: { user: User }) {
             value={role}
             onChange={(e) => handleChange(e.target.value as 'admin' | 'customer')}
             disabled={processing}
-            className={`text-xs border rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
+            className={`text-sm border rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
                 role === 'admin'
                     ? 'bg-indigo-50 border-indigo-300 text-indigo-700'
                     : 'bg-gray-50 border-gray-300 text-gray-700'
@@ -72,12 +72,12 @@ export default function AdminUsersIndex({ users, filters, flash }: Props) {
                 <h1 className="text-2xl font-bold text-gray-900 mb-6">ユーザー管理</h1>
 
                 {flash.success && (
-                    <p className="mb-4 text-sm text-green-700 bg-green-50 border border-green-200 rounded px-4 py-2">
+                    <p className="mb-4 text-base text-green-700 bg-green-50 border border-green-200 rounded px-4 py-2">
                         {flash.success}
                     </p>
                 )}
                 {flash.error && (
-                    <p className="mb-4 text-sm text-red-700 bg-red-50 border border-red-200 rounded px-4 py-2">
+                    <p className="mb-4 text-base text-red-700 bg-red-50 border border-red-200 rounded px-4 py-2">
                         {flash.error}
                     </p>
                 )}
@@ -89,11 +89,11 @@ export default function AdminUsersIndex({ users, filters, flash }: Props) {
                             name="search"
                             defaultValue={filters.search ?? ''}
                             placeholder="名前・メールで検索"
-                            className="border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 w-56"
+                            className="border border-gray-300 rounded-md px-3 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-indigo-500 w-56"
                         />
                         <button
                             type="submit"
-                            className="bg-gray-800 text-white text-sm px-3 py-1.5 rounded-md hover:bg-gray-700"
+                            className="bg-gray-800 text-white text-base px-3 py-1.5 rounded-md hover:bg-gray-700"
                         >
                             検索
                         </button>
@@ -108,7 +108,7 @@ export default function AdminUsersIndex({ users, filters, flash }: Props) {
                             <button
                                 key={value}
                                 onClick={() => handleRoleFilter(value)}
-                                className={`px-3 py-1.5 rounded-full text-sm border transition-colors ${
+                                className={`px-3 py-1.5 rounded-full text-base border transition-colors ${
                                     (filters.role ?? '') === value
                                         ? 'bg-gray-900 text-white border-gray-900'
                                         : 'bg-white text-gray-600 border-gray-300 hover:bg-gray-50'
@@ -119,7 +119,7 @@ export default function AdminUsersIndex({ users, filters, flash }: Props) {
                         ))}
                     </div>
 
-                    <span className="text-sm text-gray-500 self-center">全 {users.total} 名</span>
+                    <span className="text-base text-gray-500 self-center">全 {users.total} 名</span>
                 </div>
 
                 {/* テーブル */}
@@ -127,16 +127,16 @@ export default function AdminUsersIndex({ users, filters, flash }: Props) {
                     <table className="min-w-full divide-y divide-gray-200">
                         <thead className="bg-gray-50">
                             <tr>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">ユーザー</th>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">注文数</th>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">登録日</th>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">ロール</th>
+                                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500 uppercase">ユーザー</th>
+                                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500 uppercase">注文数</th>
+                                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500 uppercase">登録日</th>
+                                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500 uppercase">ロール</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200">
                             {users.data.length === 0 ? (
                                 <tr>
-                                    <td colSpan={4} className="px-4 py-8 text-center text-sm text-gray-500">
+                                    <td colSpan={4} className="px-4 py-8 text-center text-base text-gray-500">
                                         ユーザーが見つかりません
                                     </td>
                                 </tr>
@@ -144,13 +144,13 @@ export default function AdminUsersIndex({ users, filters, flash }: Props) {
                                 users.data.map((user) => (
                                     <tr key={user.id} className="hover:bg-gray-50">
                                         <td className="px-4 py-3">
-                                            <p className="text-sm font-medium text-gray-900">{user.name}</p>
-                                            <p className="text-xs text-gray-500">{user.email}</p>
+                                            <p className="text-base font-medium text-gray-900">{user.name}</p>
+                                            <p className="text-sm text-gray-500">{user.email}</p>
                                         </td>
-                                        <td className="px-4 py-3 text-sm text-gray-600">
+                                        <td className="px-4 py-3 text-base text-gray-600">
                                             {user.orders_count}件
                                         </td>
-                                        <td className="px-4 py-3 text-sm text-gray-500">
+                                        <td className="px-4 py-3 text-base text-gray-500">
                                             {new Date(user.created_at).toLocaleDateString('ja-JP')}
                                         </td>
                                         <td className="px-4 py-3">
@@ -170,7 +170,7 @@ export default function AdminUsersIndex({ users, filters, flash }: Props) {
                             <Link
                                 key={i}
                                 href={link.url ?? '#'}
-                                className={`px-3 py-1.5 rounded text-sm border ${
+                                className={`px-3 py-1.5 rounded text-base border ${
                                     link.active
                                         ? 'bg-indigo-600 text-white border-indigo-600'
                                         : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
