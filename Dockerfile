@@ -19,6 +19,9 @@ COPY . .
 
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
+ARG VITE_APP_NAME
+ENV VITE_APP_NAME=$VITE_APP_NAME
+
 RUN npm ci && npm run build
 
 RUN mkdir -p storage/framework/cache/data storage/framework/sessions storage/framework/views storage/logs \
