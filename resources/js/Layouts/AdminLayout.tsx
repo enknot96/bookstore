@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, LayoutDashboard, Menu, Settings, ShieldCheck, ShoppingBag, Users, X } from 'lucide-react';
+import { BookOpen, Home, LayoutDashboard, Menu, Settings, ShieldCheck, ShoppingBag, Users, X } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 
@@ -60,9 +60,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 <div className="p-4 border-t">
                     <Link
                         href="/"
-                        className="text-sm text-gray-500 hover:text-gray-700 transition-colors"
+                        className="flex items-center gap-3 text-base font-medium text-gray-600 hover:text-gray-900 transition-colors"
                     >
-                        ← 公開サイトへ
+                        <Home size={16} />
+                        公開サイトへ
                     </Link>
                 </div>
             </aside>

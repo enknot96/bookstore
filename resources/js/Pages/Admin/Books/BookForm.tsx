@@ -182,7 +182,7 @@ export default function BookForm({
                 <div className="flex gap-4 items-start">
                     {/* プレビュー */}
                     {displayUrl ? (
-                        <div className="relative w-28 h-36 flex-shrink-0">
+                        <div className="relative w-36 h-48 flex-shrink-0">
                             <img
                                 src={displayUrl}
                                 alt="カバープレビュー"
@@ -199,7 +199,7 @@ export default function BookForm({
                             )}
                         </div>
                     ) : (
-                        <div className="w-28 h-36 flex-shrink-0 bg-gray-100 rounded-md border border-dashed flex items-center justify-center text-gray-400">
+                        <div className="w-36 h-48 flex-shrink-0 bg-gray-100 rounded-md border border-dashed flex items-center justify-center text-gray-400">
                             <ImagePlus size={24} />
                         </div>
                     )}

@@ -50,7 +50,7 @@ export default function Edit({ book, categories }: Props) {
     return (
         <AdminLayout>
             <Head title="書籍編集" />
-            <div className="max-w-2xl">
+            <div className="max-w-3xl">
                 <div className="flex items-center justify-between mb-6">
                     <h1 className="text-2xl font-bold text-gray-900">書籍編集</h1>
                     <div className="flex items-center gap-3">
