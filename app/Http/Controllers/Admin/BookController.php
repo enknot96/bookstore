@@ -23,7 +23,7 @@ class BookController extends Controller
             ->when($request->category, fn($q, $v) => $q->whereHas('categories', fn($q) => $q->where('categories.id', $v)))
             ->when($request->filled('is_published'), fn($q) => $q->where('is_published', $request->boolean('is_published')));
 
-        $books = $query->orderBy('created_at', 'desc')->paginate(20)->withQueryString();
+        $books = $query->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
 
         return Inertia::render('Admin/Books/Index', [
             'books'        => $books,
@@ -110,7 +110,7 @@ class BookController extends Controller
                     ->orWhere('author', 'like', "%{$v}%");
             }))
             ->orderBy('deleted_at', 'desc')
-            ->paginate(20)
+            ->paginate(10)
             ->withQueryString();
 
         return Inertia::render('Admin/Books/Trash', [
