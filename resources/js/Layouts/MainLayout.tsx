@@ -1,5 +1,6 @@
 import { Link, router, usePage } from '@inertiajs/react';
-import { Menu, ShoppingCart, X } from 'lucide-react';
+import { Transition, TransitionChild } from '@headlessui/react';
+import { Menu, Pencil, ShoppingCart, X } from 'lucide-react';
 import { ReactNode, useEffect, useState } from 'react';
 import { toast, Toaster } from 'sonner';
 import logo from '@/assets/logo/logo.jpeg';
@@ -47,7 +48,10 @@ export default function MainLayout({ children }: { children: ReactNode }) {
                                     注文履歴
                                 </Link>
                                 <span className="text-[#431608]/30">|</span>
-                                <span className="text-[#431608]/70">{auth.user.name}</span>
+                                <Link href={route('profile.edit')} className="flex items-center gap-1 text-[#431608]/70 hover:text-[#B27E6E] transition-colors">
+                                    {auth.user.name}
+                                    <Pencil className="w-3.5 h-3.5" />
+                                </Link>
                                 <button
                                     onClick={() => router.post(route('logout'))}
                                     className="font-medium text-[#431608]/80 hover:text-[#B27E6E] transition-colors"
@@ -93,43 +97,55 @@ export default function MainLayout({ children }: { children: ReactNode }) {
                 </div>
 
                 {/* モバイル用メニューパネル */}
-                {menuOpen && (
-                    <nav className="sm:hidden border-t border-[#431608]/10 px-4 py-3 flex flex-col gap-3 text-sm">
-                        <Link href={route('books.index')} onClick={closeMenu} className="font-medium text-[#431608]/90">
-                            本を探す
-                        </Link>
-                        {auth.user ? (
-                            <>
-                                <Link href={route('orders.index')} onClick={closeMenu} className="font-medium text-[#431608]/90">
-                                    注文履歴
-                                </Link>
-                                <span className="text-[#431608]/70">{auth.user.name}</span>
-                                <button
-                                    onClick={() => {
-                                        closeMenu();
-                                        router.post(route('logout'));
-                                    }}
-                                    className="text-left font-medium text-[#431608]/80"
-                                >
-                                    ログアウト
-                                </button>
-                            </>
-                        ) : (
-                            <>
-                                <Link href={route('login')} onClick={closeMenu} className="font-medium text-[#431608]/90">
-                                    ログイン
-                                </Link>
-                                <Link
-                                    href={route('register')}
-                                    onClick={closeMenu}
-                                    className="bg-[#FFF17C] text-[#431608] px-3 py-1.5 rounded-full font-medium text-center"
-                                >
-                                    新規登録
-                                </Link>
-                            </>
-                        )}
-                    </nav>
-                )}
+                <Transition show={menuOpen}>
+                    <TransitionChild
+                        enter="transition ease-out duration-300"
+                        enterFrom="opacity-0 -translate-y-2"
+                        enterTo="opacity-100 translate-y-0"
+                        leave="transition ease-in duration-200"
+                        leaveFrom="opacity-100 translate-y-0"
+                        leaveTo="opacity-0 -translate-y-2"
+                    >
+                        <nav className="sm:hidden border-t border-[#431608]/10 px-4 py-3 flex flex-col text-sm">
+                            <Link href={route('books.index')} onClick={closeMenu} className="block py-4 text-center font-medium text-[#431608]/90">
+                                本を探す
+                            </Link>
+                            {auth.user ? (
+                                <>
+                                    <Link href={route('orders.index')} onClick={closeMenu} className="block py-4 text-center font-medium text-[#431608]/90">
+                                        注文履歴
+                                    </Link>
+                                    <Link href={route('profile.edit')} onClick={closeMenu} className="flex items-center justify-center gap-1 py-4 text-[#431608]/70">
+                                        {auth.user.name}
+                                        <Pencil className="w-3.5 h-3.5" />
+                                    </Link>
+                                    <button
+                                        onClick={() => {
+                                            closeMenu();
+                                            router.post(route('logout'));
+                                        }}
+                                        className="block w-full py-4 text-center font-medium text-[#431608]/80"
+                                    >
+                                        ログアウト
+                                    </button>
+                                </>
+                            ) : (
+                                <>
+                                    <Link href={route('login')} onClick={closeMenu} className="block py-4 text-center font-medium text-[#431608]/90">
+                                        ログイン
+                                    </Link>
+                                    <Link
+                                        href={route('register')}
+                                        onClick={closeMenu}
+                                        className="block py-4 text-center bg-[#FFF17C] text-[#431608] rounded-full font-medium"
+                                    >
+                                        新規登録
+                                    </Link>
+                                </>
+                            )}
+                        </nav>
+                    </TransitionChild>
+                </Transition>
             </header>
 
             <Toaster position="top-right" richColors />
