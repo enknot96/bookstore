@@ -312,7 +312,11 @@ export default function Index({ books, categories, filters, trashedCount }: Prop
                                                   ? 'hover:bg-gray-100 border-gray-200'
                                                   : 'opacity-40 cursor-not-allowed border-gray-200'
                                         }`}
-                                        dangerouslySetInnerHTML={{ __html: link.label }}
+                                        dangerouslySetInnerHTML={{
+                                            __html: link.label
+                                                .replace('&laquo; Previous', '« 前へ')
+                                                .replace('Next &raquo;', '次へ »'),
+                                        }}
                                     />
                                 ))}
                             </div>
