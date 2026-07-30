@@ -7,9 +7,9 @@
 
 ### デモ用アカウント
 
-| 権限 | メールアドレス | パスワード |
-| --- | --- | --- |
-| 管理者 | `admin@example.com` | `password` |
+| 権限         | メールアドレス         | パスワード |
+| ------------ | ---------------------- | ---------- |
+| 管理者       | `admin@example.com`    | `password` |
 | 一般ユーザー | `customer@example.com` | `password` |
 
 > ポートフォリオ公開用のデモアカウントです。決済はStripeのテストモードのみで動作します。
@@ -22,16 +22,16 @@
 
 ## 技術スタック
 
-| レイヤー | 採用技術 |
-| --- | --- |
-| バックエンド | Laravel 13 (PHP 8.4) |
-| フロントエンド | React (TypeScript) + Inertia.js |
-| スタイリング | Tailwind CSS |
-| 認証 | Laravel Breeze (Inertia + React) |
-| 決済 | Stripe Checkout（テストモード） |
-| ファイルストレージ | Cloudflare R2（書籍カバー画像） |
-| データベース | PostgreSQL（Supabase） |
-| デプロイ | Render（Docker） |
+| レイヤー           | 採用技術                         |
+| ------------------ | -------------------------------- |
+| バックエンド       | Laravel 13 (PHP 8.4)             |
+| フロントエンド     | React (TypeScript) + Inertia.js  |
+| スタイリング       | Tailwind CSS                     |
+| 認証               | Laravel Breeze (Inertia + React) |
+| 決済               | Stripe Checkout（テストモード）  |
+| ファイルストレージ | Cloudflare R2（書籍カバー画像）  |
+| データベース       | PostgreSQL（Supabase）           |
+| デプロイ           | Render（Docker）                 |
 
 ## 主な機能
 
@@ -83,9 +83,3 @@ npm run dev
 ```bash
 php artisan serve
 ```
-
-## 今後のブラッシュアップ予定
-
-- Playwrightによる購入クリティカルパスのE2Eテスト追加
-- カテゴリ管理画面の追加
-- UI/UXの質感の底上げ（余白・タイポグラフィ・アニメーション）
