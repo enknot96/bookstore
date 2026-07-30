@@ -24,6 +24,10 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+        if ($request->user()->isDemoAccount()) {
+            return back()->with('error', 'デモアカウントのため、この操作はできません。');
+        }
+
         $request->user()->fill($request->validated());
         $request->user()->save();
 
@@ -35,6 +39,10 @@ class ProfileController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+        if ($request->user()->isDemoAccount()) {
+            return back()->with('error', 'デモアカウントのため、この操作はできません。');
+        }
+
         $request->validate([
             'password' => ['required', 'current_password'],
         ]);

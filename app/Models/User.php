@@ -31,6 +31,11 @@ class User extends Authenticatable
     return $this->role === 'admin';
   }
 
+  public function isDemoAccount(): bool
+  {
+    return in_array($this->email, config('demo.protected_emails'), true);
+  }
+
   public function orders()
   {
     return $this->hasMany(Order::class);
