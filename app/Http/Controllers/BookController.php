@@ -42,7 +42,7 @@ class BookController extends Controller
       });
     }
 
-    $books = $query->orderBy('created_at', 'desc')->paginate(12)->withQueryString();
+    $books = $query->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
     $categories = Category::all();
 
     return Inertia::render('Books/Index', [

@@ -92,7 +92,9 @@ export default function Home({ newArrivals, categories }: Props) {
 
                     <div className="relative h-full flex flex-col items-center justify-center text-center px-4">
                         <h1 className="text-4xl font-bold mb-4 drop-shadow">
-                            木もれびの下で、お気に入りの一冊を
+                            木もれびの下で、{" "}
+                            <br className="hidden max-[660px]:inline" />
+                            お気に入りの一冊を
                         </h1>
                         <p className="text-[#EBDACA] mb-8 text-lg drop-shadow">
                             年齢やジャンルから、お子さまにぴったりの絵本をさがせます
