@@ -156,8 +156,27 @@ export default function MainLayout({ children }: { children: ReactNode }) {
             <main className="flex-1">{children}</main>
 
             <footer className="bg-white border-t mt-16">
-                <div className="max-w-7xl mx-auto px-4 py-8 text-center text-sm text-gray-500">
-                    &copy; {new Date().getFullYear()} こもれび書房. All rights reserved.
+                <div className="max-w-7xl mx-auto px-4 py-8 text-sm text-gray-500">
+                    <nav
+                        aria-label="フッター"
+                        className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-4"
+                    >
+                        <Link href={route('books.index')} className="hover:text-brand-accent">
+                            本を探す
+                        </Link>
+                        <Link href={route('legal.tokushoho')} className="hover:text-brand-accent">
+                            特定商取引法に基づく表記
+                        </Link>
+                        <Link href={route('legal.privacy')} className="hover:text-brand-accent">
+                            プライバシーポリシー
+                        </Link>
+                        <Link href={route('contact')} className="hover:text-brand-accent">
+                            お問い合わせ
+                        </Link>
+                    </nav>
+                    <p className="text-center">
+                        &copy; {new Date().getFullYear()} こもれび書房. All rights reserved.
+                    </p>
                 </div>
             </footer>
         </div>

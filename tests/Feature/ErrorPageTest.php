@@ -22,3 +22,9 @@ test('unpublished books render the error page in production', function () {
         ->assertNotFound()
         ->assertInertia(fn (Assert $page) => $page->component('Error')->where('status', 404));
 });
+
+test('static pages are reachable', function () {
+    foreach (['/legal/tokushoho', '/legal/privacy', '/contact'] as $path) {
+        $this->get($path)->assertOk();
+    }
+});
