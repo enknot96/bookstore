@@ -1,4 +1,5 @@
 import { Head, Link, router, useForm } from '@inertiajs/react';
+import Pagination from '@/Components/Pagination';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { useState } from 'react';
 
@@ -152,22 +153,7 @@ export default function AdminUsersIndex({ users, filters }: Props) {
                 </div>
 
                 {/* ページネーション */}
-                {users.last_page > 1 && (
-                    <div className="flex justify-center gap-2 mt-6">
-                        {users.links.map((link, i) => (
-                            <Link
-                                key={i}
-                                href={link.url ?? '#'}
-                                className={`px-3 py-1.5 rounded text-base border ${
-                                    link.active
-                                        ? 'bg-primary text-white border-primary'
-                                        : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
-                                } ${!link.url ? 'opacity-40 pointer-events-none' : ''}`}
-                                dangerouslySetInnerHTML={{ __html: link.label }}
-                            />
-                        ))}
-                    </div>
-                )}
+                <Pagination links={users.links} className="mt-6" />
             </div>
         </AdminLayout>
     );

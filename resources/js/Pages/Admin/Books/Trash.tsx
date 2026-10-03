@@ -8,6 +8,7 @@ import {
     DialogHeader,
     DialogTitle,
 } from '@/Components/ui/dialog';
+import Pagination from '@/Components/Pagination';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { Book, PageProps } from '@/types';
 import { Head, Link, router } from '@inertiajs/react';
@@ -241,22 +242,7 @@ export default function Trash({ books, filters }: Props) {
                                 {books.total}件中 {(books.current_page - 1) * books.per_page + 1}〜
                                 {Math.min(books.current_page * books.per_page, books.total)}件
                             </span>
-                            <div className="flex gap-1">
-                                {books.links.map((link, i) => (
-                                    <Link
-                                        key={i}
-                                        href={link.url ?? '#'}
-                                        className={`px-3 py-1 rounded border text-sm transition-colors ${
-                                            link.active
-                                                ? 'bg-primary text-primary-foreground border-primary'
-                                                : link.url
-                                                  ? 'hover:bg-gray-100 border-gray-200'
-                                                  : 'opacity-40 cursor-not-allowed border-gray-200'
-                                        }`}
-                                        dangerouslySetInnerHTML={{ __html: link.label }}
-                                    />
-                                ))}
-                            </div>
+                            <Pagination links={books.links} />
                         </div>
                     )}
                 </div>

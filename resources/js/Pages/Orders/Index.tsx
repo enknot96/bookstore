@@ -1,5 +1,6 @@
 import { Head, Link } from '@inertiajs/react';
 import { orderStatusColor, orderStatusLabel } from '@/lib/orderStatus';
+import Pagination from '@/Components/Pagination';
 import MainLayout from '@/Layouts/MainLayout';
 import { Order, PaginatedOrders } from '@/types';
 
@@ -53,22 +54,7 @@ export default function OrdersIndex({ orders }: Props) {
                             ))}
                         </div>
 
-                        {orders.last_page > 1 && (
-                            <div className="flex justify-center gap-2 mt-8">
-                                {orders.links.map((link, i) => (
-                                    <Link
-                                        key={i}
-                                        href={link.url ?? '#'}
-                                        className={`px-3 py-1.5 rounded text-sm border ${
-                                            link.active
-                                                ? 'bg-brand text-white border-brand'
-                                                : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
-                                        } ${!link.url ? 'opacity-40 pointer-events-none' : ''}`}
-                                        dangerouslySetInnerHTML={{ __html: link.label }}
-                                    />
-                                ))}
-                            </div>
-                        )}
+                        <Pagination links={orders.links} className="mt-8" />
                     </>
                 )}
             </div>

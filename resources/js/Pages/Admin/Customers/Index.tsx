@@ -1,4 +1,5 @@
 import { Head, Link, router } from '@inertiajs/react';
+import Pagination from '@/Components/Pagination';
 import AdminLayout from '@/Layouts/AdminLayout';
 
 type Customer = {
@@ -111,22 +112,7 @@ export default function CustomersIndex({ customers, filters }: Props) {
                 </div>
 
                 {/* ページネーション */}
-                {customers.last_page > 1 && (
-                    <div className="flex justify-center gap-2 mt-6">
-                        {customers.links.map((link, i) => (
-                            <Link
-                                key={i}
-                                href={link.url ?? '#'}
-                                className={`px-3 py-1.5 rounded text-base border ${
-                                    link.active
-                                        ? 'bg-primary text-white border-primary'
-                                        : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
-                                } ${!link.url ? 'opacity-40 pointer-events-none' : ''}`}
-                                dangerouslySetInnerHTML={{ __html: link.label }}
-                            />
-                        ))}
-                    </div>
-                )}
+                <Pagination links={customers.links} className="mt-6" />
             </div>
         </AdminLayout>
     );
