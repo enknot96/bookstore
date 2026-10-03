@@ -17,7 +17,7 @@ export default function OrdersIndex({ orders }: Props) {
                 {orders.data.length === 0 ? (
                     <div className="text-center py-16 text-gray-500">
                         <p className="mb-4">注文履歴がありません。</p>
-                        <Link href={route('books.index')} className="text-brand-accent hover:underline">
+                        <Link href={route('books.index')} className="text-brand-link hover:underline">
                             本を探す
                         </Link>
                     </div>

@@ -31,7 +31,7 @@ function HeaderSearch({ className, onSearch }: { className?: string; onSearch?: 
                 <button
                     type="submit"
                     aria-label="検索"
-                    className="absolute right-1 top-1/2 -translate-y-1/2 p-1.5 text-brand/70 hover:text-brand-accent"
+                    className="absolute right-1 top-1/2 -translate-y-1/2 p-1.5 text-brand/70 hover:text-brand-link"
                 >
                     <Search className="w-4 h-4" />
                 </button>
@@ -41,8 +41,8 @@ function HeaderSearch({ className, onSearch }: { className?: string; onSearch?: 
 }
 
 const navLinkClass = (active: boolean) =>
-    `font-medium transition-colors hover:text-brand-accent ${
-        active ? 'text-brand-accent underline underline-offset-8 decoration-2' : 'text-brand/90'
+    `font-medium transition-colors hover:text-brand-link ${
+        active ? 'text-brand-link underline underline-offset-8 decoration-2' : 'text-brand/90'
     }`;
 
 export default function MainLayout({ children }: { children: ReactNode }) {
@@ -81,7 +81,7 @@ export default function MainLayout({ children }: { children: ReactNode }) {
                         </Link>
                         {auth.user ? (
                             <>
-                                <Link href={route('cart.index')} className="relative font-medium text-brand/90 hover:text-brand-accent transition-colors">
+                                <Link href={route('cart.index')} className="relative font-medium text-brand/90 hover:text-brand-link transition-colors">
                                     <ShoppingCart className="w-5 h-5" />
                                     {cartCount > 0 && (
                                         <span className="absolute -top-1.5 -right-1.5 bg-brand text-brand-cream text-xs rounded-full w-4 h-4 flex items-center justify-center">
@@ -97,20 +97,20 @@ export default function MainLayout({ children }: { children: ReactNode }) {
                                     注文履歴
                                 </Link>
                                 <span className="text-brand/30">|</span>
-                                <Link href={route('profile.edit')} className="flex items-center gap-1 text-brand/70 hover:text-brand-accent transition-colors">
+                                <Link href={route('profile.edit')} className="flex items-center gap-1 text-brand/70 hover:text-brand-link transition-colors">
                                     {auth.user.name}
                                     <Pencil className="w-3.5 h-3.5" />
                                 </Link>
                                 <button
                                     onClick={() => router.post(route('logout'))}
-                                    className="font-medium text-brand/80 hover:text-brand-accent transition-colors"
+                                    className="font-medium text-brand/80 hover:text-brand-link transition-colors"
                                 >
                                     ログアウト
                                 </button>
                             </>
                         ) : (
                             <>
-                                <Link href={route('login')} className="font-medium text-brand/90 hover:text-brand-accent transition-colors">
+                                <Link href={route('login')} className="font-medium text-brand/90 hover:text-brand-link transition-colors">
                                     ログイン
                                 </Link>
                                 <Link
@@ -217,16 +217,16 @@ export default function MainLayout({ children }: { children: ReactNode }) {
                         aria-label="フッター"
                         className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-4"
                     >
-                        <Link href={route('books.index')} className="hover:text-brand-accent">
+                        <Link href={route('books.index')} className="hover:text-brand-link">
                             本を探す
                         </Link>
-                        <Link href={route('legal.tokushoho')} className="hover:text-brand-accent">
+                        <Link href={route('legal.tokushoho')} className="hover:text-brand-link">
                             特定商取引法に基づく表記
                         </Link>
-                        <Link href={route('legal.privacy')} className="hover:text-brand-accent">
+                        <Link href={route('legal.privacy')} className="hover:text-brand-link">
                             プライバシーポリシー
                         </Link>
-                        <Link href={route('contact')} className="hover:text-brand-accent">
+                        <Link href={route('contact')} className="hover:text-brand-link">
                             お問い合わせ
                         </Link>
                     </nav>

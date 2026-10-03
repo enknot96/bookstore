@@ -80,7 +80,7 @@ export default function AdminOrderShow({ order, statuses }: Props) {
                                         {item.book.cover_image_path ? (
                                             <img src={item.book.cover_image_path} alt={item.book.title} className="w-full h-full object-cover" />
                                         ) : (
-                                            <div className="w-full h-full flex items-center justify-center text-gray-400 text-base">📚</div>
+                                            <div className="w-full h-full flex items-center justify-center text-gray-500 text-base">📚</div>
                                         )}
                                     </div>
                                     <div className="flex-1 min-w-0">

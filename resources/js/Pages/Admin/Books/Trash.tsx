@@ -184,7 +184,7 @@ export default function Trash({ books, filters }: Props) {
                             <tbody className="divide-y">
                                 {books.data.length === 0 ? (
                                     <tr>
-                                        <td colSpan={6} className="px-4 py-12 text-center text-gray-400">
+                                        <td colSpan={6} className="px-4 py-12 text-center text-gray-500">
                                             ゴミ箱は空です
                                         </td>
                                     </tr>
@@ -201,7 +201,7 @@ export default function Trash({ books, filters }: Props) {
                                             </td>
                                             <td className="px-4 py-3">
                                                 <div className="font-medium text-gray-700 line-clamp-1">{book.title}</div>
-                                                <div className="text-sm text-gray-400 md:hidden">{book.author}</div>
+                                                <div className="text-sm text-gray-500 md:hidden">{book.author}</div>
                                             </td>
                                             <td className="px-4 py-3 text-gray-500 hidden md:table-cell">{book.author}</td>
                                             <td className="px-4 py-3 text-center hidden sm:table-cell">

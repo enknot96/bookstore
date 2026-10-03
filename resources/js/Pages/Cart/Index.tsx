@@ -55,7 +55,7 @@ export default function CartIndex({ cartItems, total }: Props) {
                 {cartItems.length === 0 ? (
                     <div className="text-center py-16 text-gray-500">
                         <p className="mb-4">カートに商品がありません。</p>
-                        <Link href={route('books.index')} className="text-brand-accent hover:underline">
+                        <Link href={route('books.index')} className="text-brand-link hover:underline">
                             本を探す
                         </Link>
                     </div>
@@ -73,14 +73,14 @@ export default function CartIndex({ cartItems, total }: Props) {
                                                 className="w-full h-full object-cover"
                                             />
                                         ) : (
-                                            <div className="w-full h-full flex items-center justify-center text-gray-400 text-2xl">📚</div>
+                                            <div className="w-full h-full flex items-center justify-center text-gray-500 text-2xl">📚</div>
                                         )}
                                     </div>
 
                                     <div className="flex-1 min-w-0">
                                         <Link
                                             href={route('books.show', item.book.id)}
-                                            className="font-medium text-gray-900 hover:text-brand-accent line-clamp-2"
+                                            className="font-medium text-gray-900 hover:text-brand-link line-clamp-2"
                                         >
                                             {item.book.title}
                                         </Link>
@@ -125,7 +125,7 @@ export default function CartIndex({ cartItems, total }: Props) {
                                     <button
                                         onClick={() => removeItem(item)}
                                         disabled={busy}
-                                        className="text-gray-400 hover:text-red-500 ml-2 disabled:opacity-40"
+                                        className="text-gray-500 hover:text-red-500 ml-2 disabled:opacity-40"
                                         aria-label="削除"
                                     >
                                         ✕
@@ -159,7 +159,7 @@ export default function CartIndex({ cartItems, total }: Props) {
                             ) : (
                                 <Link
                                     href={route('checkout.index')}
-                                    className="block w-full text-center bg-brand text-brand-cream py-3 rounded-lg font-medium hover:bg-brand-accent transition-colors"
+                                    className="block w-full text-center bg-brand text-brand-cream py-3 rounded-lg font-medium hover:bg-brand-link transition-colors"
                                 >
                                     レジへ進む
                                 </Link>

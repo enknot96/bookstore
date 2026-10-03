@@ -8,7 +8,7 @@ export default function Contact() {
                 <p>
                     <a
                         href="mailto:info@example.com"
-                        className="text-lg font-medium text-brand-accent hover:underline"
+                        className="text-lg font-medium text-brand-link hover:underline"
                     >
                         info@example.com
                     </a>

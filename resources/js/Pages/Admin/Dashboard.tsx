@@ -96,7 +96,7 @@ export default function Dashboard({ stats, recentOrders, lowStockBooks, statuses
                             </Link>
                         </div>
                         {recentOrders.length === 0 ? (
-                            <p className="text-base text-gray-400 py-4">注文はまだありません</p>
+                            <p className="text-base text-gray-500 py-4">注文はまだありません</p>
                         ) : (
                             <ul className="divide-y">
                                 {recentOrders.map((order) => (
@@ -138,7 +138,7 @@ export default function Dashboard({ stats, recentOrders, lowStockBooks, statuses
                             </Link>
                         </div>
                         {lowStockBooks.length === 0 ? (
-                            <p className="text-base text-gray-400 py-4">在庫僅少の書籍はありません</p>
+                            <p className="text-base text-gray-500 py-4">在庫僅少の書籍はありません</p>
                         ) : (
                             <ul className="divide-y">
                                 {lowStockBooks.map((book) => (

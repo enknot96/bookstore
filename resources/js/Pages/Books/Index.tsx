@@ -140,7 +140,7 @@ export default function BooksIndex({ books, categories, filters }: Props) {
                                             "px-4 py-1.5 rounded-full text-sm border transition-colors",
                                             active
                                                 ? "bg-brand text-brand-cream border-brand"
-                                                : "bg-white text-brand border-brand/30 hover:border-brand-accent hover:text-brand-accent",
+                                                : "bg-white text-brand border-brand/30 hover:border-brand-accent hover:text-brand-link",
                                         )}
                                     >
                                         {band.label}
@@ -227,7 +227,7 @@ export default function BooksIndex({ books, categories, filters }: Props) {
                                         aria-label="価格の下限"
                                         className="w-full border border-gray-300 rounded-md px-2 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
                                     />
-                                    <span className="text-gray-400 text-sm shrink-0">〜</span>
+                                    <span className="text-gray-500 text-sm shrink-0">〜</span>
                                     <input
                                         type="number"
                                         value={text.price_max}
@@ -243,7 +243,7 @@ export default function BooksIndex({ books, categories, filters }: Props) {
                             <div className="flex gap-2 sm:col-span-2 lg:col-span-4">
                                 <button
                                     type="submit"
-                                    className="bg-brand text-brand-cream px-5 py-2 rounded-md text-sm hover:bg-brand-accent transition"
+                                    className="bg-brand text-brand-cream px-5 py-2 rounded-md text-sm hover:bg-brand-link transition"
                                 >
                                     検索
                                 </button>
@@ -280,7 +280,7 @@ export default function BooksIndex({ books, categories, filters }: Props) {
                             <button
                                 type="button"
                                 onClick={clearAll}
-                                className="text-sm text-brand-accent hover:underline ml-1"
+                                className="text-sm text-brand-link hover:underline ml-1"
                             >
                                 すべてクリア
                             </button>
@@ -326,7 +326,7 @@ export default function BooksIndex({ books, categories, filters }: Props) {
                                 <button
                                     type="button"
                                     onClick={clearAll}
-                                    className="text-brand-accent hover:underline text-sm"
+                                    className="text-brand-link hover:underline text-sm"
                                 >
                                     条件をクリアしてすべての本を見る
                                 </button>

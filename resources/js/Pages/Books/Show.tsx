@@ -63,14 +63,14 @@ export default function BookShow({ book, related }: Props) {
                     <nav className="text-sm text-gray-500 mb-6 flex gap-2">
                         <Link
                             href={route("home")}
-                            className="hover:text-brand-accent"
+                            className="hover:text-brand-link"
                         >
                             トップ
                         </Link>
                         <span>/</span>
                         <Link
                             href={route("books.index")}
-                            className="hover:text-brand-accent"
+                            className="hover:text-brand-link"
                         >
                             本を探す
                         </Link>
@@ -116,7 +116,7 @@ export default function BookShow({ book, related }: Props) {
                                 {book.title}
                             </h1>
                             <p className="text-gray-600 mb-1">{book.author}</p>
-                            <p className="text-sm text-gray-400 mb-4">
+                            <p className="text-sm text-gray-500 mb-4">
                                 {book.publisher}
                             </p>
 

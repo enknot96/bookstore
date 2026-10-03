@@ -13,7 +13,7 @@ export default function OrderShow({ order }: Props) {
             <Head title={`注文 #${order.id}`} />
             <div className="max-w-2xl mx-auto px-4 py-12">
                 <div className="flex items-center gap-3 mb-8">
-                    <Link href={route('orders.index')} className="text-sm text-gray-500 hover:text-brand-accent">
+                    <Link href={route('orders.index')} className="text-sm text-gray-500 hover:text-brand-link">
                         ← 注文履歴
                     </Link>
                 </div>
@@ -62,7 +62,7 @@ export default function OrderShow({ order }: Props) {
                                                 className="w-full h-full object-cover"
                                             />
                                         ) : (
-                                            <div className="w-full h-full flex items-center justify-center text-gray-400">📚</div>
+                                            <div className="w-full h-full flex items-center justify-center text-gray-500">📚</div>
                                         )}
                                     </div>
                                     <div className="flex-1 min-w-0">

@@ -240,7 +240,7 @@ function CheckoutForm({ total, cartItems }: Props) {
             <button
                 type="submit"
                 disabled={!stripe || processing}
-                className="w-full bg-brand text-brand-cream py-3 rounded-lg font-medium hover:bg-brand-accent disabled:opacity-60 transition-colors"
+                className="w-full bg-brand text-brand-cream py-3 rounded-lg font-medium hover:bg-brand-link disabled:opacity-60 transition-colors"
             >
                 {processing ? '処理中...' : `¥${total.toLocaleString()} を支払う`}
             </button>

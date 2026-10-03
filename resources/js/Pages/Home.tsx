@@ -100,7 +100,7 @@ export default function Home({ newArrivals, categories }: Props) {
                                 </h2>
                                 <Link
                                     href={route("books.index")}
-                                    className="text-brand-accent text-sm hover:underline"
+                                    className="text-brand-link text-sm hover:underline"
                                 >
                                     すべて見る →
                                 </Link>
@@ -146,7 +146,7 @@ export default function Home({ newArrivals, categories }: Props) {
                                         href={route("books.index", {
                                             category: cat.slug,
                                         })}
-                                        className="bg-white border border-brand/20 rounded-lg p-4 text-center font-medium text-brand/80 hover:border-brand-accent hover:text-brand-accent transition"
+                                        className="bg-white border border-brand/20 rounded-lg p-4 text-center font-medium text-brand/80 hover:border-brand-accent hover:text-brand-link transition"
                                     >
                                         {cat.name}
                                         {cat.books_count !== undefined && (

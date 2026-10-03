@@ -199,7 +199,7 @@ export default function BookForm({
                             )}
                         </div>
                     ) : (
-                        <div className="w-36 h-48 flex-shrink-0 bg-gray-100 rounded-md border border-dashed flex items-center justify-center text-gray-400">
+                        <div className="w-36 h-48 flex-shrink-0 bg-gray-100 rounded-md border border-dashed flex items-center justify-center text-gray-500">
                             <ImagePlus size={24} />
                         </div>
                     )}
@@ -221,7 +221,7 @@ export default function BookForm({
                         >
                             {displayUrl ? '画像を変更' : '画像を選択'}
                         </Button>
-                        <p className="text-sm text-gray-400">JPEG / PNG / WebP（5MB以内）</p>
+                        <p className="text-sm text-gray-500">JPEG / PNG / WebP（5MB以内）</p>
                         {data.cover_image && (
                             <p className="text-sm text-green-600 font-medium">
                                 {data.cover_image.name}

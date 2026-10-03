@@ -81,7 +81,7 @@ export default function CheckoutComplete({ order }: Props) {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Link
                         href={route('orders.show', order.id)}
-                        className="bg-brand text-brand-cream px-6 py-2.5 rounded-lg font-medium hover:bg-brand-accent transition-colors"
+                        className="bg-brand text-brand-cream px-6 py-2.5 rounded-lg font-medium hover:bg-brand-link transition-colors"
                     >
                         注文詳細を見る
                     </Link>

@@ -22,6 +22,8 @@ export default {
                 brand: {
                     DEFAULT: '#431608',
                     accent: '#B27E6E',
+                    // 文字・リンク用（白・クリーム背景でWCAG AAのコントラストを満たす濃さ）
+                    link: '#8F5C4C',
                     cream: '#FDFAEB',
                     sun: '#FFF17C',
                     'sun-hover': '#ED946D',

@@ -46,7 +46,7 @@ function CreateAdminForm({ onClose }: { onClose: () => void }) {
         <div className="bg-brand-cream border border-brand-sand-dark rounded-lg p-5 mb-6">
             <div className="flex items-center justify-between mb-4">
                 <h2 className="text-base font-semibold text-gray-900">新規管理者を追加</h2>
-                <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
+                <button onClick={onClose} className="text-gray-500 hover:text-gray-600">
                     <X size={18} />
                 </button>
             </div>
@@ -205,7 +205,7 @@ export default function AdminsIndex({ admins, filters, auth }: Props) {
                                             {admin.id !== auth.user.id && (
                                                 <button
                                                     onClick={() => handleDelete(admin)}
-                                                    className="text-gray-400 hover:text-red-600 transition-colors p-1 rounded"
+                                                    className="text-gray-500 hover:text-red-600 transition-colors p-1 rounded"
                                                     title="削除"
                                                 >
                                                     <Trash2 size={16} />

@@ -25,7 +25,7 @@ export default function Pagination({ links, className }: { links: PaginationLink
 
                 if (!link.url) {
                     return (
-                        <span key={i} className={cn(base, 'border-transparent text-gray-400')}>
+                        <span key={i} className={cn(base, 'border-transparent text-gray-500')}>
                             {label}
                         </span>
                     );

@@ -239,7 +239,7 @@ export default function Index({ books, categories, filters, trashedCount }: Prop
                                     <tr>
                                         <td
                                             colSpan={8}
-                                            className="px-4 py-10 text-center text-gray-400"
+                                            className="px-4 py-10 text-center text-gray-500"
                                         >
                                             書籍が見つかりません
                                         </td>
@@ -262,7 +262,7 @@ export default function Index({ books, categories, filters, trashedCount }: Prop
                                                 <div className="font-medium text-gray-900 line-clamp-1">
                                                     {book.title}
                                                 </div>
-                                                <div className="text-sm text-gray-400 md:hidden">
+                                                <div className="text-sm text-gray-500 md:hidden">
                                                     {book.author}
                                                 </div>
                                             </td>
