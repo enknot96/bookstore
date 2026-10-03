@@ -20,6 +20,7 @@ class OrderItem extends Model
 
   public function book()
   {
-    return $this->belongsTo(Book::class);
+    // 注文後に書籍が削除されても、注文履歴の表示で null にならないようにする
+    return $this->belongsTo(Book::class)->withTrashed();
   }
 }
