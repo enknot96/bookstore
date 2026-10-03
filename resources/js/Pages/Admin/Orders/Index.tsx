@@ -100,7 +100,7 @@ export default function AdminOrdersIndex({ orders, statuses, filters, flash }: P
                                         <td className="px-4 py-3 text-right">
                                             <Link
                                                 href={route('admin.orders.show', order.id)}
-                                                className="text-base text-indigo-600 hover:underline"
+                                                className="text-base text-primary hover:underline"
                                             >
                                                 詳細
                                             </Link>
@@ -121,7 +121,7 @@ export default function AdminOrdersIndex({ orders, statuses, filters, flash }: P
                                 href={link.url ?? '#'}
                                 className={`px-3 py-1.5 rounded text-base border ${
                                     link.active
-                                        ? 'bg-indigo-600 text-white border-indigo-600'
+                                        ? 'bg-primary text-white border-primary'
                                         : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
                                 } ${!link.url ? 'opacity-40 pointer-events-none' : ''}`}
                                 dangerouslySetInnerHTML={{ __html: link.label }}

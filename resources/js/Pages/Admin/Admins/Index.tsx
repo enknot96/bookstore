@@ -44,7 +44,7 @@ function CreateAdminForm({ onClose }: { onClose: () => void }) {
     };
 
     return (
-        <div className="bg-indigo-50 border border-indigo-200 rounded-lg p-5 mb-6">
+        <div className="bg-brand-cream border border-brand-sand-dark rounded-lg p-5 mb-6">
             <div className="flex items-center justify-between mb-4">
                 <h2 className="text-base font-semibold text-gray-900">新規管理者を追加</h2>
                 <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
@@ -58,7 +58,7 @@ function CreateAdminForm({ onClose }: { onClose: () => void }) {
                         type="text"
                         value={data.name}
                         onChange={(e) => setData('name', e.target.value)}
-                        className="w-full border border-gray-300 rounded-md px-3 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="w-full border border-gray-300 rounded-md px-3 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-ring"
                         placeholder="山田 太郎"
                     />
                     {errors.name && <p className="text-sm text-red-600 mt-1">{errors.name}</p>}
@@ -69,7 +69,7 @@ function CreateAdminForm({ onClose }: { onClose: () => void }) {
                         type="email"
                         value={data.email}
                         onChange={(e) => setData('email', e.target.value)}
-                        className="w-full border border-gray-300 rounded-md px-3 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="w-full border border-gray-300 rounded-md px-3 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-ring"
                         placeholder="admin@example.com"
                     />
                     {errors.email && <p className="text-sm text-red-600 mt-1">{errors.email}</p>}
@@ -80,7 +80,7 @@ function CreateAdminForm({ onClose }: { onClose: () => void }) {
                         type="password"
                         value={data.password}
                         onChange={(e) => setData('password', e.target.value)}
-                        className="w-full border border-gray-300 rounded-md px-3 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="w-full border border-gray-300 rounded-md px-3 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-ring"
                         placeholder="8文字以上"
                     />
                     {errors.password && <p className="text-sm text-red-600 mt-1">{errors.password}</p>}
@@ -91,7 +91,7 @@ function CreateAdminForm({ onClose }: { onClose: () => void }) {
                         type="password"
                         value={data.password_confirmation}
                         onChange={(e) => setData('password_confirmation', e.target.value)}
-                        className="w-full border border-gray-300 rounded-md px-3 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="w-full border border-gray-300 rounded-md px-3 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-ring"
                         placeholder="もう一度入力"
                     />
                 </div>
@@ -106,7 +106,7 @@ function CreateAdminForm({ onClose }: { onClose: () => void }) {
                     <button
                         type="submit"
                         disabled={processing}
-                        className="bg-indigo-600 text-white text-base px-4 py-1.5 rounded-md hover:bg-indigo-700 disabled:opacity-60"
+                        className="bg-primary text-white text-base px-4 py-1.5 rounded-md hover:bg-primary/90 disabled:opacity-60"
                     >
                         {processing ? '作成中...' : '管理者を追加'}
                     </button>
@@ -139,7 +139,7 @@ export default function AdminsIndex({ admins, filters, flash, auth }: Props) {
                     {!showForm && (
                         <button
                             onClick={() => setShowForm(true)}
-                            className="flex items-center gap-2 bg-indigo-600 text-white text-base px-4 py-2 rounded-md hover:bg-indigo-700"
+                            className="flex items-center gap-2 bg-primary text-white text-base px-4 py-2 rounded-md hover:bg-primary/90"
                         >
                             <Plus size={16} />
                             管理者を追加
@@ -167,7 +167,7 @@ export default function AdminsIndex({ admins, filters, flash, auth }: Props) {
                             name="search"
                             defaultValue={filters.search ?? ''}
                             placeholder="名前・メールで検索"
-                            className="border border-gray-300 rounded-md px-3 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-indigo-500 w-56"
+                            className="border border-gray-300 rounded-md px-3 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-ring w-56"
                         />
                         <button
                             type="submit"
@@ -203,7 +203,7 @@ export default function AdminsIndex({ admins, filters, flash, auth }: Props) {
                                             <p className="text-base font-medium text-gray-900">
                                                 {admin.name}
                                                 {admin.id === auth.user.id && (
-                                                    <span className="ml-2 text-sm text-indigo-600 bg-indigo-50 border border-indigo-200 rounded px-1.5 py-0.5">
+                                                    <span className="ml-2 text-sm text-primary bg-brand-cream border border-brand-sand-dark rounded px-1.5 py-0.5">
                                                         あなた
                                                     </span>
                                                 )}
@@ -240,7 +240,7 @@ export default function AdminsIndex({ admins, filters, flash, auth }: Props) {
                                 href={link.url ?? '#'}
                                 className={`px-3 py-1.5 rounded text-base border ${
                                     link.active
-                                        ? 'bg-indigo-600 text-white border-indigo-600'
+                                        ? 'bg-primary text-white border-primary'
                                         : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
                                 } ${!link.url ? 'opacity-40 pointer-events-none' : ''}`}
                                 dangerouslySetInnerHTML={{ __html: link.label }}

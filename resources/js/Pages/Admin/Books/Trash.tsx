@@ -127,7 +127,7 @@ export default function Trash({ books, filters }: Props) {
                         onChange={(e) => setSearch(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && applySearch()}
                         placeholder="タイトル・著者で検索"
-                        className="border border-gray-300 rounded-md px-3 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-indigo-500 w-56"
+                        className="border border-gray-300 rounded-md px-3 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-ring w-56"
                     />
                     <Button variant="outline" size="sm" onClick={applySearch}>
                         検索
@@ -136,8 +136,8 @@ export default function Trash({ books, filters }: Props) {
 
                 {/* 一括操作バー */}
                 {selectedIds.length > 0 && (
-                    <div className="flex items-center gap-3 bg-blue-50 border border-blue-200 rounded-lg px-4 py-2">
-                        <span className="text-base text-blue-700">{selectedIds.length}件を選択中</span>
+                    <div className="flex items-center gap-3 bg-brand-cream border border-brand-sand-dark rounded-lg px-4 py-2">
+                        <span className="text-base text-primary">{selectedIds.length}件を選択中</span>
                         <Button
                             variant="outline"
                             size="sm"

@@ -33,7 +33,7 @@ export default function AdminOrderShow({ order, statuses, flash }: Props) {
             <Head title={`注文 #${order.id}`} />
             <div className="p-6 max-w-2xl">
                 <div className="flex items-center gap-3 mb-6">
-                    <Link href={route('admin.orders.index')} className="text-base text-gray-500 hover:text-indigo-600">
+                    <Link href={route('admin.orders.index')} className="text-base text-gray-500 hover:text-primary">
                         ← 注文一覧
                     </Link>
                 </div>
@@ -57,7 +57,7 @@ export default function AdminOrderShow({ order, statuses, flash }: Props) {
                             <select
                                 value={selectedStatus}
                                 onChange={(e) => setSelectedStatus(e.target.value)}
-                                className="border border-gray-300 rounded-md px-3 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                className="border border-gray-300 rounded-md px-3 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-ring"
                             >
                                 {Object.entries(statuses).map(([key, label]) => (
                                     <option key={key} value={key}>{label}</option>
@@ -66,7 +66,7 @@ export default function AdminOrderShow({ order, statuses, flash }: Props) {
                             <button
                                 onClick={handleStatusUpdate}
                                 disabled={selectedStatus === order.status}
-                                className="bg-indigo-600 text-white text-base px-4 py-1.5 rounded-md hover:bg-indigo-700 disabled:opacity-40 transition-colors"
+                                className="bg-primary text-white text-base px-4 py-1.5 rounded-md hover:bg-primary/90 disabled:opacity-40 transition-colors"
                             >
                                 更新
                             </button>
@@ -110,7 +110,7 @@ export default function AdminOrderShow({ order, statuses, flash }: Props) {
                         </div>
                         <div className="border-t mt-4 pt-4 flex justify-between">
                             <span className="font-semibold text-gray-900">合計</span>
-                            <span className="text-lg font-bold text-indigo-600">
+                            <span className="text-lg font-bold text-primary">
                                 ¥{order.total_amount.toLocaleString()}
                             </span>
                         </div>

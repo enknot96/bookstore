@@ -41,9 +41,9 @@ function RoleSelect({ user }: { user: User }) {
             value={role}
             onChange={(e) => handleChange(e.target.value as 'admin' | 'customer')}
             disabled={processing}
-            className={`text-sm border rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
+            className={`text-sm border rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-ring ${
                 role === 'admin'
-                    ? 'bg-indigo-50 border-indigo-300 text-indigo-700'
+                    ? 'bg-brand-cream border-brand-sand-dark text-primary'
                     : 'bg-gray-50 border-gray-300 text-gray-700'
             }`}
         >
@@ -89,7 +89,7 @@ export default function AdminUsersIndex({ users, filters, flash }: Props) {
                             name="search"
                             defaultValue={filters.search ?? ''}
                             placeholder="名前・メールで検索"
-                            className="border border-gray-300 rounded-md px-3 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-indigo-500 w-56"
+                            className="border border-gray-300 rounded-md px-3 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-ring w-56"
                         />
                         <button
                             type="submit"
@@ -172,7 +172,7 @@ export default function AdminUsersIndex({ users, filters, flash }: Props) {
                                 href={link.url ?? '#'}
                                 className={`px-3 py-1.5 rounded text-base border ${
                                     link.active
-                                        ? 'bg-indigo-600 text-white border-indigo-600'
+                                        ? 'bg-primary text-white border-primary'
                                         : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
                                 } ${!link.url ? 'opacity-40 pointer-events-none' : ''}`}
                                 dangerouslySetInnerHTML={{ __html: link.label }}

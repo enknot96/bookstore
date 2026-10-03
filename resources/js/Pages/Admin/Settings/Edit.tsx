@@ -42,7 +42,7 @@ export default function AdminSettingsEdit({ adminNotificationEmail, flash }: Pro
                                 value={data.admin_notification_email}
                                 onChange={(e) => setData('admin_notification_email', e.target.value)}
                                 placeholder="admin@example.com"
-                                className="w-full border border-gray-300 rounded-md px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                className="w-full border border-gray-300 rounded-md px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-ring"
                             />
                             {errors.admin_notification_email && (
                                 <p className="text-red-500 text-sm mt-1">{errors.admin_notification_email}</p>
@@ -52,7 +52,7 @@ export default function AdminSettingsEdit({ adminNotificationEmail, flash }: Pro
                         <button
                             type="submit"
                             disabled={processing}
-                            className="bg-indigo-600 text-white px-5 py-2 rounded-md text-base font-medium hover:bg-indigo-700 disabled:opacity-60 transition-colors"
+                            className="bg-primary text-white px-5 py-2 rounded-md text-base font-medium hover:bg-primary/90 disabled:opacity-60 transition-colors"
                         >
                             保存する
                         </button>

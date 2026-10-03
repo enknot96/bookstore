@@ -19,7 +19,7 @@ const statCards = (stats: Stats) => [
         value: stats.books,
         icon: BookOpen,
         href: "/admin/books",
-        color: "text-blue-600 bg-blue-50",
+        color: "text-brand bg-brand-sand/50",
     },
     {
         label: "カテゴリ数",
@@ -80,13 +80,13 @@ export default function Dashboard({ stats }: Props) {
                     <div className="flex flex-wrap gap-3">
                         <Link
                             href="/admin/books/create"
-                            className="text-base text-blue-600 hover:underline"
+                            className="text-base text-primary hover:underline"
                         >
                             + 書籍を登録する
                         </Link>
                         <Link
                             href="/admin/books"
-                            className="text-base text-blue-600 hover:underline"
+                            className="text-base text-primary hover:underline"
                         >
                             書籍一覧を見る
                         </Link>
