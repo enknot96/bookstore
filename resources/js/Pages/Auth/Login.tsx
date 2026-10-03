@@ -104,13 +104,13 @@ export default function Login({ status, canResetPassword, demoLoginEnabled }) {
                     </p>
                     <div className="flex flex-col gap-2 sm:flex-row">
                         <SecondaryButton
-                            className="flex-1"
+                            className="flex-1 whitespace-nowrap"
                             onClick={() => router.post(route('demo-login', 'user'))}
                         >
                             デモユーザーでログイン
                         </SecondaryButton>
                         <SecondaryButton
-                            className="flex-1"
+                            className="flex-1 whitespace-nowrap"
                             onClick={() => router.post(route('demo-login', 'admin'))}
                         >
                             デモ管理者でログイン
