@@ -1,4 +1,4 @@
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, router } from '@inertiajs/react';
 import { orderStatusColor, orderStatusLabel } from '@/lib/orderStatus';
 import MainLayout from '@/Layouts/MainLayout';
 import { Order } from '@/types';
@@ -67,6 +67,9 @@ export default function OrderShow({ order }: Props) {
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <p className="text-sm font-medium text-gray-900 truncate">{item.book.title}</p>
+                                        {item.book.deleted_at && (
+                                            <p className="text-xs text-gray-500">現在お取り扱いしていません</p>
+                                        )}
                                         <p className="text-xs text-gray-500">
                                             ¥{item.unit_price.toLocaleString()} × {item.quantity}
                                         </p>
@@ -85,6 +88,17 @@ export default function OrderShow({ order }: Props) {
                         <span className="text-xl font-bold text-brand">
                             ¥{order.total_amount.toLocaleString()}
                         </span>
+                    </div>
+
+                    {/* 再購入 */}
+                    <div className="border-t pt-4">
+                        <button
+                            type="button"
+                            onClick={() => router.post(route('orders.reorder', order.id))}
+                            className="w-full sm:w-auto bg-brand-sun text-brand px-6 py-2.5 rounded-full font-semibold hover:bg-brand-sun-hover transition"
+                        >
+                            この注文をもう一度買う
+                        </button>
                     </div>
                 </div>
             </div>

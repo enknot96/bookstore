@@ -21,6 +21,7 @@ export interface Book {
     age_min: number | null;
     age_max: number | null;
     stock: number;
+    deleted_at?: string | null;
     is_published: boolean;
     cover_image_path: string | null;
     categories: Category[];
