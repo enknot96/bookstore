@@ -6,11 +6,15 @@ import { toast, Toaster } from 'sonner';
 import logo from '@/assets/logo/logo.jpeg';
 
 export default function MainLayout({ children }: { children: ReactNode }) {
-    const { auth, cartCount, flash } = usePage<{
-        auth: { user: { name: string } | null };
-        cartCount: number;
-        flash: { success?: string; error?: string };
+    // エラーページなど、共有 props が付かない場合でも動くよう既定値を持たせる
+    const props = usePage<{
+        auth?: { user: { name: string } | null };
+        cartCount?: number;
+        flash?: { success?: string; error?: string };
     }>().props;
+    const auth = props.auth ?? { user: null };
+    const cartCount = props.cartCount ?? 0;
+    const flash = props.flash ?? {};
 
     const [menuOpen, setMenuOpen] = useState(false);
     const closeMenu = () => setMenuOpen(false);
