@@ -75,6 +75,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                     <button
                         className="lg:hidden p-1 rounded hover:bg-gray-100"
                         onClick={() => setSidebarOpen((v) => !v)}
+                        aria-label={sidebarOpen ? 'メニューを閉じる' : 'メニューを開く'}
+                        aria-expanded={sidebarOpen}
                     >
                         {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
                     </button>

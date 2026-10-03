@@ -81,7 +81,7 @@ export default function MainLayout({ children }: { children: ReactNode }) {
                         </Link>
                         {auth.user ? (
                             <>
-                                <Link href={route('cart.index')} className="relative font-medium text-brand/90 hover:text-brand-link transition-colors">
+                                <Link href={route('cart.index')} aria-label={`カート（${cartCount}点）`} className="relative font-medium text-brand/90 hover:text-brand-link transition-colors">
                                     <ShoppingCart className="w-5 h-5" />
                                     {cartCount > 0 && (
                                         <span className="absolute -top-1.5 -right-1.5 bg-brand text-brand-cream text-xs rounded-full w-4 h-4 flex items-center justify-center">
@@ -126,7 +126,7 @@ export default function MainLayout({ children }: { children: ReactNode }) {
                     {/* モバイル用: カート常時表示 + ハンバーガー */}
                     <div className="flex items-center gap-3 sm:hidden">
                         {auth.user && (
-                            <Link href={route('cart.index')} className="relative text-brand/90">
+                            <Link href={route('cart.index')} aria-label={`カート（${cartCount}点）`} className="relative text-brand/90">
                                 <ShoppingCart className="w-5 h-5" />
                                 {cartCount > 0 && (
                                     <span className="absolute -top-1.5 -right-1.5 bg-brand text-brand-cream text-xs rounded-full w-4 h-4 flex items-center justify-center">
@@ -137,7 +137,9 @@ export default function MainLayout({ children }: { children: ReactNode }) {
                         )}
                         <button
                             onClick={() => setMenuOpen((v) => !v)}
-                            aria-label="メニューを開く"
+                            aria-label={menuOpen ? 'メニューを閉じる' : 'メニューを開く'}
+                            aria-expanded={menuOpen}
+                            aria-controls="mobile-menu"
                             className="text-brand"
                         >
                             {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -155,7 +157,7 @@ export default function MainLayout({ children }: { children: ReactNode }) {
                         leaveFrom="opacity-100 translate-y-0"
                         leaveTo="opacity-0 -translate-y-2"
                     >
-                        <nav className="sm:hidden border-t border-brand/10 px-4 py-3 flex flex-col text-sm">
+                        <nav id="mobile-menu" className="sm:hidden border-t border-brand/10 px-4 py-3 flex flex-col text-sm">
                             <HeaderSearch className="py-3" onSearch={closeMenu} />
                             <Link
                                 href={route('books.index')}

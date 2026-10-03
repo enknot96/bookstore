@@ -308,7 +308,7 @@ export default function Index({ books, categories, filters, trashedCount }: Prop
                                             </td>
                                             <td className="px-4 py-3 text-right">
                                                 <Link href={route('admin.books.edit', book.id)}>
-                                                    <Button variant="ghost" size="icon">
+                                                    <Button variant="ghost" size="icon" aria-label={`「${book.title}」を編集`}>
                                                         <Pencil size={15} />
                                                     </Button>
                                                 </Link>

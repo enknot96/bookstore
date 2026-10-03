@@ -47,14 +47,15 @@ function CreateAdminForm({ onClose }: { onClose: () => void }) {
         <div className="bg-brand-cream border border-brand-sand-dark rounded-lg p-5 mb-6">
             <div className="flex items-center justify-between mb-4">
                 <h2 className="text-base font-semibold text-gray-900">新規管理者を追加</h2>
-                <button onClick={onClose} className="text-gray-500 hover:text-gray-600">
+                <button onClick={onClose} aria-label="閉じる" className="text-gray-500 hover:text-gray-600">
                     <X size={18} />
                 </button>
             </div>
             <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">名前</label>
+                    <label htmlFor="admin-name" className="block text-sm font-medium text-gray-700 mb-1">名前</label>
                     <input
+                        id="admin-name"
                         type="text"
                         value={data.name}
                         onChange={(e) => setData('name', e.target.value)}
@@ -64,8 +65,9 @@ function CreateAdminForm({ onClose }: { onClose: () => void }) {
                     {errors.name && <p className="text-sm text-red-600 mt-1">{errors.name}</p>}
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">メールアドレス</label>
+                    <label htmlFor="admin-email" className="block text-sm font-medium text-gray-700 mb-1">メールアドレス</label>
                     <input
+                        id="admin-email"
                         type="email"
                         value={data.email}
                         onChange={(e) => setData('email', e.target.value)}
@@ -75,8 +77,9 @@ function CreateAdminForm({ onClose }: { onClose: () => void }) {
                     {errors.email && <p className="text-sm text-red-600 mt-1">{errors.email}</p>}
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">パスワード</label>
+                    <label htmlFor="admin-password" className="block text-sm font-medium text-gray-700 mb-1">パスワード</label>
                     <input
+                        id="admin-password"
                         type="password"
                         value={data.password}
                         onChange={(e) => setData('password', e.target.value)}
@@ -86,8 +89,9 @@ function CreateAdminForm({ onClose }: { onClose: () => void }) {
                     {errors.password && <p className="text-sm text-red-600 mt-1">{errors.password}</p>}
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">パスワード（確認）</label>
+                    <label htmlFor="admin-password-confirmation" className="block text-sm font-medium text-gray-700 mb-1">パスワード（確認）</label>
                     <input
+                        id="admin-password-confirmation"
                         type="password"
                         value={data.password_confirmation}
                         onChange={(e) => setData('password_confirmation', e.target.value)}
@@ -156,6 +160,7 @@ export default function AdminsIndex({ admins, filters, auth }: Props) {
                             name="search"
                             defaultValue={filters.search ?? ''}
                             placeholder="名前・メールで検索"
+                            aria-label="名前・メールで検索"
                             className="border border-gray-300 rounded-md px-3 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-ring w-56"
                         />
                         <button

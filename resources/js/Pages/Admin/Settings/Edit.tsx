@@ -24,13 +24,14 @@ export default function AdminSettingsEdit({ adminNotificationEmail }: Props) {
                 <div className="bg-white rounded-lg shadow-sm p-6">
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div>
-                            <label className="block text-base font-medium text-gray-700 mb-1">
+                            <label htmlFor="admin_notification_email" className="block text-base font-medium text-gray-700 mb-1">
                                 管理者通知メールアドレス
                             </label>
                             <p className="text-sm text-gray-500 mb-2">
                                 新規注文が入った際に通知を送るメールアドレスを設定してください。
                             </p>
                             <input
+                                id="admin_notification_email"
                                 type="email"
                                 value={data.admin_notification_email}
                                 onChange={(e) => setData('admin_notification_email', e.target.value)}

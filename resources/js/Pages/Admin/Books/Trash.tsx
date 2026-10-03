@@ -121,6 +121,7 @@ export default function Trash({ books, filters }: Props) {
                         onChange={(e) => setSearch(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && applySearch()}
                         placeholder="タイトル・著者で検索"
+                        aria-label="タイトル・著者で検索"
                         className="border border-gray-300 rounded-md px-3 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-ring w-56"
                     />
                     <Button variant="outline" size="sm" onClick={applySearch}>

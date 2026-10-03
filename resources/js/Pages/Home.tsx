@@ -35,6 +35,9 @@ export default function Home({ newArrivals, categories }: Props) {
     const [heroIndex, setHeroIndex] = useState(0);
 
     useEffect(() => {
+        // 動きを減らす設定のユーザーには自動切り替えを行わない
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
         const timer = setInterval(() => {
             setHeroIndex((prev) => (prev + 1) % HERO_IMAGES.length);
         }, HERO_INTERVAL_MS);
@@ -53,7 +56,7 @@ export default function Home({ newArrivals, categories }: Props) {
                             src={src}
                             alt=""
                             aria-hidden="true"
-                            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+                            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out motion-reduce:transition-none ${
                                 i === heroIndex ? "opacity-100" : "opacity-0"
                             }`}
                         />

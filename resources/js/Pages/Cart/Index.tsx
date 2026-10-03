@@ -103,16 +103,18 @@ export default function CartIndex({ cartItems, total }: Props) {
                                     <div className="flex items-center gap-2">
                                         <button
                                             onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                                            aria-label={`「${item.book.title}」の数量を減らす`}
                                             disabled={busy || item.quantity <= 1}
-                                            className="w-7 h-7 rounded border border-gray-300 flex items-center justify-center text-gray-600 hover:bg-gray-100 disabled:opacity-40"
+                                            className="w-9 h-9 rounded border border-gray-300 flex items-center justify-center text-gray-600 hover:bg-gray-100 disabled:opacity-40"
                                         >
                                             −
                                         </button>
                                         <span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
                                         <button
                                             onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                                            aria-label={`「${item.book.title}」の数量を増やす`}
                                             disabled={busy || item.quantity >= Math.min(99, item.book.stock)}
-                                            className="w-7 h-7 rounded border border-gray-300 flex items-center justify-center text-gray-600 hover:bg-gray-100 disabled:opacity-40"
+                                            className="w-9 h-9 rounded border border-gray-300 flex items-center justify-center text-gray-600 hover:bg-gray-100 disabled:opacity-40"
                                         >
                                             ＋
                                         </button>
@@ -126,7 +128,7 @@ export default function CartIndex({ cartItems, total }: Props) {
                                         onClick={() => removeItem(item)}
                                         disabled={busy}
                                         className="text-gray-500 hover:text-red-500 ml-2 disabled:opacity-40"
-                                        aria-label="削除"
+                                        aria-label={`「${item.book.title}」をカートから削除`}
                                     >
                                         ✕
                                     </button>

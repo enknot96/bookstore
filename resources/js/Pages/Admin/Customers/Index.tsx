@@ -49,6 +49,7 @@ export default function CustomersIndex({ customers, filters }: Props) {
                             name="search"
                             defaultValue={filters.search ?? ''}
                             placeholder="名前・メールで検索"
+                            aria-label="名前・メールで検索"
                             className="border border-gray-300 rounded-md px-3 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-ring w-56"
                         />
                         <button
