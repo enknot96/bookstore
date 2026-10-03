@@ -70,3 +70,14 @@ test('home shows only categories that have published books', function () {
     expect($categories)->toHaveCount(1);
     expect($categories[0]['books_count'])->toBe(1);
 });
+
+test('book detail renders OGP meta tags on the server for crawlers', function () {
+    $book = bookWith('おおきなかぶ', 1000, null, null);
+    $book->update(['description' => "ある日\nおじいさんが かぶを うえました。", 'cover_image_path' => 'https://img.example.com/cover.jpg']);
+
+    $this->get("/books/{$book->id}")
+        ->assertOk()
+        ->assertSee('<meta property="og:title" content="おおきなかぶ - ', false)
+        ->assertSee('og:image" content="https://img.example.com/cover.jpg"', false)
+        ->assertSee('ある日 おじいさんが かぶを うえました。', false);
+});

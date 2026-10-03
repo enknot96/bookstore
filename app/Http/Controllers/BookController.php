@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class BookController extends Controller
@@ -91,9 +92,20 @@ class BookController extends Controller
       ->take(4)
       ->get();
 
+    // クローラー向けに、サーバー側（app.blade.php）で出力するメタ情報
+    $description = $book->description
+      ? Str::limit(preg_replace('/\s+/u', ' ', trim($book->description)), 120, '…')
+      : "{$book->author}（{$book->publisher}）の絵本です。";
+
     return Inertia::render('Books/Show', [
       'book' => $book,
       'related' => $related,
+      'meta' => [
+        'title' => $book->title,
+        'description' => $description,
+        'image' => $book->cover_image_path,
+        'type' => 'product',
+      ],
     ]);
   }
 }

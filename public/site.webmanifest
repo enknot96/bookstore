@@ -1,0 +1,14 @@
+{
+    "name": "こもれび書房",
+    "short_name": "こもれび書房",
+    "description": "年齢やジャンルから、お子さまにぴったりの絵本をさがせるオンライン絵本店",
+    "start_url": "/",
+    "display": "browser",
+    "lang": "ja",
+    "background_color": "#FDFAEB",
+    "theme_color": "#431608",
+    "icons": [
+        { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+        { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+    ]
+}

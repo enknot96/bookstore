@@ -1,6 +1,7 @@
-import { Head, Link } from "@inertiajs/react";
+import { Link } from "@inertiajs/react";
 import { useEffect, useState } from "react";
 import BookCard from "@/Components/BookCard";
+import Seo from "@/Components/Seo";
 import MainLayout from "@/Layouts/MainLayout";
 import { AGE_BANDS } from "@/lib/ageBands";
 import hero01 from "@/assets/hero/hero01.jpg";
@@ -46,7 +47,11 @@ export default function Home({ newArrivals, categories }: Props) {
 
     return (
         <>
-            <Head title="トップ" />
+            <Seo
+                title="トップ"
+                description="年齢やジャンルから、お子さまにぴったりの絵本をさがせるオンライン絵本店。0〜2歳から9歳以上まで、年齢別にお選びいただけます。"
+                url={route("home")}
+            />
             <MainLayout>
                 {/* Hero */}
                 <section className="relative h-[420px] sm:h-[480px] overflow-hidden text-brand-cream">

@@ -1,8 +1,9 @@
-import { Head, router } from "@inertiajs/react";
+import { router } from "@inertiajs/react";
 import { ChevronDown, X } from "lucide-react";
 import { FormEvent, useState } from "react";
 import BookCard, { BookCardBook } from "@/Components/BookCard";
 import Pagination, { PaginationLink } from "@/Components/Pagination";
+import Seo from "@/Components/Seo";
 import MainLayout from "@/Layouts/MainLayout";
 import { AGE_BANDS, ageBandLabel } from "@/lib/ageBands";
 import { cn } from "@/lib/utils";
@@ -113,7 +114,11 @@ export default function BooksIndex({ books, categories, filters }: Props) {
 
     return (
         <>
-            <Head title="本を探す" />
+            <Seo
+                title="本を探す"
+                description="タイトル・著者・カテゴリ・対象年齢から、お子さまにぴったりの絵本をさがせます。"
+                url={route("books.index")}
+            />
             <MainLayout>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
                     <h1 className="text-2xl font-bold text-brand mb-6">

@@ -1,6 +1,7 @@
-import { Head, Link, router, usePage } from "@inertiajs/react";
+import { Link, router, usePage } from "@inertiajs/react";
 import { useState } from "react";
 import BookCard from "@/Components/BookCard";
+import Seo, { excerpt } from "@/Components/Seo";
 import MainLayout from "@/Layouts/MainLayout";
 import { PageProps } from "@/types";
 
@@ -56,7 +57,13 @@ export default function BookShow({ book, related }: Props) {
 
     return (
         <>
-            <Head title={book.title} />
+            <Seo
+                title={book.title}
+                description={excerpt(book.description) ?? `${book.author}（${book.publisher}）の絵本です。`}
+                image={book.cover_image_path}
+                url={route("books.show", book.id)}
+                type="product"
+            />
             <MainLayout>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
                     {/* パンくず */}
