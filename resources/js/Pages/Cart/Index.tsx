@@ -5,10 +5,9 @@ import { CartItem } from '@/types';
 type Props = {
     cartItems: CartItem[];
     total: number;
-    flash: { success?: string; error?: string };
 };
 
-export default function CartIndex({ cartItems, total, flash }: Props) {
+export default function CartIndex({ cartItems, total }: Props) {
     const updateQuantity = (id: number, quantity: number) => {
         router.patch(route('cart.update', id), { quantity }, { preserveScroll: true });
     };
@@ -22,12 +21,6 @@ export default function CartIndex({ cartItems, total, flash }: Props) {
             <Head title="カート" />
             <div className="max-w-3xl mx-auto px-4 py-12">
                 <h1 className="text-2xl font-bold text-gray-900 mb-8">ショッピングカート</h1>
-
-                {flash.success && (
-                    <p className="mb-4 text-sm text-green-700 bg-green-50 border border-green-200 rounded px-4 py-2">
-                        {flash.success}
-                    </p>
-                )}
 
                 {cartItems.length === 0 ? (
                     <div className="text-center py-16 text-gray-500">
@@ -77,7 +70,7 @@ export default function CartIndex({ cartItems, total, flash }: Props) {
                                         <span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
                                         <button
                                             onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                                            disabled={item.quantity >= 99}
+                                            disabled={item.quantity >= Math.min(99, item.book.stock)}
                                             className="w-7 h-7 rounded border border-gray-300 flex items-center justify-center text-gray-600 hover:bg-gray-100 disabled:opacity-40"
                                         >
                                             ＋

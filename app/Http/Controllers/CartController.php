@@ -44,8 +44,13 @@ class CartController extends Controller
             'user_id' => $request->user()->id,
             'book_id' => $book->id,
         ]);
-        $cartItem->quantity = ($cartItem->quantity ?? 0) + ($request->quantity ?? 1);
+        $requested = ($cartItem->quantity ?? 0) + ($request->quantity ?? 1);
+        $cartItem->quantity = min($requested, $book->stock);
         $cartItem->save();
+
+        if ($requested > $book->stock) {
+            return back()->with('error', '「' . $book->title . '」は在庫の上限（' . $book->stock . '冊）までカートに入れました。');
+        }
 
         return back()->with('success', '「' . $book->title . '」をカートに追加しました。');
     }
@@ -56,7 +61,13 @@ class CartController extends Controller
 
         $request->validate(['quantity' => ['required', 'integer', 'min:1', 'max:99']]);
 
-        $cartItem->update(['quantity' => $request->quantity]);
+        $stock    = $cartItem->book->stock;
+        $quantity = min((int) $request->quantity, max($stock, 1));
+        $cartItem->update(['quantity' => $quantity]);
+
+        if ($request->quantity > $quantity) {
+            return back()->with('error', '在庫の上限（' . $stock . '冊）までです。');
+        }
 
         return back();
     }
