@@ -17,12 +17,26 @@ class OrderController extends Controller
             $query->where('status', $request->status);
         }
 
+        // 注文番号（#12 や 12）、顧客名、メールアドレスで検索
+        if ($request->filled('q')) {
+            $keyword = trim($request->q);
+            $orderId = ltrim($keyword, '#');
+
+            $query->where(function ($q) use ($keyword, $orderId) {
+                if (ctype_digit($orderId)) {
+                    $q->orWhere('id', (int) $orderId);
+                }
+                $q->orWhereHas('user', fn($u) => $u->where('name', 'like', "%{$keyword}%")
+                    ->orWhere('email', 'like', "%{$keyword}%"));
+            });
+        }
+
         $orders = $query->paginate(20)->withQueryString();
 
         return Inertia::render('Admin/Orders/Index', [
             'orders'   => $orders,
             'statuses' => Order::STATUS_LABELS,
-            'filters'  => $request->only('status'),
+            'filters'  => $request->only(['status', 'q']),
         ]);
     }
 

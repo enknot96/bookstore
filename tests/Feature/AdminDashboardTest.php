@@ -63,3 +63,29 @@ test('dashboard low stock only lists published books', function () {
 test('dashboard is not available to customers', function () {
     $this->actingAs(User::factory()->create())->get('/admin')->assertForbidden();
 });
+
+test('admin books can be filtered by low stock and sorted by stock', function () {
+    $admin = adminUser();
+    dashboardBook(10);
+    dashboardBook(3);
+    dashboardBook(5);
+
+    $titles = fn ($response) => collect($response->viewData('page')['props']['books']['data'])->pluck('stock')->all();
+
+    expect($titles($this->actingAs($admin)->get('/admin/books?low_stock=1&sort=stock_asc')))->toBe([3, 5]);
+    expect($titles($this->actingAs($admin)->get('/admin/books?sort=stock_asc')))->toBe([3, 5, 10]);
+});
+
+test('admin orders can be searched by id, name, and email', function () {
+    $admin = adminUser();
+    $alice = User::factory()->create(['name' => '佐藤花子', 'email' => 'alice@example.com']);
+    $bob = User::factory()->create(['name' => '鈴木一郎', 'email' => 'bob@example.com']);
+    $aliceOrder = dashboardOrder($alice, 'confirmed', 1000);
+    dashboardOrder($bob, 'confirmed', 2000);
+
+    $ids = fn ($response) => collect($response->viewData('page')['props']['orders']['data'])->pluck('user_id')->all();
+
+    expect($ids($this->actingAs($admin)->get('/admin/orders?q=' . urlencode('佐藤'))))->toBe([$alice->id]);
+    expect($ids($this->actingAs($admin)->get('/admin/orders?q=bob@')))->toBe([$bob->id]);
+    expect($ids($this->actingAs($admin)->get('/admin/orders?q=' . urlencode('#' . $aliceOrder->id))))->toBe([$alice->id]);
+});

@@ -21,14 +21,22 @@ class BookController extends Controller
                     ->orWhere('author', 'like', "%{$v}%");
             }))
             ->when($request->category, fn($q, $v) => $q->whereHas('categories', fn($q) => $q->where('categories.id', $v)))
-            ->when($request->filled('is_published'), fn($q) => $q->where('is_published', $request->boolean('is_published')));
+            ->when($request->filled('is_published'), fn($q) => $q->where('is_published', $request->boolean('is_published')))
+            ->when($request->boolean('low_stock'), fn($q) => $q->where('stock', '<=', Book::LOW_STOCK_THRESHOLD));
 
-        $books = $query->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
+        match ($request->sort) {
+            'price_asc'  => $query->orderBy('price', 'asc'),
+            'price_desc' => $query->orderBy('price', 'desc'),
+            'stock_asc'  => $query->orderBy('stock', 'asc'),
+            default      => $query->orderBy('created_at', 'desc'),
+        };
+
+        $books = $query->orderBy('id', 'desc')->paginate(10)->withQueryString();
 
         return Inertia::render('Admin/Books/Index', [
             'books'        => $books,
             'categories'   => Category::orderBy('name')->get(),
-            'filters'      => $request->only(['search', 'category', 'is_published']),
+            'filters'      => $request->only(['search', 'category', 'is_published', 'low_stock', 'sort']),
             'trashedCount' => Book::onlyTrashed()->count(),
         ]);
     }
