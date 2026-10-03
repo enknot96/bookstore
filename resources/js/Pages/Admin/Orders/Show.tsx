@@ -61,8 +61,8 @@ export default function AdminOrderShow({ order, statuses }: Props) {
                     {/* 顧客・配送情報 */}
                     <div className="bg-white rounded-lg shadow-sm p-5">
                         <h2 className="text-base font-medium text-gray-700 mb-3">顧客情報</h2>
-                        <p className="text-base text-gray-900">{order.user.name}</p>
-                        <p className="text-base text-gray-500">{order.user.email}</p>
+                        <p className="text-base text-gray-900">{order.user?.name ?? '（退会済み）'}</p>
+                        <p className="text-base text-gray-500">{order.user?.email}</p>
 
                         <h2 className="text-base font-medium text-gray-700 mt-4 mb-2">配送先</h2>
                         <p className="text-base text-gray-900">{order.shipping_name}</p>

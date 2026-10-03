@@ -71,6 +71,7 @@ Route::middleware(['auth', 'admin', 'demo.restrict'])->prefix('admin')->name('ad
   Route::get('settings', [AdminSettingController::class, 'edit'])->name('settings.edit');
   Route::patch('settings', [AdminSettingController::class, 'update'])->name('settings.update');
   Route::get('customers', [AdminCustomerController::class, 'index'])->name('customers.index');
+  Route::delete('customers/{customer}', [AdminCustomerController::class, 'destroy'])->name('customers.destroy');
   Route::get('admins', [AdminAccountController::class, 'index'])->name('admins.index');
   Route::post('admins', [AdminAccountController::class, 'store'])->name('admins.store');
   Route::delete('admins/{user}', [AdminAccountController::class, 'destroy'])->name('admins.destroy');

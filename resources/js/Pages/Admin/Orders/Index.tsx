@@ -104,8 +104,8 @@ export default function AdminOrdersIndex({ orders, statuses, filters }: Props) {
                                     <tr key={order.id} className="hover:bg-gray-50">
                                         <td className="px-4 py-3 text-base font-medium text-gray-900">#{order.id}</td>
                                         <td className="px-4 py-3">
-                                            <p className="text-base text-gray-900">{order.user.name}</p>
-                                            <p className="text-sm text-gray-500">{order.user.email}</p>
+                                            <p className="text-base text-gray-900">{order.user?.name ?? '（退会済み）'}</p>
+                                            <p className="text-sm text-gray-500">{order.user?.email}</p>
                                         </td>
                                         <td className="px-4 py-3 text-base text-gray-900">
                                             ¥{order.total_amount.toLocaleString()}

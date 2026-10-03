@@ -1,4 +1,15 @@
-import { Head, Link, router } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
+import { Trash2 } from 'lucide-react';
+import { useState } from 'react';
+import { Button } from '@/Components/ui/button';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+} from '@/Components/ui/dialog';
 import Pagination from '@/Components/Pagination';
 import AdminLayout from '@/Layouts/AdminLayout';
 
@@ -25,6 +36,21 @@ type Props = {
 };
 
 export default function CustomersIndex({ customers, filters }: Props) {
+    const [target, setTarget] = useState<Customer | null>(null);
+    const [deleting, setDeleting] = useState(false);
+
+    const handleDelete = () => {
+        if (!target) return;
+        router.delete(route('admin.customers.destroy', target.id), {
+            preserveScroll: true,
+            onStart: () => setDeleting(true),
+            onFinish: () => {
+                setDeleting(false);
+                setTarget(null);
+            },
+        });
+    };
+
     const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const search = (e.currentTarget.elements.namedItem('search') as HTMLInputElement).value;
@@ -80,12 +106,13 @@ export default function CustomersIndex({ customers, filters }: Props) {
                                 <th className="px-4 py-3 text-left text-sm font-medium text-gray-500 uppercase">注文数</th>
                                 <th className="px-4 py-3 text-left text-sm font-medium text-gray-500 uppercase">合計購入金額</th>
                                 <th className="px-4 py-3 text-left text-sm font-medium text-gray-500 uppercase">登録日</th>
+                                <th className="px-4 py-3"><span className="sr-only">操作</span></th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200">
                             {customers.data.length === 0 ? (
                                 <tr>
-                                    <td colSpan={4} className="px-4 py-8 text-center text-base text-gray-500">
+                                    <td colSpan={5} className="px-4 py-8 text-center text-base text-gray-500">
                                         顧客が見つかりません
                                     </td>
                                 </tr>
@@ -105,6 +132,16 @@ export default function CustomersIndex({ customers, filters }: Props) {
                                         <td className="px-4 py-3 text-base text-gray-500">
                                             {new Date(customer.created_at).toLocaleDateString('ja-JP')}
                                         </td>
+                                        <td className="px-4 py-3 text-right">
+                                            <Button
+                                                variant="ghost"
+                                                size="icon"
+                                                aria-label={`顧客「${customer.name}」を削除`}
+                                                onClick={() => setTarget(customer)}
+                                            >
+                                                <Trash2 size={16} />
+                                            </Button>
+                                        </td>
                                     </tr>
                                 ))
                             )}
@@ -115,6 +152,28 @@ export default function CustomersIndex({ customers, filters }: Props) {
                 {/* ページネーション */}
                 <Pagination links={customers.links} className="mt-6" />
             </div>
+
+            <Dialog open={target !== null} onOpenChange={(open) => !open && setTarget(null)}>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>顧客「{target?.name}」を削除しますか？</DialogTitle>
+                        <DialogDescription>
+                            {target?.email}
+                            <br />
+                            この顧客の注文 {target?.orders_count}件（{formatAmount(target?.orders_sum_total_amount ?? null)}）も
+                            あわせて削除されます。注文は元に戻せません。
+                        </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter>
+                        <Button variant="outline" onClick={() => setTarget(null)}>
+                            キャンセル
+                        </Button>
+                        <Button variant="destructive" onClick={handleDelete} disabled={deleting}>
+                            削除する
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
         </AdminLayout>
     );
 }

@@ -18,6 +18,7 @@ return [
         'admin.admins.store',
         'admin.admins.destroy',
         'admin.settings.update',
+        'admin.customers.destroy',
     ],
 
     'protected_emails' => [

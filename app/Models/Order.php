@@ -33,7 +33,8 @@ class Order extends Model
 
   public function user()
   {
-    return $this->belongsTo(User::class);
+    // 退会（ソフトデリート）済みユーザーの注文でも、管理画面で名前を表示できるようにする
+    return $this->belongsTo(User::class)->withTrashed();
   }
 
   public function items()
