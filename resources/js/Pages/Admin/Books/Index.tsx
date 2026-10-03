@@ -8,6 +8,7 @@ import {
     DialogHeader,
     DialogTitle,
 } from '@/Components/ui/dialog';
+import Pagination from '@/Components/Pagination';
 import { Input } from '@/Components/ui/input';
 import {
     Select,
@@ -27,7 +28,16 @@ interface Filters {
     search?: string;
     category?: string;
     is_published?: string;
+    low_stock?: string;
+    sort?: string;
 }
+
+const SORT_OPTIONS = [
+    { value: 'newest', label: '新着順' },
+    { value: 'price_asc', label: '価格が安い順' },
+    { value: 'price_desc', label: '価格が高い順' },
+    { value: 'stock_asc', label: '在庫が少ない順' },
+];
 
 interface Props extends PageProps {
     books: PaginatedBooks;
@@ -137,6 +147,29 @@ export default function Index({ books, categories, filters, trashedCount }: Prop
                             <SelectItem value="0">非公開</SelectItem>
                         </SelectContent>
                     </Select>
+                    <Select
+                        value={filters.sort ?? 'newest'}
+                        onValueChange={(v) => applyFilter({ sort: v === 'newest' ? undefined : v })}
+                    >
+                        <SelectTrigger className="w-40" aria-label="並び替え">
+                            <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {SORT_OPTIONS.map((o) => (
+                                <SelectItem key={o.value} value={o.value}>
+                                    {o.label}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                    <Button
+                        variant={filters.low_stock ? 'default' : 'outline'}
+                        size="sm"
+                        aria-pressed={!!filters.low_stock}
+                        onClick={() => applyFilter({ low_stock: filters.low_stock ? undefined : '1' })}
+                    >
+                        在庫僅少のみ
+                    </Button>
                     <Button variant="outline" size="sm" onClick={() => applyFilter({ search })}>
                         検索
                     </Button>
@@ -185,7 +218,7 @@ export default function Index({ books, categories, filters, trashedCount }: Prop
                                     <th className="px-4 py-3 text-left font-medium text-gray-600">
                                         タイトル
                                     </th>
-                                    <th className="px-4 py-3 w-36"></th>
+                                    <th className="px-4 py-3 w-20"><span className="sr-only">表紙</span></th>
                                     <th className="px-4 py-3 text-left font-medium text-gray-600 hidden md:table-cell">
                                         著者
                                     </th>
@@ -238,10 +271,11 @@ export default function Index({ books, categories, filters, trashedCount }: Prop
                                                     <img
                                                         src={book.cover_image_path}
                                                         alt={book.title}
-                                                        className="w-full h-28 object-cover rounded shadow-sm"
+                                                        loading="lazy"
+                                                        className="w-12 h-16 object-cover rounded shadow-sm"
                                                     />
                                                 ) : (
-                                                    <div className="w-full h-28 bg-gray-100 rounded flex items-center justify-center text-2xl">
+                                                    <div className="w-12 h-16 bg-gray-100 rounded flex items-center justify-center text-2xl">
                                                         📖
                                                     </div>
                                                 )}
@@ -293,26 +327,7 @@ export default function Index({ books, categories, filters, trashedCount }: Prop
                                 {books.total}件中 {(books.current_page - 1) * books.per_page + 1}〜
                                 {Math.min(books.current_page * books.per_page, books.total)}件
                             </span>
-                            <div className="flex gap-1">
-                                {books.links.map((link, i) => (
-                                    <Link
-                                        key={i}
-                                        href={link.url ?? '#'}
-                                        className={`px-3 py-1 rounded border text-sm transition-colors ${
-                                            link.active
-                                                ? 'bg-primary text-primary-foreground border-primary'
-                                                : link.url
-                                                  ? 'hover:bg-gray-100 border-gray-200'
-                                                  : 'opacity-40 cursor-not-allowed border-gray-200'
-                                        }`}
-                                        dangerouslySetInnerHTML={{
-                                            __html: link.label
-                                                .replace('&laquo; Previous', '« 前へ')
-                                                .replace('Next &raquo;', '次へ »'),
-                                        }}
-                                    />
-                                ))}
-                            </div>
+                            <Pagination links={books.links} />
                         </div>
                     )}
                 </div>

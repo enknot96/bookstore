@@ -1,17 +1,32 @@
 import { Head, Link, router } from '@inertiajs/react';
+import { FormEvent, useState } from 'react';
 import { orderStatusColor } from '@/lib/orderStatus';
+import Pagination from '@/Components/Pagination';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { Order, PaginatedOrders } from '@/types';
 
 type Props = {
     orders: PaginatedOrders & { data: (Order & { user: { name: string; email: string } })[] };
     statuses: Record<string, string>;
-    filters: { status?: string };
+    filters: { status?: string; q?: string };
 };
 
 export default function AdminOrdersIndex({ orders, statuses, filters }: Props) {
-    const handleStatusFilter = (status: string) => {
-        router.get(route('admin.orders.index'), { status: status || undefined }, { preserveState: true });
+    const [query, setQuery] = useState(filters.q ?? '');
+
+    const applyFilter = (overrides: { status?: string; q?: string }) => {
+        router.get(
+            route('admin.orders.index'),
+            { status: filters.status || undefined, q: query.trim() || undefined, ...overrides },
+            { preserveState: true },
+        );
+    };
+
+    const handleStatusFilter = (status: string) => applyFilter({ status: status || undefined });
+
+    const handleSearch = (e: FormEvent) => {
+        e.preventDefault();
+        applyFilter({ q: query.trim() || undefined });
     };
 
     return (
@@ -19,6 +34,27 @@ export default function AdminOrdersIndex({ orders, statuses, filters }: Props) {
             <Head title="注文管理" />
             <div>
                 <h1 className="text-2xl font-bold text-gray-900 mb-6">注文管理</h1>
+
+                {/* 検索 */}
+                <form onSubmit={handleSearch} role="search" className="flex gap-2 mb-4">
+                    <label htmlFor="order-search" className="sr-only">
+                        注文を検索
+                    </label>
+                    <input
+                        id="order-search"
+                        type="search"
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)}
+                        placeholder="注文番号・顧客名・メールで検索"
+                        className="border border-gray-300 rounded-md px-3 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-ring w-72 max-w-full"
+                    />
+                    <button
+                        type="submit"
+                        className="bg-primary text-primary-foreground px-4 py-1.5 rounded-md text-base hover:bg-primary/90"
+                    >
+                        検索
+                    </button>
+                </form>
 
                 {/* フィルター */}
                 <div className="flex flex-wrap gap-2 mb-6">
@@ -98,22 +134,7 @@ export default function AdminOrdersIndex({ orders, statuses, filters }: Props) {
                 </div>
 
                 {/* ページネーション */}
-                {orders.last_page > 1 && (
-                    <div className="flex justify-center gap-2 mt-6">
-                        {orders.links.map((link, i) => (
-                            <Link
-                                key={i}
-                                href={link.url ?? '#'}
-                                className={`px-3 py-1.5 rounded text-base border ${
-                                    link.active
-                                        ? 'bg-primary text-white border-primary'
-                                        : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
-                                } ${!link.url ? 'opacity-40 pointer-events-none' : ''}`}
-                                dangerouslySetInnerHTML={{ __html: link.label }}
-                            />
-                        ))}
-                    </div>
-                )}
+                <Pagination links={orders.links} className="mt-6" />
             </div>
         </AdminLayout>
     );
