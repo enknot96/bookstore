@@ -50,14 +50,14 @@ export default function BookShow({ book, related }: Props) {
                     <nav className="text-sm text-gray-500 mb-6 flex gap-2">
                         <Link
                             href={route("home")}
-                            className="hover:text-[#B27E6E]"
+                            className="hover:text-brand-accent"
                         >
                             トップ
                         </Link>
                         <span>/</span>
                         <Link
                             href={route("books.index")}
-                            className="hover:text-[#B27E6E]"
+                            className="hover:text-brand-accent"
                         >
                             本を探す
                         </Link>
@@ -77,7 +77,7 @@ export default function BookShow({ book, related }: Props) {
                                 className="rounded-lg object-cover shrink-0 w-full sm:w-48 h-64"
                             />
                         ) : (
-                            <div className="bg-[#EBDACA] rounded-lg flex items-center justify-center text-8xl shrink-0 w-full sm:w-48 h-64">
+                            <div className="bg-brand-sand rounded-lg flex items-center justify-center text-8xl shrink-0 w-full sm:w-48 h-64">
                                 📖
                             </div>
                         )}
@@ -91,7 +91,7 @@ export default function BookShow({ book, related }: Props) {
                                         href={route("books.index", {
                                             category: cat.slug,
                                         })}
-                                        className="text-xs bg-[#EBDACA] text-[#431608] px-2 py-0.5 rounded-full hover:bg-[#D8C7C2]"
+                                        className="text-xs bg-brand-sand text-brand px-2 py-0.5 rounded-full hover:bg-brand-sand-dark"
                                     >
                                         {cat.name}
                                     </Link>
@@ -123,7 +123,7 @@ export default function BookShow({ book, related }: Props) {
                                 </span>
                             </div>
 
-                            <p className="text-3xl font-bold text-[#431608] mb-6">
+                            <p className="text-3xl font-bold text-brand mb-6">
                                 ¥{book.price.toLocaleString()}
                             </p>
 
@@ -131,14 +131,14 @@ export default function BookShow({ book, related }: Props) {
                                 auth.user ? (
                                     <button
                                         onClick={addToCart}
-                                        className="inline-block bg-[#FFF17C] text-[#431608] px-8 py-3 rounded-full font-semibold hover:bg-[#ED946D] transition"
+                                        className="inline-block bg-brand-sun text-brand px-8 py-3 rounded-full font-semibold hover:bg-brand-sun-hover transition"
                                     >
                                         カートに入れる
                                     </button>
                                 ) : (
                                     <Link
                                         href={route("login", { redirect: route("books.show", book.id, false) })}
-                                        className="inline-block bg-[#FFF17C] text-[#431608] px-8 py-3 rounded-full font-semibold hover:bg-[#ED946D] transition"
+                                        className="inline-block bg-brand-sun text-brand px-8 py-3 rounded-full font-semibold hover:bg-brand-sun-hover transition"
                                     >
                                         カートに入れる（要ログイン）
                                     </Link>
@@ -185,7 +185,7 @@ export default function BookShow({ book, related }: Props) {
                                                 className="w-full h-32 object-cover"
                                             />
                                         ) : (
-                                            <div className="bg-[#EBDACA] h-32 flex items-center justify-center text-4xl">
+                                            <div className="bg-brand-sand h-32 flex items-center justify-center text-4xl">
                                                 📖
                                             </div>
                                         )}
@@ -196,7 +196,7 @@ export default function BookShow({ book, related }: Props) {
                                             <p className="text-xs text-gray-500 mt-1">
                                                 {b.author}
                                             </p>
-                                            <p className="text-[#431608] font-bold text-sm mt-1">
+                                            <p className="text-brand font-bold text-sm mt-1">
                                                 ¥{b.price.toLocaleString()}
                                             </p>
                                         </div>

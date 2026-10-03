@@ -74,7 +74,7 @@ export default function Login({ status, canResetPassword }) {
                                 setData('remember', e.target.checked)
                             }
                         />
-                        <span className="ms-2 text-sm text-[#431608]/70">
+                        <span className="ms-2 text-sm text-brand/70">
                             ログイン状態を保持する
                         </span>
                     </label>
@@ -84,7 +84,7 @@ export default function Login({ status, canResetPassword }) {
                     {canResetPassword && (
                         <Link
                             href={route('password.request')}
-                            className="rounded-md text-sm text-[#431608]/70 underline hover:text-[#431608] focus:outline-none focus:ring-2 focus:ring-[#B27E6E] focus:ring-offset-2"
+                            className="rounded-md text-sm text-brand/70 underline hover:text-brand focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2"
                         >
                             パスワードをお忘れですか？
                         </Link>

@@ -19,7 +19,7 @@ const STATUS_COLORS: Record<string, string> = {
     pending:    'bg-yellow-100 text-yellow-800',
     confirmed:  'bg-blue-100 text-blue-800',
     processing: 'bg-purple-100 text-purple-800',
-    shipped:    'bg-[#EBDACA] text-[#431608]',
+    shipped:    'bg-brand-sand text-brand',
     delivered:  'bg-green-100 text-green-800',
     cancelled:  'bg-gray-100 text-gray-800',
 };
@@ -34,7 +34,7 @@ export default function OrdersIndex({ orders }: Props) {
                 {orders.data.length === 0 ? (
                     <div className="text-center py-16 text-gray-500">
                         <p className="mb-4">注文履歴がありません。</p>
-                        <Link href={route('books.index')} className="text-[#B27E6E] hover:underline">
+                        <Link href={route('books.index')} className="text-brand-accent hover:underline">
                             本を探す
                         </Link>
                     </div>
@@ -78,7 +78,7 @@ export default function OrdersIndex({ orders }: Props) {
                                         href={link.url ?? '#'}
                                         className={`px-3 py-1.5 rounded text-sm border ${
                                             link.active
-                                                ? 'bg-[#431608] text-white border-[#431608]'
+                                                ? 'bg-brand text-white border-brand'
                                                 : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
                                         } ${!link.url ? 'opacity-40 pointer-events-none' : ''}`}
                                         dangerouslySetInnerHTML={{ __html: link.label }}

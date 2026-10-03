@@ -19,7 +19,7 @@ export default function ForgotPassword({ status }) {
         <GuestLayout>
             <Head title="パスワードをお忘れの方" />
 
-            <div className="mb-4 text-sm text-[#431608]/70">
+            <div className="mb-4 text-sm text-brand/70">
                 パスワードをお忘れですか？ご登録のメールアドレスを入力いただければ、
                 新しいパスワードを設定するためのリンクをお送りします。
             </div>

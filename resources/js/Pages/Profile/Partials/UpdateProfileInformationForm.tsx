@@ -20,7 +20,7 @@ export default function UpdateProfileInformationForm({ user }: { user: User }) {
     return (
         <section>
             <header>
-                <h2 className="text-lg font-medium text-[#431608]">アカウント情報</h2>
+                <h2 className="text-lg font-medium text-brand">アカウント情報</h2>
                 <p className="mt-1 text-sm text-gray-600">
                     お名前とメールアドレスを更新できます。
                 </p>

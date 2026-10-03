@@ -37,7 +37,7 @@ export default function UpdatePasswordForm() {
     return (
         <section>
             <header>
-                <h2 className="text-lg font-medium text-[#431608]">パスワード変更</h2>
+                <h2 className="text-lg font-medium text-brand">パスワード変更</h2>
                 <p className="mt-1 text-sm text-gray-600">
                     第三者による不正アクセスを防ぐため、長く複雑なパスワードの使用をおすすめします。
                 </p>

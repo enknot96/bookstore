@@ -55,7 +55,7 @@ function BookCard({ book }: { book: Book }) {
                     className="w-full h-40 object-cover"
                 />
             ) : (
-                <div className="bg-[#EBDACA] h-40 flex items-center justify-center text-5xl">
+                <div className="bg-brand-sand h-40 flex items-center justify-center text-5xl">
                     📖
                 </div>
             )}
@@ -67,7 +67,7 @@ function BookCard({ book }: { book: Book }) {
                     {book.title}
                 </h3>
                 <p className="text-xs text-gray-500 mt-1">{book.author}</p>
-                <p className="text-[#431608] font-bold mt-2 text-sm">
+                <p className="text-brand font-bold mt-2 text-sm">
                     ¥{book.price.toLocaleString()}
                 </p>
             </div>
@@ -120,7 +120,7 @@ export default function BooksIndex({ books, categories, filters }: Props) {
                                     })
                                 }
                                 placeholder="例：絵本、あいうえお"
-                                className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#B27E6E]"
+                                className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
                             />
                         </div>
 
@@ -137,7 +137,7 @@ export default function BooksIndex({ books, categories, filters }: Props) {
                                         category: e.target.value,
                                     })
                                 }
-                                className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#B27E6E]"
+                                className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
                             >
                                 <option value="">すべて</option>
                                 {categories.map((cat) => (
@@ -165,7 +165,7 @@ export default function BooksIndex({ books, categories, filters }: Props) {
                                     }
                                     placeholder="下限"
                                     min={0}
-                                    className="w-full border border-gray-300 rounded-md px-2 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#B27E6E]"
+                                    className="w-full border border-gray-300 rounded-md px-2 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
                                 />
                                 <span className="text-gray-400 text-sm shrink-0">
                                     〜
@@ -181,7 +181,7 @@ export default function BooksIndex({ books, categories, filters }: Props) {
                                     }
                                     placeholder="上限"
                                     min={0}
-                                    className="w-full border border-gray-300 rounded-md px-2 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#B27E6E]"
+                                    className="w-full border border-gray-300 rounded-md px-2 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
                                 />
                             </div>
                         </div>
@@ -200,7 +200,7 @@ export default function BooksIndex({ books, categories, filters }: Props) {
                                 placeholder="例：5"
                                 min={0}
                                 max={18}
-                                className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#B27E6E]"
+                                className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
                             />
                         </div>
 
@@ -208,7 +208,7 @@ export default function BooksIndex({ books, categories, filters }: Props) {
                         <div className="flex gap-2 lg:col-span-5">
                             <button
                                 type="submit"
-                                className="bg-[#431608] text-[#FDFAEB] px-5 py-2 rounded-md text-sm hover:bg-[#B27E6E] transition"
+                                className="bg-brand text-brand-cream px-5 py-2 rounded-md text-sm hover:bg-brand-accent transition"
                             >
                                 検索
                             </button>

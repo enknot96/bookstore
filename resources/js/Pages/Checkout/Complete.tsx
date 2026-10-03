@@ -47,7 +47,7 @@ export default function CheckoutComplete({ order }: Props) {
                 {isPending && (
                     <p
                         role="status"
-                        className="mb-8 text-sm text-[#431608] bg-[#FFF17C]/40 border border-[#FFF17C] rounded px-4 py-3"
+                        className="mb-8 text-sm text-brand bg-brand-sun/40 border border-brand-sun rounded px-4 py-3"
                     >
                         決済を確認しています。このまま少しお待ちください。
                         反映に時間がかかる場合は、後ほど注文履歴からご確認ください。
@@ -57,7 +57,7 @@ export default function CheckoutComplete({ order }: Props) {
                 <div className="bg-white rounded-lg shadow-sm p-6 text-left mb-8">
                     <div className="flex justify-between items-center mb-4">
                         <span className="text-sm text-gray-500">ステータス</span>
-                        <span className="text-sm font-medium text-[#431608]">
+                        <span className="text-sm font-medium text-brand">
                             {STATUS_LABELS[order.status] ?? order.status}
                         </span>
                     </div>
@@ -67,7 +67,7 @@ export default function CheckoutComplete({ order }: Props) {
                     </div>
                     <div className="flex justify-between items-center mb-6">
                         <span className="text-sm text-gray-500">合計金額</span>
-                        <span className="text-lg font-bold text-[#431608]">
+                        <span className="text-lg font-bold text-brand">
                             ¥{order.total_amount.toLocaleString()}
                         </span>
                     </div>
@@ -89,7 +89,7 @@ export default function CheckoutComplete({ order }: Props) {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Link
                         href={route('orders.show', order.id)}
-                        className="bg-[#431608] text-[#FDFAEB] px-6 py-2.5 rounded-lg font-medium hover:bg-[#B27E6E] transition-colors"
+                        className="bg-brand text-brand-cream px-6 py-2.5 rounded-lg font-medium hover:bg-brand-accent transition-colors"
                     >
                         注文詳細を見る
                     </Link>

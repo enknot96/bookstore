@@ -46,7 +46,7 @@ export default function DeleteUserForm() {
     return (
         <section>
             <header>
-                <h2 className="text-lg font-medium text-[#431608]">退会</h2>
+                <h2 className="text-lg font-medium text-brand">退会</h2>
                 <p className="mt-1 text-sm text-gray-600">
                     退会するとアカウントが無効化され、ログインできなくなります。注文履歴は運用上の記録として保持されます。
                 </p>
@@ -58,7 +58,7 @@ export default function DeleteUserForm() {
 
             <Modal show={confirmingUserDeletion} onClose={closeModal}>
                 <form onSubmit={deleteUser} className="p-6">
-                    <h2 className="text-lg font-medium text-[#431608]">本当に退会しますか？</h2>
+                    <h2 className="text-lg font-medium text-brand">本当に退会しますか？</h2>
 
                     <p className="mt-1 text-sm text-gray-600">
                         退会すると再度ログインできなくなります。続行する場合はパスワードを入力してください。

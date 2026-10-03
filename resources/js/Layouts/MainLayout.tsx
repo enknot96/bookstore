@@ -21,52 +21,52 @@ export default function MainLayout({ children }: { children: ReactNode }) {
     }, [flash]);
 
     return (
-        <div className="min-h-screen bg-[#FDFAEB] flex flex-col">
-            <header className="bg-white border-b border-[#431608]/10 shadow-sm">
+        <div className="min-h-screen bg-brand-cream flex flex-col">
+            <header className="bg-white border-b border-brand/10 shadow-sm">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-                    <Link href={route('home')} className="flex items-center gap-2 text-xl font-bold text-[#431608]">
+                    <Link href={route('home')} className="flex items-center gap-2 text-xl font-bold text-brand">
                         <img src={logo} alt="" className="h-10 w-10 object-contain" />
                         こもれび書房
                     </Link>
 
                     {/* デスクトップ用ナビ */}
                     <nav className="hidden sm:flex items-center gap-4 text-sm">
-                        <Link href={route('books.index')} className="font-medium text-[#431608]/90 hover:text-[#B27E6E] transition-colors">
+                        <Link href={route('books.index')} className="font-medium text-brand/90 hover:text-brand-accent transition-colors">
                             本を探す
                         </Link>
                         {auth.user ? (
                             <>
-                                <Link href={route('cart.index')} className="relative font-medium text-[#431608]/90 hover:text-[#B27E6E] transition-colors">
+                                <Link href={route('cart.index')} className="relative font-medium text-brand/90 hover:text-brand-accent transition-colors">
                                     <ShoppingCart className="w-5 h-5" />
                                     {cartCount > 0 && (
-                                        <span className="absolute -top-1.5 -right-1.5 bg-[#431608] text-[#FDFAEB] text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                                        <span className="absolute -top-1.5 -right-1.5 bg-brand text-brand-cream text-xs rounded-full w-4 h-4 flex items-center justify-center">
                                             {cartCount}
                                         </span>
                                     )}
                                 </Link>
-                                <Link href={route('orders.index')} className="font-medium text-[#431608]/90 hover:text-[#B27E6E] transition-colors">
+                                <Link href={route('orders.index')} className="font-medium text-brand/90 hover:text-brand-accent transition-colors">
                                     注文履歴
                                 </Link>
-                                <span className="text-[#431608]/30">|</span>
-                                <Link href={route('profile.edit')} className="flex items-center gap-1 text-[#431608]/70 hover:text-[#B27E6E] transition-colors">
+                                <span className="text-brand/30">|</span>
+                                <Link href={route('profile.edit')} className="flex items-center gap-1 text-brand/70 hover:text-brand-accent transition-colors">
                                     {auth.user.name}
                                     <Pencil className="w-3.5 h-3.5" />
                                 </Link>
                                 <button
                                     onClick={() => router.post(route('logout'))}
-                                    className="font-medium text-[#431608]/80 hover:text-[#B27E6E] transition-colors"
+                                    className="font-medium text-brand/80 hover:text-brand-accent transition-colors"
                                 >
                                     ログアウト
                                 </button>
                             </>
                         ) : (
                             <>
-                                <Link href={route('login')} className="font-medium text-[#431608]/90 hover:text-[#B27E6E] transition-colors">
+                                <Link href={route('login')} className="font-medium text-brand/90 hover:text-brand-accent transition-colors">
                                     ログイン
                                 </Link>
                                 <Link
                                     href={route('register')}
-                                    className="bg-[#FFF17C] text-[#431608] px-3 py-1.5 rounded-full font-medium hover:bg-[#ED946D] transition-colors"
+                                    className="bg-brand-sun text-brand px-3 py-1.5 rounded-full font-medium hover:bg-brand-sun-hover transition-colors"
                                 >
                                     新規登録
                                 </Link>
@@ -77,10 +77,10 @@ export default function MainLayout({ children }: { children: ReactNode }) {
                     {/* モバイル用: カート常時表示 + ハンバーガー */}
                     <div className="flex items-center gap-3 sm:hidden">
                         {auth.user && (
-                            <Link href={route('cart.index')} className="relative text-[#431608]/90">
+                            <Link href={route('cart.index')} className="relative text-brand/90">
                                 <ShoppingCart className="w-5 h-5" />
                                 {cartCount > 0 && (
-                                    <span className="absolute -top-1.5 -right-1.5 bg-[#431608] text-[#FDFAEB] text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                                    <span className="absolute -top-1.5 -right-1.5 bg-brand text-brand-cream text-xs rounded-full w-4 h-4 flex items-center justify-center">
                                         {cartCount}
                                     </span>
                                 )}
@@ -89,7 +89,7 @@ export default function MainLayout({ children }: { children: ReactNode }) {
                         <button
                             onClick={() => setMenuOpen((v) => !v)}
                             aria-label="メニューを開く"
-                            className="text-[#431608]"
+                            className="text-brand"
                         >
                             {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                         </button>
@@ -106,16 +106,16 @@ export default function MainLayout({ children }: { children: ReactNode }) {
                         leaveFrom="opacity-100 translate-y-0"
                         leaveTo="opacity-0 -translate-y-2"
                     >
-                        <nav className="sm:hidden border-t border-[#431608]/10 px-4 py-3 flex flex-col text-sm">
-                            <Link href={route('books.index')} onClick={closeMenu} className="block py-4 text-center font-medium text-[#431608]/90">
+                        <nav className="sm:hidden border-t border-brand/10 px-4 py-3 flex flex-col text-sm">
+                            <Link href={route('books.index')} onClick={closeMenu} className="block py-4 text-center font-medium text-brand/90">
                                 本を探す
                             </Link>
                             {auth.user ? (
                                 <>
-                                    <Link href={route('orders.index')} onClick={closeMenu} className="block py-4 text-center font-medium text-[#431608]/90">
+                                    <Link href={route('orders.index')} onClick={closeMenu} className="block py-4 text-center font-medium text-brand/90">
                                         注文履歴
                                     </Link>
-                                    <Link href={route('profile.edit')} onClick={closeMenu} className="flex items-center justify-center gap-1 py-4 text-[#431608]/70">
+                                    <Link href={route('profile.edit')} onClick={closeMenu} className="flex items-center justify-center gap-1 py-4 text-brand/70">
                                         {auth.user.name}
                                         <Pencil className="w-3.5 h-3.5" />
                                     </Link>
@@ -124,20 +124,20 @@ export default function MainLayout({ children }: { children: ReactNode }) {
                                             closeMenu();
                                             router.post(route('logout'));
                                         }}
-                                        className="block w-full py-4 text-center font-medium text-[#431608]/80"
+                                        className="block w-full py-4 text-center font-medium text-brand/80"
                                     >
                                         ログアウト
                                     </button>
                                 </>
                             ) : (
                                 <>
-                                    <Link href={route('login')} onClick={closeMenu} className="block py-4 text-center font-medium text-[#431608]/90">
+                                    <Link href={route('login')} onClick={closeMenu} className="block py-4 text-center font-medium text-brand/90">
                                         ログイン
                                     </Link>
                                     <Link
                                         href={route('register')}
                                         onClick={closeMenu}
-                                        className="block py-4 text-center bg-[#FFF17C] text-[#431608] rounded-full font-medium"
+                                        className="block py-4 text-center bg-brand-sun text-brand rounded-full font-medium"
                                     >
                                         新規登録
                                     </Link>

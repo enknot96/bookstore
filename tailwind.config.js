@@ -19,6 +19,15 @@ export default {
                 sans: ['"Zen Maru Gothic"', ...defaultTheme.fontFamily.sans],
             },
             colors: {
+                brand: {
+                    DEFAULT: '#431608',
+                    accent: '#B27E6E',
+                    cream: '#FDFAEB',
+                    sun: '#FFF17C',
+                    'sun-hover': '#ED946D',
+                    sand: '#EBDACA',
+                    'sand-dark': '#D8C7C2',
+                },
                 border: 'hsl(var(--border))',
                 input: 'hsl(var(--input))',
                 ring: 'hsl(var(--ring))',

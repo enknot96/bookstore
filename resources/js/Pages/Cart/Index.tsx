@@ -25,7 +25,7 @@ export default function CartIndex({ cartItems, total }: Props) {
                 {cartItems.length === 0 ? (
                     <div className="text-center py-16 text-gray-500">
                         <p className="mb-4">カートに商品がありません。</p>
-                        <Link href={route('books.index')} className="text-[#B27E6E] hover:underline">
+                        <Link href={route('books.index')} className="text-brand-accent hover:underline">
                             本を探す
                         </Link>
                     </div>
@@ -49,7 +49,7 @@ export default function CartIndex({ cartItems, total }: Props) {
                                     <div className="flex-1 min-w-0">
                                         <Link
                                             href={route('books.show', item.book.id)}
-                                            className="font-medium text-gray-900 hover:text-[#B27E6E] line-clamp-2"
+                                            className="font-medium text-gray-900 hover:text-brand-accent line-clamp-2"
                                         >
                                             {item.book.title}
                                         </Link>
@@ -95,13 +95,13 @@ export default function CartIndex({ cartItems, total }: Props) {
                         <div className="bg-white rounded-lg shadow-sm p-6">
                             <div className="flex justify-between items-center mb-6">
                                 <span className="text-lg font-medium text-gray-900">合計</span>
-                                <span className="text-2xl font-bold text-[#431608]">
+                                <span className="text-2xl font-bold text-brand">
                                     ¥{total.toLocaleString()}
                                 </span>
                             </div>
                             <Link
                                 href={route('checkout.index')}
-                                className="block w-full text-center bg-[#431608] text-[#FDFAEB] py-3 rounded-lg font-medium hover:bg-[#B27E6E] transition-colors"
+                                className="block w-full text-center bg-brand text-brand-cream py-3 rounded-lg font-medium hover:bg-brand-accent transition-colors"
                             >
                                 レジへ進む
                             </Link>
