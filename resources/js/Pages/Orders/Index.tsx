@@ -1,27 +1,10 @@
 import { Head, Link } from '@inertiajs/react';
+import { orderStatusColor, orderStatusLabel } from '@/lib/orderStatus';
 import MainLayout from '@/Layouts/MainLayout';
 import { Order, PaginatedOrders } from '@/types';
 
 type Props = {
     orders: PaginatedOrders;
-};
-
-const STATUS_LABELS: Record<string, string> = {
-    pending: '決済待ち',
-    confirmed: '注文確定',
-    processing: '処理中',
-    shipped: '発送済み',
-    delivered: '配達完了',
-    cancelled: 'キャンセル',
-};
-
-const STATUS_COLORS: Record<string, string> = {
-    pending:    'bg-yellow-100 text-yellow-800',
-    confirmed:  'bg-blue-100 text-blue-800',
-    processing: 'bg-purple-100 text-purple-800',
-    shipped:    'bg-brand-sand text-brand',
-    delivered:  'bg-green-100 text-green-800',
-    cancelled:  'bg-gray-100 text-gray-800',
 };
 
 export default function OrdersIndex({ orders }: Props) {
@@ -54,8 +37,8 @@ export default function OrdersIndex({ orders }: Props) {
                                                 {new Date(order.created_at).toLocaleDateString('ja-JP')}
                                             </p>
                                         </div>
-                                        <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${STATUS_COLORS[order.status] ?? 'bg-gray-100 text-gray-800'}`}>
-                                            {STATUS_LABELS[order.status] ?? order.status}
+                                        <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${orderStatusColor(order.status)}`}>
+                                            {orderStatusLabel(order.status)}
                                         </span>
                                     </div>
                                     <div className="mt-3 flex justify-between items-end">

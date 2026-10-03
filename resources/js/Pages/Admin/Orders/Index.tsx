@@ -1,4 +1,5 @@
 import { Head, Link, router } from '@inertiajs/react';
+import { orderStatusColor } from '@/lib/orderStatus';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { Order, PaginatedOrders } from '@/types';
 
@@ -7,15 +8,6 @@ type Props = {
     statuses: Record<string, string>;
     filters: { status?: string };
     flash: { success?: string };
-};
-
-const STATUS_COLORS: Record<string, string> = {
-    pending:    'bg-yellow-100 text-yellow-800',
-    confirmed:  'bg-blue-100 text-blue-800',
-    processing: 'bg-purple-100 text-purple-800',
-    shipped:    'bg-indigo-100 text-indigo-800',
-    delivered:  'bg-green-100 text-green-800',
-    cancelled:  'bg-gray-100 text-gray-800',
 };
 
 export default function AdminOrdersIndex({ orders, statuses, filters, flash }: Props) {
@@ -90,7 +82,7 @@ export default function AdminOrdersIndex({ orders, statuses, filters, flash }: P
                                             ¥{order.total_amount.toLocaleString()}
                                         </td>
                                         <td className="px-4 py-3">
-                                            <span className={`text-sm font-medium px-2.5 py-1 rounded-full ${STATUS_COLORS[order.status] ?? 'bg-gray-100 text-gray-800'}`}>
+                                            <span className={`text-sm font-medium px-2.5 py-1 rounded-full ${orderStatusColor(order.status)}`}>
                                                 {statuses[order.status] ?? order.status}
                                             </span>
                                         </td>

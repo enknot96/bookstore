@@ -1,19 +1,11 @@
 import { Head, Link, router } from '@inertiajs/react';
 import { useEffect } from 'react';
+import { orderStatusLabel } from '@/lib/orderStatus';
 import MainLayout from '@/Layouts/MainLayout';
 import { Order } from '@/types';
 
 type Props = {
     order: Order;
-};
-
-const STATUS_LABELS: Record<string, string> = {
-    pending: '決済待ち',
-    confirmed: '注文確定',
-    processing: '処理中',
-    shipped: '発送済み',
-    delivered: '配達完了',
-    cancelled: 'キャンセル',
 };
 
 const POLL_INTERVAL_MS = 3000;
@@ -58,7 +50,7 @@ export default function CheckoutComplete({ order }: Props) {
                     <div className="flex justify-between items-center mb-4">
                         <span className="text-sm text-gray-500">ステータス</span>
                         <span className="text-sm font-medium text-brand">
-                            {STATUS_LABELS[order.status] ?? order.status}
+                            {orderStatusLabel(order.status)}
                         </span>
                     </div>
                     <div className="flex justify-between items-center mb-4">

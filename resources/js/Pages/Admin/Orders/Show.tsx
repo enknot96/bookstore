@@ -1,4 +1,5 @@
 import { Head, Link, router } from '@inertiajs/react';
+import { orderStatusColor } from '@/lib/orderStatus';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { Order } from '@/types';
 import { useState } from 'react';
@@ -9,15 +10,6 @@ type Props = {
     order: Order & { user: User };
     statuses: Record<string, string>;
     flash: { success?: string };
-};
-
-const STATUS_COLORS: Record<string, string> = {
-    pending:    'bg-yellow-100 text-yellow-800',
-    confirmed:  'bg-blue-100 text-blue-800',
-    processing: 'bg-purple-100 text-purple-800',
-    shipped:    'bg-indigo-100 text-indigo-800',
-    delivered:  'bg-green-100 text-green-800',
-    cancelled:  'bg-gray-100 text-gray-800',
 };
 
 export default function AdminOrderShow({ order, statuses, flash }: Props) {
@@ -51,7 +43,7 @@ export default function AdminOrderShow({ order, statuses, flash }: Props) {
                     <div className="bg-white rounded-lg shadow-sm p-5">
                         <h2 className="text-base font-medium text-gray-700 mb-3">ステータス変更</h2>
                         <div className="flex items-center gap-3">
-                            <span className={`text-sm font-medium px-2.5 py-1 rounded-full ${STATUS_COLORS[order.status] ?? 'bg-gray-100 text-gray-800'}`}>
+                            <span className={`text-sm font-medium px-2.5 py-1 rounded-full ${orderStatusColor(order.status)}`}>
                                 現在: {statuses[order.status] ?? order.status}
                             </span>
                             <select
