@@ -137,7 +137,7 @@ export default function BookShow({ book, related }: Props) {
                                     </button>
                                 ) : (
                                     <Link
-                                        href={route("login")}
+                                        href={route("login", { redirect: route("books.show", book.id, false) })}
                                         className="inline-block bg-[#FFF17C] text-[#431608] px-8 py-3 rounded-full font-semibold hover:bg-[#ED946D] transition"
                                     >
                                         カートに入れる（要ログイン）

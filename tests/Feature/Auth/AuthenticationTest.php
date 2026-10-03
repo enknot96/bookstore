@@ -39,3 +39,25 @@ test('users can logout', function () {
     $this->assertGuest();
     $response->assertRedirect('/');
 });
+
+test('users are redirected back to the requested path after login', function () {
+    $user = User::factory()->create();
+
+    $this->get('/login?redirect=/books/1');
+
+    $this->post('/login', ['email' => $user->email, 'password' => 'password'])
+        ->assertRedirect(url('/books/1'));
+});
+
+test('external redirect targets are ignored after login', function () {
+    $user = User::factory()->create();
+
+    foreach (['https://evil.example.com', '//evil.example.com', '/\\evil.example.com'] as $target) {
+        $this->get('/login?redirect=' . urlencode($target));
+
+        $this->post('/login', ['email' => $user->email, 'password' => 'password'])
+            ->assertRedirect('/');
+
+        $this->post('/logout');
+    }
+});

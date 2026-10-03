@@ -16,8 +16,14 @@ class AuthenticatedSessionController extends Controller
     /**
      * Display the login view.
      */
-    public function create(): Response
+    public function create(Request $request): Response
     {
+        // ログイン後の戻り先。同一オリジンの相対パスのみ許可（オープンリダイレクト対策）
+        $redirect = $request->query('redirect');
+        if (is_string($redirect) && preg_match('#^/(?![/\\\\])#', $redirect)) {
+            $request->session()->put('url.intended', url($redirect));
+        }
+
         return Inertia::render('Auth/Login', [
             'canResetPassword' => Route::has('password.request'),
             'status' => session('status'),
