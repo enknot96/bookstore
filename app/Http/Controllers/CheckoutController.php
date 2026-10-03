@@ -12,19 +12,22 @@ class CheckoutController extends Controller
 {
     public function index(Request $request)
     {
-        $cartItems = $request->user()->cartItems()
-            ->with('book')
-            ->get()
-            ->map(fn($item) => [
-                'id'       => $item->id,
-                'quantity' => $item->quantity,
-                'book'     => $item->book,
-                'subtotal' => $item->book->price * $item->quantity,
-            ]);
+        $items = $request->user()->cartItems()->with('book')->get();
 
-        if ($cartItems->isEmpty()) {
+        if ($items->isEmpty()) {
             return redirect()->route('cart.index')->with('error', 'カートが空です。');
         }
+
+        if ($items->contains(fn($item) => $item->unavailableReason())) {
+            return redirect()->route('cart.index')->with('error', '購入できない商品が含まれています。カートを確認してください。');
+        }
+
+        $cartItems = $items->map(fn($item) => [
+            'id'       => $item->id,
+            'quantity' => $item->quantity,
+            'book'     => $item->book,
+            'subtotal' => $item->book->price * $item->quantity,
+        ]);
 
         return Inertia::render('Checkout/Index', [
             'cartItems' => $cartItems,
@@ -45,6 +48,14 @@ class CheckoutController extends Controller
 
         if ($cartItems->isEmpty()) {
             return response()->json(['error' => 'カートが空です。'], 422);
+        }
+
+        // 非公開・削除済みの書籍チェック
+        $unpublished = $cartItems->first(fn($item) => $item->unavailableReason() === 'unpublished');
+        if ($unpublished) {
+            return response()->json([
+                'error' => '「' . $unpublished->book->title . '」は現在購入できません。カートを確認してください。',
+            ], 422);
         }
 
         // 在庫再チェック（多重注文対策）

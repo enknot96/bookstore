@@ -38,11 +38,14 @@ export interface PaginatedBooks {
     links: { url: string | null; label: string; active: boolean }[];
 }
 
+export type CartItemIssue = 'unpublished' | 'out_of_stock' | 'insufficient';
+
 export interface CartItem {
     id: number;
     quantity: number;
     book: Book;
     subtotal: number;
+    issue?: CartItemIssue | null;
 }
 
 export interface OrderItem {

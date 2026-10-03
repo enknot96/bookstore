@@ -19,6 +19,7 @@ class CartController extends Controller
                 'quantity' => $item->quantity,
                 'book'     => $item->book,
                 'subtotal' => $item->book->price * $item->quantity,
+                'issue'    => $item->unavailableReason(),
             ]);
 
         return Inertia::render('Cart/Index', [
@@ -34,7 +35,7 @@ class CartController extends Controller
             'quantity' => ['integer', 'min:1', 'max:99'],
         ]);
 
-        $book = Book::findOrFail($request->book_id);
+        $book = Book::where('is_published', true)->findOrFail($request->book_id);
 
         if ($book->stock <= 0) {
             return back()->with('error', '「' . $book->title . '」は在庫切れです。');
@@ -77,7 +78,8 @@ class CartController extends Controller
         $this->authorizeCartItem($request, $cartItem);
         $cartItem->delete();
 
-        return back()->with('success', 'カートから削除しました。');
+        // 通知は画面側（「元に戻す」付きの toast）で表示する
+        return back();
     }
 
     private function authorizeCartItem(Request $request, CartItem $cartItem): void
