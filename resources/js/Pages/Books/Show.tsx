@@ -44,9 +44,14 @@ export default function BookShow({ book, related }: Props) {
 
     const maxQuantity = Math.min(book.stock, MAX_PURCHASE_QUANTITY);
     const [quantity, setQuantity] = useState(1);
+    const [adding, setAdding] = useState(false);
 
     const addToCart = () => {
-        router.post(route('cart.store'), { book_id: book.id, quantity });
+        router.post(
+            route('cart.store'),
+            { book_id: book.id, quantity },
+            { onStart: () => setAdding(true), onFinish: () => setAdding(false) },
+        );
     };
 
     return (
@@ -178,9 +183,10 @@ export default function BookShow({ book, related }: Props) {
                                 auth.user ? (
                                     <button
                                         onClick={addToCart}
-                                        className="inline-block bg-brand-sun text-brand px-8 py-3 rounded-full font-semibold hover:bg-brand-sun-hover transition"
+                                        disabled={adding}
+                                        className="inline-block bg-brand-sun text-brand px-8 py-3 rounded-full font-semibold hover:bg-brand-sun-hover transition disabled:opacity-60 disabled:cursor-not-allowed"
                                     >
-                                        カートに入れる
+                                        {adding ? "追加中..." : "カートに入れる"}
                                     </button>
                                 ) : (
                                     <Link

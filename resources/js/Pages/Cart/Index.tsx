@@ -1,6 +1,7 @@
 import { Head, Link, router } from '@inertiajs/react';
 import MainLayout from '@/Layouts/MainLayout';
 import { CartItem, CartItemIssue } from '@/types';
+import { useState } from 'react';
 import { toast } from 'sonner';
 
 type Props = {
@@ -15,13 +16,17 @@ const ISSUE_MESSAGES: Record<CartItemIssue, string> = {
 };
 
 export default function CartIndex({ cartItems, total }: Props) {
+    // 通信中は操作を無効化して、連打による二重送信を防ぐ
+    const [busy, setBusy] = useState(false);
+    const busyOptions = { preserveScroll: true, onStart: () => setBusy(true), onFinish: () => setBusy(false) };
+
     const updateQuantity = (id: number, quantity: number) => {
-        router.patch(route('cart.update', id), { quantity }, { preserveScroll: true });
+        router.patch(route('cart.update', id), { quantity }, busyOptions);
     };
 
     const removeItem = (item: CartItem) => {
         router.delete(route('cart.destroy', item.id), {
-            preserveScroll: true,
+            ...busyOptions,
             onSuccess: () => {
                 toast.success(`「${item.book.title}」をカートから削除しました`, {
                     duration: 6000,
@@ -98,7 +103,7 @@ export default function CartIndex({ cartItems, total }: Props) {
                                     <div className="flex items-center gap-2">
                                         <button
                                             onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                                            disabled={item.quantity <= 1}
+                                            disabled={busy || item.quantity <= 1}
                                             className="w-7 h-7 rounded border border-gray-300 flex items-center justify-center text-gray-600 hover:bg-gray-100 disabled:opacity-40"
                                         >
                                             −
@@ -106,7 +111,7 @@ export default function CartIndex({ cartItems, total }: Props) {
                                         <span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
                                         <button
                                             onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                                            disabled={item.quantity >= Math.min(99, item.book.stock)}
+                                            disabled={busy || item.quantity >= Math.min(99, item.book.stock)}
                                             className="w-7 h-7 rounded border border-gray-300 flex items-center justify-center text-gray-600 hover:bg-gray-100 disabled:opacity-40"
                                         >
                                             ＋
@@ -119,7 +124,8 @@ export default function CartIndex({ cartItems, total }: Props) {
 
                                     <button
                                         onClick={() => removeItem(item)}
-                                        className="text-gray-400 hover:text-red-500 ml-2"
+                                        disabled={busy}
+                                        className="text-gray-400 hover:text-red-500 ml-2 disabled:opacity-40"
                                         aria-label="削除"
                                     >
                                         ✕
