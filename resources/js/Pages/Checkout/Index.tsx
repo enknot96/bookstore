@@ -104,7 +104,7 @@ function CheckoutForm({ total, cartItems }: Props) {
                             type="text"
                             value={shipping.shipping_name}
                             onChange={(e) => setShipping({ ...shipping, shipping_name: e.target.value })}
-                            className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#B27E6E]"
                             placeholder="山田 太郎"
                         />
                         {errors.shipping_name && <p className="text-red-500 text-xs mt-1">{errors.shipping_name}</p>}
@@ -115,7 +115,7 @@ function CheckoutForm({ total, cartItems }: Props) {
                             type="text"
                             value={shipping.shipping_zip}
                             onChange={(e) => setShipping({ ...shipping, shipping_zip: e.target.value })}
-                            className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#B27E6E]"
                             placeholder="123-4567"
                         />
                         {errors.shipping_zip && <p className="text-red-500 text-xs mt-1">{errors.shipping_zip}</p>}
@@ -126,7 +126,7 @@ function CheckoutForm({ total, cartItems }: Props) {
                             type="text"
                             value={shipping.shipping_address}
                             onChange={(e) => setShipping({ ...shipping, shipping_address: e.target.value })}
-                            className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#B27E6E]"
                             placeholder="東京都渋谷区..."
                         />
                         {errors.shipping_address && <p className="text-red-500 text-xs mt-1">{errors.shipping_address}</p>}
@@ -156,7 +156,7 @@ function CheckoutForm({ total, cartItems }: Props) {
                     ))}
                     <div className="flex justify-between items-center px-4 py-3 font-semibold">
                         <span>合計</span>
-                        <span className="text-indigo-600">¥{total.toLocaleString()}</span>
+                        <span className="text-[#431608]">¥{total.toLocaleString()}</span>
                     </div>
                 </div>
             </section>
@@ -170,7 +170,7 @@ function CheckoutForm({ total, cartItems }: Props) {
             <button
                 type="submit"
                 disabled={!stripe || processing}
-                className="w-full bg-indigo-600 text-white py-3 rounded-lg font-medium hover:bg-indigo-700 disabled:opacity-60 transition-colors"
+                className="w-full bg-[#431608] text-[#FDFAEB] py-3 rounded-lg font-medium hover:bg-[#B27E6E] disabled:opacity-60 transition-colors"
             >
                 {processing ? '処理中...' : `¥${total.toLocaleString()} を支払う`}
             </button>
