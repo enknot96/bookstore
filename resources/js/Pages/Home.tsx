@@ -54,7 +54,7 @@ export default function Home({ newArrivals, categories }: Props) {
             />
             <MainLayout>
                 {/* Hero */}
-                <section className="relative h-[420px] sm:h-[480px] overflow-hidden text-brand-cream">
+                <section className="relative h-[420px] sm:h-[480px] lg:h-[600px] overflow-hidden text-brand-cream">
                     {HERO_IMAGES.map((src, i) => (
                         <img
                             key={src}
