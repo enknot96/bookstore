@@ -3,7 +3,7 @@ import { Transition, TransitionChild } from '@headlessui/react';
 import { Menu, Pencil, Search, ShoppingCart, X } from 'lucide-react';
 import { FormEvent, ReactNode, useState } from 'react';
 import FlashToaster from '@/Components/FlashToaster';
-import logo from '@/assets/logo/logo.jpeg';
+import logo from '@/assets/logo/logo.webp';
 
 function HeaderSearch({ className, onSearch }: { className?: string; onSearch?: () => void }) {
     const [keyword, setKeyword] = useState('');
