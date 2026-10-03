@@ -171,7 +171,7 @@ export default function BookShow({ book, related }: Props) {
                                         onChange={(e) =>
                                             setQuantity(Number(e.target.value))
                                         }
-                                        className="border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
+                                        className="w-20 border border-gray-300 rounded-md pl-3 pr-9 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
                                     >
                                         {Array.from(
                                             { length: maxQuantity },

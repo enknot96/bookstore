@@ -42,7 +42,7 @@ export default function AdminOrderShow({ order, statuses }: Props) {
                             <select
                                 value={selectedStatus}
                                 onChange={(e) => setSelectedStatus(e.target.value)}
-                                className="border border-gray-300 rounded-md px-3 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-ring"
+                                className="border border-gray-300 rounded-md pl-3 pr-9 py-1.5 text-base focus:outline-none focus:ring-2 focus:ring-ring"
                             >
                                 {Object.entries(statuses).map(([key, label]) => (
                                     <option key={key} value={key}>{label}</option>

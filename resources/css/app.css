@@ -35,3 +35,17 @@
         @apply bg-background text-foreground;
     }
 }
+
+/* @tailwindcss/forms の既定（青）のフォーカス色をブランド色に揃える */
+@layer base {
+    [type='text']:focus,
+    [type='email']:focus,
+    [type='password']:focus,
+    [type='number']:focus,
+    [type='search']:focus,
+    select:focus,
+    textarea:focus {
+        border-color: hsl(var(--ring));
+        --tw-ring-color: hsl(var(--ring));
+    }
+}

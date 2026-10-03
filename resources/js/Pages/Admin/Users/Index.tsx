@@ -41,7 +41,7 @@ function RoleSelect({ user }: { user: User }) {
             value={role}
             onChange={(e) => handleChange(e.target.value as 'admin' | 'customer')}
             disabled={processing}
-            className={`text-sm border rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-ring ${
+            className={`text-sm border rounded pl-2 pr-8 py-1 focus:outline-none focus:ring-2 focus:ring-ring ${
                 role === 'admin'
                     ? 'bg-brand-cream border-brand-sand-dark text-primary'
                     : 'bg-gray-50 border-gray-300 text-gray-700'
