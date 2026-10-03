@@ -58,3 +58,15 @@ test('an unknown age band is ignored', function () {
 
     expect(titles($this->get('/books?age_band=nonsense')))->toHaveCount(2);
 });
+
+test('home shows only categories that have published books', function () {
+    $category = \App\Models\Category::create(['name' => '動物', 'slug' => 'animals']);
+    \App\Models\Category::create(['name' => '空カテゴリ', 'slug' => 'empty']);
+    bookWith('公開本', 1000, null, null)->categories()->attach($category);
+    bookWith('非公開本', 1000, null, null)->update(['is_published' => false]);
+
+    $categories = $this->get('/')->viewData('page')['props']['categories'];
+
+    expect($categories)->toHaveCount(1);
+    expect($categories[0]['books_count'])->toBe(1);
+});

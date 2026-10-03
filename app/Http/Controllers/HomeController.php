@@ -16,7 +16,11 @@ class HomeController extends Controller
       ->take(4)
       ->get();
 
-    $categories = Category::all();
+    // 公開中の書籍数つき（0冊のカテゴリは表示しない）
+    $categories = Category::withCount(['books' => fn($q) => $q->where('is_published', true)])
+      ->get()
+      ->filter(fn($c) => $c->books_count > 0)
+      ->values();
 
     return Inertia::render('Home', [
       'newArrivals' => $newArrivals,

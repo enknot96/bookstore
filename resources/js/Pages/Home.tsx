@@ -2,6 +2,7 @@ import { Head, Link } from "@inertiajs/react";
 import { useEffect, useState } from "react";
 import BookCard from "@/Components/BookCard";
 import MainLayout from "@/Layouts/MainLayout";
+import { AGE_BANDS } from "@/lib/ageBands";
 import hero01 from "@/assets/hero/hero01.jpg";
 import hero02 from "@/assets/hero/hero02.jpg";
 import hero03 from "@/assets/hero/hero03.jpg";
@@ -22,6 +23,7 @@ type Category = {
     id: number;
     name: string;
     slug: string;
+    books_count?: number;
 };
 
 type Props = {
@@ -111,10 +113,30 @@ export default function Home({ newArrivals, categories }: Props) {
                         </section>
                     )}
 
+                    {/* 年齢から探す */}
+                    <section className="mt-16">
+                        <h2 className="text-2xl font-bold text-brand mb-6">
+                            年齢から探す
+                        </h2>
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            {AGE_BANDS.map((band) => (
+                                <Link
+                                    key={band.key}
+                                    href={route("books.index", {
+                                        age_band: band.key,
+                                    })}
+                                    className="bg-brand-sun/60 text-brand rounded-2xl py-6 text-center text-lg font-bold hover:bg-brand-sun transition"
+                                >
+                                    {band.label}
+                                </Link>
+                            ))}
+                        </div>
+                    </section>
+
                     {/* カテゴリ */}
                     {categories.length > 0 && (
                         <section className="mt-16 mb-8">
-                            <h2 className="text-2xl font-bold text-gray-800 mb-6">
+                            <h2 className="text-2xl font-bold text-brand mb-6">
                                 カテゴリ別に探す
                             </h2>
                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -127,6 +149,11 @@ export default function Home({ newArrivals, categories }: Props) {
                                         className="bg-white border border-brand/20 rounded-lg p-4 text-center font-medium text-brand/80 hover:border-brand-accent hover:text-brand-accent transition"
                                     >
                                         {cat.name}
+                                        {cat.books_count !== undefined && (
+                                            <span className="ml-1 text-xs font-normal text-gray-500">
+                                                （{cat.books_count}冊）
+                                            </span>
+                                        )}
                                     </Link>
                                 ))}
                             </div>
