@@ -18,7 +18,7 @@ import {
 } from '@/Components/ui/select';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { Category, PageProps, PaginatedBooks } from '@/types';
-import { Link, router, usePage } from '@inertiajs/react';
+import { Link, router } from '@inertiajs/react';
 import { Pencil, Plus, Trash2 } from 'lucide-react';
 import { Head } from '@inertiajs/react';
 import { useState } from 'react';
@@ -37,7 +37,6 @@ interface Props extends PageProps {
 }
 
 export default function Index({ books, categories, filters, trashedCount }: Props) {
-    const { props } = usePage<PageProps & { flash?: { success?: string } }>();
     const [search, setSearch] = useState(filters.search ?? '');
     const [selectedIds, setSelectedIds] = useState<number[]>([]);
     const [bulkConfirmOpen, setBulkConfirmOpen] = useState(false);
@@ -99,12 +98,6 @@ export default function Index({ books, categories, filters, trashedCount }: Prop
                         </Link>
                     </div>
                 </div>
-
-                {props.flash?.success && (
-                    <div className="rounded-md bg-green-50 border border-green-200 px-4 py-2 text-base text-green-700">
-                        {props.flash.success}
-                    </div>
-                )}
 
                 {/* フィルター */}
                 <div className="flex flex-wrap gap-3 bg-white border rounded-lg p-4">

@@ -7,10 +7,9 @@ type Props = {
     orders: PaginatedOrders & { data: (Order & { user: { name: string; email: string } })[] };
     statuses: Record<string, string>;
     filters: { status?: string };
-    flash: { success?: string };
 };
 
-export default function AdminOrdersIndex({ orders, statuses, filters, flash }: Props) {
+export default function AdminOrdersIndex({ orders, statuses, filters }: Props) {
     const handleStatusFilter = (status: string) => {
         router.get(route('admin.orders.index'), { status: status || undefined }, { preserveState: true });
     };
@@ -20,12 +19,6 @@ export default function AdminOrdersIndex({ orders, statuses, filters, flash }: P
             <Head title="注文管理" />
             <div>
                 <h1 className="text-2xl font-bold text-gray-900 mb-6">注文管理</h1>
-
-                {flash.success && (
-                    <p className="mb-4 text-base text-green-700 bg-green-50 border border-green-200 rounded px-4 py-2">
-                        {flash.success}
-                    </p>
-                )}
 
                 {/* フィルター */}
                 <div className="flex flex-wrap gap-2 mb-6">

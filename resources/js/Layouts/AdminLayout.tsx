@@ -1,6 +1,7 @@
 import { Link, usePage } from '@inertiajs/react';
 import { BookOpen, Home, LayoutDashboard, Menu, Settings, ShieldCheck, ShoppingBag, Users, X } from 'lucide-react';
 import { useState } from 'react';
+import FlashToaster from '@/Components/FlashToaster';
 import { cn } from '@/lib/utils';
 
 const navItems = [
@@ -77,8 +78,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                     >
                         {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
                     </button>
-                    <span className="text-base text-gray-500">児童書EC 管理</span>
+                    <span className="text-base text-gray-500">こもれび書房 管理</span>
                 </header>
+                <FlashToaster />
                 <main className="flex-1 p-6">{children}</main>
             </div>
         </div>

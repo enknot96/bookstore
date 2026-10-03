@@ -22,7 +22,6 @@ type PaginatedUsers = {
 type Props = {
     users: PaginatedUsers;
     filters: { search?: string; role?: string };
-    flash: { success?: string; error?: string };
 };
 
 function RoleSelect({ user }: { user: User }) {
@@ -53,7 +52,7 @@ function RoleSelect({ user }: { user: User }) {
     );
 }
 
-export default function AdminUsersIndex({ users, filters, flash }: Props) {
+export default function AdminUsersIndex({ users, filters }: Props) {
     const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const form = e.currentTarget;
@@ -70,17 +69,6 @@ export default function AdminUsersIndex({ users, filters, flash }: Props) {
             <Head title="ユーザー管理" />
             <div className="p-6">
                 <h1 className="text-2xl font-bold text-gray-900 mb-6">ユーザー管理</h1>
-
-                {flash.success && (
-                    <p className="mb-4 text-base text-green-700 bg-green-50 border border-green-200 rounded px-4 py-2">
-                        {flash.success}
-                    </p>
-                )}
-                {flash.error && (
-                    <p className="mb-4 text-base text-red-700 bg-red-50 border border-red-200 rounded px-4 py-2">
-                        {flash.error}
-                    </p>
-                )}
 
                 {/* 検索・フィルター */}
                 <div className="flex flex-wrap gap-3 mb-6">

@@ -1,8 +1,8 @@
 import { Link, router, usePage } from '@inertiajs/react';
 import { Transition, TransitionChild } from '@headlessui/react';
 import { Menu, Pencil, Search, ShoppingCart, X } from 'lucide-react';
-import { FormEvent, ReactNode, useEffect, useState } from 'react';
-import { toast, Toaster } from 'sonner';
+import { FormEvent, ReactNode, useState } from 'react';
+import FlashToaster from '@/Components/FlashToaster';
 import logo from '@/assets/logo/logo.jpeg';
 
 function HeaderSearch({ className, onSearch }: { className?: string; onSearch?: () => void }) {
@@ -50,22 +50,15 @@ export default function MainLayout({ children }: { children: ReactNode }) {
     const props = usePage<{
         auth?: { user: { name: string } | null };
         cartCount?: number;
-        flash?: { success?: string; error?: string };
     }>().props;
     const auth = props.auth ?? { user: null };
     const cartCount = props.cartCount ?? 0;
-    const flash = props.flash ?? {};
     const { url } = usePage();
     const path = url.split('?')[0];
     const isActive = (href: string) => path === href || path.startsWith(`${href}/`);
 
     const [menuOpen, setMenuOpen] = useState(false);
     const closeMenu = () => setMenuOpen(false);
-
-    useEffect(() => {
-        if (flash.success) toast.success(flash.success);
-        if (flash.error) toast.error(flash.error);
-    }, [flash]);
 
     return (
         <div className="min-h-screen bg-brand-cream flex flex-col">
@@ -215,7 +208,7 @@ export default function MainLayout({ children }: { children: ReactNode }) {
                 </Transition>
             </header>
 
-            <Toaster position="top-right" richColors />
+            <FlashToaster />
             <main className="flex-1">{children}</main>
 
             <footer className="bg-white border-t mt-16">

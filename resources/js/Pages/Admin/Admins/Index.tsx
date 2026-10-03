@@ -21,7 +21,6 @@ type PaginatedAdmins = {
 type Props = {
     admins: PaginatedAdmins;
     filters: { search?: string };
-    flash: { success?: string; error?: string };
     auth: { user: { id: number } };
 };
 
@@ -116,7 +115,7 @@ function CreateAdminForm({ onClose }: { onClose: () => void }) {
     );
 }
 
-export default function AdminsIndex({ admins, filters, flash, auth }: Props) {
+export default function AdminsIndex({ admins, filters, auth }: Props) {
     const [showForm, setShowForm] = useState(false);
 
     const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
@@ -146,17 +145,6 @@ export default function AdminsIndex({ admins, filters, flash, auth }: Props) {
                         </button>
                     )}
                 </div>
-
-                {flash.success && (
-                    <p className="mb-4 text-base text-green-700 bg-green-50 border border-green-200 rounded px-4 py-2">
-                        {flash.success}
-                    </p>
-                )}
-                {flash.error && (
-                    <p className="mb-4 text-base text-red-700 bg-red-50 border border-red-200 rounded px-4 py-2">
-                        {flash.error}
-                    </p>
-                )}
 
                 {showForm && <CreateAdminForm onClose={() => setShowForm(false)} />}
 

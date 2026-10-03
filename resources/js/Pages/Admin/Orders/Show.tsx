@@ -9,10 +9,9 @@ type User = { name: string; email: string };
 type Props = {
     order: Order & { user: User };
     statuses: Record<string, string>;
-    flash: { success?: string };
 };
 
-export default function AdminOrderShow({ order, statuses, flash }: Props) {
+export default function AdminOrderShow({ order, statuses }: Props) {
     const [selectedStatus, setSelectedStatus] = useState(order.status);
 
     const handleStatusUpdate = () => {
@@ -31,12 +30,6 @@ export default function AdminOrderShow({ order, statuses, flash }: Props) {
                 </div>
 
                 <h1 className="text-2xl font-bold text-gray-900 mb-6">注文 #{order.id}</h1>
-
-                {flash.success && (
-                    <p className="mb-4 text-base text-green-700 bg-green-50 border border-green-200 rounded px-4 py-2">
-                        {flash.success}
-                    </p>
-                )}
 
                 <div className="space-y-6">
                     {/* ステータス変更 */}

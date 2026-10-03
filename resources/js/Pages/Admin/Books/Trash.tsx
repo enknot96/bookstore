@@ -10,7 +10,7 @@ import {
 } from '@/Components/ui/dialog';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { Book, PageProps } from '@/types';
-import { Head, Link, router, usePage } from '@inertiajs/react';
+import { Head, Link, router } from '@inertiajs/react';
 import { ArchiveRestore, ArrowLeft, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -33,7 +33,6 @@ interface Props extends PageProps {
 }
 
 export default function Trash({ books, filters }: Props) {
-    const { props } = usePage<PageProps & { flash?: { success?: string } }>();
     const [search, setSearch] = useState(filters.search ?? '');
     const [selectedIds, setSelectedIds] = useState<number[]>([]);
     const [emptyConfirmOpen, setEmptyConfirmOpen] = useState(false);
@@ -113,12 +112,6 @@ export default function Trash({ books, filters }: Props) {
                         </Button>
                     )}
                 </div>
-
-                {props.flash?.success && (
-                    <div className="rounded-md bg-green-50 border border-green-200 px-4 py-2 text-base text-green-700">
-                        {props.flash.success}
-                    </div>
-                )}
 
                 {/* 検索 */}
                 <div className="flex gap-2 bg-white border rounded-lg p-4">

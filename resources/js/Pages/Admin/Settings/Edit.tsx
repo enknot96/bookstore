@@ -3,10 +3,9 @@ import AdminLayout from '@/Layouts/AdminLayout';
 
 type Props = {
     adminNotificationEmail: string;
-    flash: { success?: string };
 };
 
-export default function AdminSettingsEdit({ adminNotificationEmail, flash }: Props) {
+export default function AdminSettingsEdit({ adminNotificationEmail }: Props) {
     const { data, setData, patch, processing, errors } = useForm({
         admin_notification_email: adminNotificationEmail,
     });
@@ -21,12 +20,6 @@ export default function AdminSettingsEdit({ adminNotificationEmail, flash }: Pro
             <Head title="設定" />
             <div className="max-w-xl">
                 <h1 className="text-2xl font-bold text-gray-900 mb-6">設定</h1>
-
-                {flash.success && (
-                    <p className="mb-4 text-base text-green-700 bg-green-50 border border-green-200 rounded px-4 py-2">
-                        {flash.success}
-                    </p>
-                )}
 
                 <div className="bg-white rounded-lg shadow-sm p-6">
                     <form onSubmit={handleSubmit} className="space-y-6">
