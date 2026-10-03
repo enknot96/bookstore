@@ -1,4 +1,5 @@
 import { Head, Link, router, usePage } from "@inertiajs/react";
+import { useState } from "react";
 import BookCard from "@/Components/BookCard";
 import MainLayout from "@/Layouts/MainLayout";
 import { PageProps } from "@/types";
@@ -28,6 +29,9 @@ type Props = {
     related: Book[];
 };
 
+const MAX_PURCHASE_QUANTITY = 10;
+const LOW_STOCK_THRESHOLD = 5;
+
 function ageLabel(min: number | null, max: number | null): string {
     if (min === null && max === null) return "全年齢";
     if (min !== null && max !== null) return `${min}〜${max}歳`;
@@ -38,8 +42,11 @@ function ageLabel(min: number | null, max: number | null): string {
 export default function BookShow({ book, related }: Props) {
     const { auth } = usePage<PageProps>().props;
 
+    const maxQuantity = Math.min(book.stock, MAX_PURCHASE_QUANTITY);
+    const [quantity, setQuantity] = useState(1);
+
     const addToCart = () => {
-        router.post(route('cart.store'), { book_id: book.id, quantity: 1 });
+        router.post(route('cart.store'), { book_id: book.id, quantity });
     };
 
     return (
@@ -122,13 +129,51 @@ export default function BookShow({ book, related }: Props) {
                                             ? `${book.stock}冊`
                                             : "在庫なし"}
                                     </strong>
+                                    {book.stock > 0 &&
+                                        book.stock <= LOW_STOCK_THRESHOLD && (
+                                            <span className="ml-2 text-xs font-medium text-red-700 bg-red-50 border border-red-200 rounded-full px-2 py-0.5">
+                                                残りわずか
+                                            </span>
+                                        )}
                                 </span>
                             </div>
 
-                            <p className="text-3xl font-bold text-brand mb-6">
+                            <p className="text-3xl font-bold text-brand">
                                 ¥{book.price.toLocaleString()}
+                                <span className="ml-2 text-sm font-normal text-gray-500">
+                                    税込・送料無料
+                                </span>
                             </p>
 
+                            {book.stock > 0 && auth.user && (
+                                <div className="mt-4 flex items-center gap-2">
+                                    <label
+                                        htmlFor="quantity"
+                                        className="text-sm text-gray-600"
+                                    >
+                                        数量
+                                    </label>
+                                    <select
+                                        id="quantity"
+                                        value={quantity}
+                                        onChange={(e) =>
+                                            setQuantity(Number(e.target.value))
+                                        }
+                                        className="border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
+                                    >
+                                        {Array.from(
+                                            { length: maxQuantity },
+                                            (_, i) => i + 1,
+                                        ).map((n) => (
+                                            <option key={n} value={n}>
+                                                {n}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                            )}
+
+                            <div className="mt-6">
                             {book.stock > 0 ? (
                                 auth.user ? (
                                     <button
@@ -153,6 +198,7 @@ export default function BookShow({ book, related }: Props) {
                                     在庫切れ
                                 </button>
                             )}
+                            </div>
 
                             {book.description && (
                                 <div className="mt-6 border-t pt-4">
