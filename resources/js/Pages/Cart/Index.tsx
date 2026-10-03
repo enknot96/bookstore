@@ -39,6 +39,7 @@ export default function CartIndex({ cartItems, total }: Props) {
                                             <img
                                                 src={item.book.cover_image_path}
                                                 alt={item.book.title}
+                                                loading="lazy"
                                                 className="w-full h-full object-cover"
                                             />
                                         ) : (

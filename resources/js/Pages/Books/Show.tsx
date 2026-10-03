@@ -75,10 +75,11 @@ export default function BookShow({ book, related }: Props) {
                             <img
                                 src={book.cover_image_path}
                                 alt={book.title}
-                                className="rounded-lg object-cover shrink-0 w-full sm:w-48 h-64"
+                                decoding="async"
+                                className="rounded-lg object-cover shrink-0 w-48 aspect-[3/4] mx-auto sm:mx-0 self-start"
                             />
                         ) : (
-                            <div className="bg-brand-sand rounded-lg flex items-center justify-center text-8xl shrink-0 w-full sm:w-48 h-64">
+                            <div className="bg-brand-sand rounded-lg flex items-center justify-center text-8xl shrink-0 w-48 aspect-[3/4] mx-auto sm:mx-0 self-start">
                                 📖
                             </div>
                         )}

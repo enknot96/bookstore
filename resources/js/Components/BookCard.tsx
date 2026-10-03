@@ -26,13 +26,15 @@ export default function BookCard({ book, compact = false }: Props) {
                 <img
                     src={book.cover_image_path}
                     alt={book.title}
-                    className={cn('w-full object-cover', compact ? 'h-32' : 'h-48')}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full aspect-[3/4] object-cover"
                 />
             ) : (
                 <div
                     className={cn(
-                        'bg-brand-sand flex items-center justify-center',
-                        compact ? 'h-32 text-4xl' : 'h-48 text-6xl',
+                        'bg-brand-sand w-full aspect-[3/4] flex items-center justify-center',
+                        compact ? 'text-4xl' : 'text-6xl',
                     )}
                 >
                     📖
