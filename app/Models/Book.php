@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Book extends Model
 {
     use SoftDeletes;
+  /** 在庫僅少とみなす冊数（この値以下） */
+  public const LOW_STOCK_THRESHOLD = 5;
+
   protected $fillable = [
     'title',
     'author',

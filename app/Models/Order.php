@@ -19,6 +19,9 @@ class Order extends Model
 
   public const STATUSES = ['pending', 'confirmed', 'processing', 'shipped', 'delivered', 'cancelled'];
 
+  /** 決済済みとみなすステータス（売上集計の対象） */
+  public const PAID_STATUSES = ['confirmed', 'processing', 'shipped', 'delivered'];
+
   public const STATUS_LABELS = [
     'pending'    => '決済待ち',
     'confirmed'  => '注文確定',
