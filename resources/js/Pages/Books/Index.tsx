@@ -1,5 +1,6 @@
 import { Head, Link, router } from "@inertiajs/react";
 import { FormEvent, useState } from "react";
+import BookCard from "@/Components/BookCard";
 import MainLayout from "@/Layouts/MainLayout";
 
 type Book = {
@@ -41,39 +42,6 @@ type Props = {
     categories: Category[];
     filters: Filters;
 };
-
-function BookCard({ book }: { book: Book }) {
-    return (
-        <Link
-            href={route("books.show", book.id)}
-            className="bg-white rounded-lg shadow hover:shadow-md transition-shadow overflow-hidden flex flex-col"
-        >
-            {book.cover_image_path ? (
-                <img
-                    src={book.cover_image_path}
-                    alt={book.title}
-                    className="w-full h-40 object-cover"
-                />
-            ) : (
-                <div className="bg-brand-sand h-40 flex items-center justify-center text-5xl">
-                    📖
-                </div>
-            )}
-            <div className="p-3 flex flex-col flex-1">
-                <p className="text-xs text-gray-500 mb-1 truncate">
-                    {book.categories.map((c) => c.name).join(" / ")}
-                </p>
-                <h3 className="font-semibold text-gray-800 text-sm line-clamp-2 flex-1">
-                    {book.title}
-                </h3>
-                <p className="text-xs text-gray-500 mt-1">{book.author}</p>
-                <p className="text-brand font-bold mt-2 text-sm">
-                    ¥{book.price.toLocaleString()}
-                </p>
-            </div>
-        </Link>
-    );
-}
 
 export default function BooksIndex({ books, categories, filters }: Props) {
     const [form, setForm] = useState<Filters>(filters);

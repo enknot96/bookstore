@@ -1,5 +1,6 @@
 import { Head, Link } from "@inertiajs/react";
 import { useEffect, useState } from "react";
+import BookCard from "@/Components/BookCard";
 import MainLayout from "@/Layouts/MainLayout";
 import hero01 from "@/assets/hero/hero01.jpg";
 import hero02 from "@/assets/hero/hero02.jpg";
@@ -27,39 +28,6 @@ type Props = {
     newArrivals: Book[];
     categories: Category[];
 };
-
-function BookCard({ book }: { book: Book }) {
-    return (
-        <Link
-            href={route("books.show", book.id)}
-            className="bg-white rounded-lg shadow hover:shadow-md transition-shadow overflow-hidden flex flex-col"
-        >
-            {book.cover_image_path ? (
-                <img
-                    src={book.cover_image_path}
-                    alt={book.title}
-                    className="w-full h-48 object-cover"
-                />
-            ) : (
-                <div className="bg-brand-sand h-48 flex items-center justify-center text-6xl">
-                    📖
-                </div>
-            )}
-            <div className="p-4 flex flex-col flex-1">
-                <p className="text-xs text-gray-500 mb-1">
-                    {book.categories.map((c) => c.name).join(" / ")}
-                </p>
-                <h3 className="font-semibold text-gray-800 line-clamp-2 flex-1">
-                    {book.title}
-                </h3>
-                <p className="text-sm text-gray-500 mt-1">{book.author}</p>
-                <p className="text-brand font-bold mt-2">
-                    ¥{book.price.toLocaleString()}
-                </p>
-            </div>
-        </Link>
-    );
-}
 
 export default function Home({ newArrivals, categories }: Props) {
     const [heroIndex, setHeroIndex] = useState(0);

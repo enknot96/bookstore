@@ -1,4 +1,5 @@
 import { Head, Link, router, usePage } from "@inertiajs/react";
+import BookCard from "@/Components/BookCard";
 import MainLayout from "@/Layouts/MainLayout";
 import { PageProps } from "@/types";
 
@@ -173,34 +174,7 @@ export default function BookShow({ book, related }: Props) {
                             </h2>
                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                                 {related.map((b) => (
-                                    <Link
-                                        key={b.id}
-                                        href={route("books.show", b.id)}
-                                        className="bg-white rounded-lg shadow hover:shadow-md transition overflow-hidden flex flex-col"
-                                    >
-                                        {b.cover_image_path ? (
-                                            <img
-                                                src={b.cover_image_path}
-                                                alt={b.title}
-                                                className="w-full h-32 object-cover"
-                                            />
-                                        ) : (
-                                            <div className="bg-brand-sand h-32 flex items-center justify-center text-4xl">
-                                                📖
-                                            </div>
-                                        )}
-                                        <div className="p-3">
-                                            <p className="text-sm font-semibold text-gray-800 line-clamp-2">
-                                                {b.title}
-                                            </p>
-                                            <p className="text-xs text-gray-500 mt-1">
-                                                {b.author}
-                                            </p>
-                                            <p className="text-brand font-bold text-sm mt-1">
-                                                ¥{b.price.toLocaleString()}
-                                            </p>
-                                        </div>
-                                    </Link>
+                                    <BookCard key={b.id} book={b} compact />
                                 ))}
                             </div>
                         </section>
