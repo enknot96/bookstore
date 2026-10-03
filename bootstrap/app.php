@@ -22,6 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->alias([
             'admin' => \App\Http\Middleware\EnsureUserIsAdmin::class,
+            'demo.restrict' => \App\Http\Middleware\RestrictDemoAdmin::class,
         ]);
 
         $middleware->validateCsrfTokens(except: [

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\SettingController as AdminSettingController;
 use App\Http\Controllers\Admin\AdminAccountController;
 use App\Http\Controllers\Admin\CustomerController as AdminCustomerController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\Auth\DemoLoginController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
@@ -54,7 +55,9 @@ Route::middleware('auth')->group(function () {
   Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+Route::post('/demo-login/{type}', DemoLoginController::class)->middleware('guest')->whereIn('type', ['user', 'admin'])->name('demo-login');
+
+Route::middleware(['auth', 'admin', 'demo.restrict'])->prefix('admin')->name('admin.')->group(function () {
   Route::get('/', AdminDashboardController::class)->name('dashboard');
   Route::get('books/trash', [AdminBookController::class, 'trash'])->name('books.trash');
   Route::delete('books/trash/empty', [AdminBookController::class, 'emptyTrash'])->name('books.trash.empty');

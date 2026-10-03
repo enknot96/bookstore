@@ -2,11 +2,12 @@ import Checkbox from '@/Components/Checkbox';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
+import SecondaryButton from '@/Components/SecondaryButton';
 import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, Link, router, useForm } from '@inertiajs/react';
 
-export default function Login({ status, canResetPassword }) {
+export default function Login({ status, canResetPassword, demoLoginEnabled }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
@@ -95,6 +96,28 @@ export default function Login({ status, canResetPassword }) {
                     </PrimaryButton>
                 </div>
             </form>
+
+            {demoLoginEnabled && (
+                <div className="mt-6 border-t border-brand/10 pt-4">
+                    <p className="mb-3 text-center text-sm text-brand/70">
+                        ポートフォリオ用デモ（ID・パスワード入力不要）
+                    </p>
+                    <div className="flex flex-col gap-2 sm:flex-row">
+                        <SecondaryButton
+                            className="flex-1"
+                            onClick={() => router.post(route('demo-login', 'user'))}
+                        >
+                            デモユーザーでログイン
+                        </SecondaryButton>
+                        <SecondaryButton
+                            className="flex-1"
+                            onClick={() => router.post(route('demo-login', 'admin'))}
+                        >
+                            デモ管理者でログイン
+                        </SecondaryButton>
+                    </div>
+                </div>
+            )}
         </GuestLayout>
     );
 }
