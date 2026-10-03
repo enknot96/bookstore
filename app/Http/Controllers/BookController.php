@@ -9,6 +9,14 @@ use Inertia\Inertia;
 
 class BookController extends Controller
 {
+  /** 年齢帯のキー => [下限, 上限]（上限は帯の最大年齢） */
+  public const AGE_BANDS = [
+    '0-2' => [0, 2],
+    '3-5' => [3, 5],
+    '6-8' => [6, 8],
+    '9+' => [9, 99],
+  ];
+
   public function index(Request $request)
   {
     $query = Book::where('is_published', true)->with('categories');
@@ -42,13 +50,29 @@ class BookController extends Controller
       });
     }
 
-    $books = $query->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
+    if (isset(self::AGE_BANDS[$request->age_band])) {
+      [$bandMin, $bandMax] = self::AGE_BANDS[$request->age_band];
+      // 書籍の対象年齢（null は制限なし）と年齢帯が重なる本
+      $query->where(function ($q) use ($bandMax) {
+        $q->whereNull('age_min')->orWhere('age_min', '<=', $bandMax);
+      })->where(function ($q) use ($bandMin) {
+        $q->whereNull('age_max')->orWhere('age_max', '>=', $bandMin);
+      });
+    }
+
+    match ($request->sort) {
+      'price_asc' => $query->orderBy('price', 'asc')->orderBy('id', 'desc'),
+      'price_desc' => $query->orderBy('price', 'desc')->orderBy('id', 'desc'),
+      default => $query->orderBy('created_at', 'desc')->orderBy('id', 'desc'),
+    };
+
+    $books = $query->paginate(12)->withQueryString();
     $categories = Category::all();
 
     return Inertia::render('Books/Index', [
       'books' => $books,
       'categories' => $categories,
-      'filters' => $request->only(['keyword', 'category', 'price_min', 'price_max', 'age']),
+      'filters' => $request->only(['keyword', 'category', 'price_min', 'price_max', 'age', 'age_band', 'sort']),
     ]);
   }
 
