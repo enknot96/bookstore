@@ -1,9 +1,49 @@
 import { Link, router, usePage } from '@inertiajs/react';
 import { Transition, TransitionChild } from '@headlessui/react';
-import { Menu, Pencil, ShoppingCart, X } from 'lucide-react';
-import { ReactNode, useEffect, useState } from 'react';
+import { Menu, Pencil, Search, ShoppingCart, X } from 'lucide-react';
+import { FormEvent, ReactNode, useEffect, useState } from 'react';
 import { toast, Toaster } from 'sonner';
 import logo from '@/assets/logo/logo.jpeg';
+
+function HeaderSearch({ className, onSearch }: { className?: string; onSearch?: () => void }) {
+    const [keyword, setKeyword] = useState('');
+
+    const submit = (e: FormEvent) => {
+        e.preventDefault();
+        onSearch?.();
+        router.get(route('books.index'), keyword.trim() ? { keyword: keyword.trim() } : {});
+    };
+
+    return (
+        <form onSubmit={submit} role="search" className={className}>
+            <label htmlFor="header-search" className="sr-only">
+                キーワード検索
+            </label>
+            <div className="relative">
+                <input
+                    id="header-search"
+                    type="search"
+                    value={keyword}
+                    onChange={(e) => setKeyword(e.target.value)}
+                    placeholder="タイトル・著者で検索"
+                    className="w-full rounded-full border border-brand/20 bg-brand-cream/60 pl-4 pr-10 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent"
+                />
+                <button
+                    type="submit"
+                    aria-label="検索"
+                    className="absolute right-1 top-1/2 -translate-y-1/2 p-1.5 text-brand/70 hover:text-brand-accent"
+                >
+                    <Search className="w-4 h-4" />
+                </button>
+            </div>
+        </form>
+    );
+}
+
+const navLinkClass = (active: boolean) =>
+    `font-medium transition-colors hover:text-brand-accent ${
+        active ? 'text-brand-accent underline underline-offset-8 decoration-2' : 'text-brand/90'
+    }`;
 
 export default function MainLayout({ children }: { children: ReactNode }) {
     // エラーページなど、共有 props が付かない場合でも動くよう既定値を持たせる
@@ -15,6 +55,9 @@ export default function MainLayout({ children }: { children: ReactNode }) {
     const auth = props.auth ?? { user: null };
     const cartCount = props.cartCount ?? 0;
     const flash = props.flash ?? {};
+    const { url } = usePage();
+    const path = url.split('?')[0];
+    const isActive = (href: string) => path === href || path.startsWith(`${href}/`);
 
     const [menuOpen, setMenuOpen] = useState(false);
     const closeMenu = () => setMenuOpen(false);
@@ -35,7 +78,12 @@ export default function MainLayout({ children }: { children: ReactNode }) {
 
                     {/* デスクトップ用ナビ */}
                     <nav className="hidden sm:flex items-center gap-4 text-sm">
-                        <Link href={route('books.index')} className="font-medium text-brand/90 hover:text-brand-accent transition-colors">
+                        <HeaderSearch className="hidden lg:block w-56" />
+                        <Link
+                            href={route('books.index')}
+                            aria-current={isActive('/books') ? 'page' : undefined}
+                            className={navLinkClass(isActive('/books'))}
+                        >
                             本を探す
                         </Link>
                         {auth.user ? (
@@ -48,7 +96,11 @@ export default function MainLayout({ children }: { children: ReactNode }) {
                                         </span>
                                     )}
                                 </Link>
-                                <Link href={route('orders.index')} className="font-medium text-brand/90 hover:text-brand-accent transition-colors">
+                                <Link
+                                    href={route('orders.index')}
+                                    aria-current={isActive('/orders') ? 'page' : undefined}
+                                    className={navLinkClass(isActive('/orders'))}
+                                >
                                     注文履歴
                                 </Link>
                                 <span className="text-brand/30">|</span>
@@ -111,12 +163,23 @@ export default function MainLayout({ children }: { children: ReactNode }) {
                         leaveTo="opacity-0 -translate-y-2"
                     >
                         <nav className="sm:hidden border-t border-brand/10 px-4 py-3 flex flex-col text-sm">
-                            <Link href={route('books.index')} onClick={closeMenu} className="block py-4 text-center font-medium text-brand/90">
+                            <HeaderSearch className="py-3" onSearch={closeMenu} />
+                            <Link
+                                href={route('books.index')}
+                                onClick={closeMenu}
+                                aria-current={isActive('/books') ? 'page' : undefined}
+                                className={`block py-4 text-center ${navLinkClass(isActive('/books'))}`}
+                            >
                                 本を探す
                             </Link>
                             {auth.user ? (
                                 <>
-                                    <Link href={route('orders.index')} onClick={closeMenu} className="block py-4 text-center font-medium text-brand/90">
+                                    <Link
+                                        href={route('orders.index')}
+                                        onClick={closeMenu}
+                                        aria-current={isActive('/orders') ? 'page' : undefined}
+                                        className={`block py-4 text-center ${navLinkClass(isActive('/orders'))}`}
+                                    >
                                         注文履歴
                                     </Link>
                                     <Link href={route('profile.edit')} onClick={closeMenu} className="flex items-center justify-center gap-1 py-4 text-brand/70">
